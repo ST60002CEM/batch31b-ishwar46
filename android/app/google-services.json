@@ -1,0 +1,25 @@
+{
+    "project_info": {
+        "project_number": "563905110011",
+        "project_id": "age-care-app",
+        "storage_bucket": "age-care-app.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:563905110011:android:c687a989b18936ce86755e",
+            "android_client_info": {
+                "package_name": "com.closedai.agecare"
+            }
+        },
+        "oauth_client": [],
+        "api_key": [{
+            "current_key": "AIzaSyA6EHQfbTNQ63K_XMOBe3kifMFUUhHGKTI"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": []
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
