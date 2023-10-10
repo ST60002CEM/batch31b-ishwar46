@@ -1,4 +1,4 @@
-package com.example.age_care
+package com.closedai.agecare
 
 import io.flutter.embedding.android.FlutterActivity
 
