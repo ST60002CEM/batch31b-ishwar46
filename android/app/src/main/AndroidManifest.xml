@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.closedai.agecare">
    <application
-        android:label="age_care"
+        android:label="Herchaha"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
