@@ -13,18 +13,18 @@ class LoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          color: AppColor.primaryColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
+            color: AppColor.primaryColor,
+            borderRadius: BorderRadius.circular(10)),
+        child: Center(
+            child: Text(
           text,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-        ),
+        )),
       ),
     );
   }
