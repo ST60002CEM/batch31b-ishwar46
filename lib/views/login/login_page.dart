@@ -1,7 +1,8 @@
-import 'package:age_care/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../widgets/login_button_widget.dart';
+import '../../styles/appcolor.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,89 +16,272 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(children: [
-          const SizedBox(
-            height: 300,
-            width: double.infinity,
-            child: BackGroundWidget(),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            "LOGIN",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 16,
-              horizontal: 32,
-            ),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Enter Username",
-                    labelText: "Username",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.person,
-                      size: 20,
+      // backgroundColor: AppColor.background,
+      // key: _scaffoldKey,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    "assets/img/logo.png",
+                    repeat: ImageRepeat.noRepeat,
+                    width: 80,
+                    height: 80,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "LOGIN",
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            letterSpacing: 1.5,
+                            color: AppColor.primaryColor),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //Login Message
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Please Login to Continue",
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            letterSpacing: 1.5,
+                            color: AppColor.primaryColor),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //SVG
+                  SvgPicture.asset(
+                    "assets/svg/login_image.svg",
+                    width: 200,
+                    height: 200,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Username",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == "") {
+                              //return localization.username_required;
+                              return "Username is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style:
+                              const TextStyle(color: AppColor.secondaryColor),
+                          showCursor: true,
+                          //controller: passwordController,
+                          //obscureText: !_passwordVisible,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColor.primaryColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColor.primaryColor),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0),
+                              label: Text(
+                                "Password",
+                                //localization.password,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    letterSpacing: 1.5,
+                                    color: AppColor.secondaryColor),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock_open_outlined,
+                                size: 20,
+                                color: AppColor.secondaryColor,
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    //passwordVisible = !passwordVisible;
+                                  });
+                                },
+                                icon: Icon(
+                                  //passwordVisible
+                                  //? Icons.visibility
+                                  //: Icons.visibility_off,
+                                  Icons.visibility_off,
+                                  color: AppColor.secondaryColor,
+                                ),
+                              )),
+                          validator: (value) {
+                            if (value == "") {
+                              // return localization.password_cannot_be_empty;
+                              return "Password cannot be empty";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  obscureText: !_passwordVisiable,
-                  decoration: const InputDecoration(
-                    hintText: "Enter Password",
-                    labelText: "Password",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      size: 20,
-                    ),
-                    suffixIcon: IconButton(
-                      onPressed: null,
-                      icon: Icon(Icons.visibility),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
+                    child: Row(
+                      children: [
+                        // Checkbox(
+                        //   side: const BorderSide(color: AppColor.secondaryColor),
+                        //   materialTapTargetSize: MaterialTapTargetSize.padded,
+                        //   overlayColor:
+                        //       MaterialStateProperty.all<Color>(AppColor.secondaryColor),
+                        //   checkColor: const Color.fromARGB(255, 255, 255, 255),
+                        //   activeColor: AppColor.primaryColor,
+                        //   //value: rememberMe,
+                        //   onChanged: (bool? value) {
+                        //     setState(() {
+                        //       rememberMe = value;
+                        //     });
+                        //     _onRememberMeChanged(value!);
+                        //   },
+                        // ),
+                        Text(
+                          "Remember Me",
+                          //localization.remember_me,
+                          style: const TextStyle(
+                              fontSize: 13.0, color: AppColor.secondaryColor),
+                        ),
+                      ],
                     ),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Password cannot be empty";
-                    } else if (value.length < 6) {
-                      return "Password length should be atleast 6";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                LoginButton(
-                  text: "Login",
-                  onTap: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextButton(
-                  onPressed: null,
-                  child: Text("Herchaha Mobile Application Version 1.0.0"),
-                )
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        AppColor.primaryColor,
+                      ),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(278, 30),
+                      ),
+                    ),
+                    child: Text(
+                      "Login",
+                      //localization.login.toUpperCase(),
+                      style: GoogleFonts.montserrat(
+                        letterSpacing: 1.3,
+                        color: AppColor.secondaryColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    // onPressed: () async {
+                    //   FocusScope.of(context).requestFocus(FocusNode());
+                    //   EasyLoading.show(status: localization.logging_in);
+                    //   _loginBloc.add(
+                    //     LoginClickEvent(
+                    //       username: usernameController.text,
+                    //       password: passwordController.text,
+                    //     ),
+                    //   );
+                    // },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "© ${DateTime.now().year} Herchaha Mobile Application",
+                          style: const TextStyle(
+                              color: AppColor.secondaryColor, fontSize: 12),
+                        ),
+                        // Text(
+                        //   "Version $versionName",
+                        //   style: const TextStyle(
+                        //       color: AppColor.lightText, fontSize: 10),
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ]),
+        ),
       ),
     );
   }
