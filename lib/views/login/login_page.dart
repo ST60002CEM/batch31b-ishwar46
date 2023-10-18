@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _passwordVisiable = false;
   @override
   Widget build(BuildContext context) {
+    var versionName;
     return Scaffold(
       // backgroundColor: AppColor.background,
       // key: _scaffoldKey,
@@ -235,6 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Size(278, 30),
                       ),
                     ),
+
                     child: Text(
                       "Login",
                       //localization.login.toUpperCase(),
@@ -262,19 +264,41 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 20.0,
                   ),
+                  InkWell(
+                    child: Text(
+                      "New User? Create Account",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 12,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.secondaryColor),
+                    ),
+                    onTap: () => Navigator.pushNamed(context, '/signuppage'),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
                   Center(
                     child: Column(
                       children: [
                         Text(
                           "© ${DateTime.now().year} Herchaha Mobile Application",
-                          style: const TextStyle(
-                              color: AppColor.secondaryColor, fontSize: 12),
+                          style: GoogleFonts.montserrat(
+                              fontSize: 10,
+                              letterSpacing: 1.5,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.secondaryColor),
                         ),
-                        // Text(
-                        //   "Version $versionName",
-                        //   style: const TextStyle(
-                        //       color: AppColor.lightText, fontSize: 10),
-                        // ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text("Version $versionName",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 10,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.secondaryColor)),
                       ],
                     ),
                   ),

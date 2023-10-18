@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../styles/appcolor.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
+    var versionName;
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -47,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: 10,
                       ),
                       Text(
-                        "LOGIN",
+                        "SIGNUP",
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -66,7 +66,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: 10,
                       ),
                       Text(
-                        "Please Login to Continue",
+                        "Please fillup the form to continue",
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
@@ -77,12 +77,6 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  //SVG
-                  SvgPicture.asset(
-                    "assets/svg/login_image.svg",
-                    width: 200,
-                    height: 200,
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -184,40 +178,173 @@ class _SignInPageState extends State<SignInPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.zero,
-                    child: Row(
-                      children: const [
-                        // Checkbox(
-                        //   side: const BorderSide(color: AppColor.secondaryColor),
-                        //   materialTapTargetSize: MaterialTapTargetSize.padded,
-                        //   overlayColor:
-                        //       MaterialStateProperty.all<Color>(AppColor.secondaryColor),
-                        //   checkColor: const Color.fromARGB(255, 255, 255, 255),
-                        //   activeColor: AppColor.primaryColor,
-                        //   //value: rememberMe,
-                        //   onChanged: (bool? value) {
-                        //     setState(() {
-                        //       rememberMe = value;
-                        //     });
-                        //     _onRememberMeChanged(value!);
-                        //   },
-                        // ),
-                        Text(
-                          "Remember Me",
-                          //localization.remember_me,
-                          style: TextStyle(
-                              fontSize: 13.0, color: AppColor.secondaryColor),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Username",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == "") {
+                              //return localization.username_required;
+                              return "Username is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Username",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == "") {
+                              //return localization.username_required;
+                              return "Username is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Username",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == "") {
+                              //return localization.username_required;
+                              return "Username is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Username",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == "") {
+                              //return localization.username_required;
+                              return "Username is required";
+                            }
+                            return null;
+                          },
                         ),
                       ],
                     ),
                   ),
+
                   const SizedBox(
-                    height: 20,
+                    height: 80,
                   ),
 
                   const SizedBox(
@@ -233,7 +360,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     child: Text(
-                      "Login",
+                      "Sign up",
                       //localization.login.toUpperCase(),
                       style: GoogleFonts.montserrat(
                         letterSpacing: 1.3,
@@ -267,11 +394,14 @@ class _SignInPageState extends State<SignInPage> {
                           style: const TextStyle(
                               color: AppColor.secondaryColor, fontSize: 12),
                         ),
-                        // Text(
-                        //   "Version $versionName",
-                        //   style: const TextStyle(
-                        //       color: AppColor.lightText, fontSize: 10),
-                        // ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Version $versionName",
+                          style: const TextStyle(
+                              color: AppColor.secondaryColor, fontSize: 10),
+                        ),
                       ],
                     ),
                   ),
