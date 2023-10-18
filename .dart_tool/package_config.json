@@ -146,6 +146,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "google_nav_bar",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_nav_bar-5.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
@@ -380,7 +386,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-10-13T08:41:41.003237Z",
+  "generated": "2023-10-18T10:05:25.005198Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }

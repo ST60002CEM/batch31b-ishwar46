@@ -96,12 +96,12 @@ class _LoginPageState extends State<LoginPage> {
                           showCursor: true,
                           //controller: usernameController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: AppColor.primaryColor,
                               ),
                             ),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: AppColor.primaryColor),
                             ),
@@ -139,11 +139,11 @@ class _LoginPageState extends State<LoginPage> {
                           //controller: passwordController,
                           //obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: AppColor.primaryColor),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: AppColor.primaryColor),
                               ),
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                     //passwordVisible = !passwordVisible;
                                   });
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   //passwordVisible
                                   //? Icons.visibility
                                   //: Icons.visibility_off,
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
                     child: Row(
-                      children: [
+                      children: const [
                         // Checkbox(
                         //   side: const BorderSide(color: AppColor.secondaryColor),
                         //   materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Remember Me",
                           //localization.remember_me,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 13.0, color: AppColor.secondaryColor),
                         ),
                       ],
@@ -240,7 +240,8 @@ class _LoginPageState extends State<LoginPage> {
                       //localization.login.toUpperCase(),
                       style: GoogleFonts.montserrat(
                         letterSpacing: 1.3,
-                        color: AppColor.secondaryColor,
+                        color: AppColor.whiteText,
+                        fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,
                     ),
