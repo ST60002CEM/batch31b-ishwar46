@@ -26,4 +26,5 @@ class MyRoutes {
   static String homeRoute = "/home";
   static String loginRoute = "/loginpage";
   static String signupRoute = "/signuppage";
+  
 }
