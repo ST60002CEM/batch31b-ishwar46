@@ -99,6 +99,40 @@ class _SignUpPageState extends State<SignUpPage> {
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
                             label: Text(
+                              "Full Name",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.account_circle_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
                               "Username",
                               //localization.username,
                               style: GoogleFonts.montserrat(
@@ -119,6 +153,75 @@ class _SignUpPageState extends State<SignUpPage> {
                             }
                             return null;
                           },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          keyboardType: TextInputType.emailAddress,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Email",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.email_outlined,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: AppColor.primaryColor),
+                          showCursor: true,
+                          //controller: usernameController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.primaryColor,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.primaryColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            label: Text(
+                              "Address",
+                              //localization.username,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  color: AppColor.secondaryColor),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.location_pin,
+                              size: 20,
+                              color: AppColor.secondaryColor,
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
@@ -176,168 +279,62 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                         ),
                         const SizedBox(
-                          height: 16,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
-                          showCursor: true,
-                          //controller: usernameController,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColor.primaryColor,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            label: Text(
-                              "Username",
-                              //localization.username,
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.account_circle_outlined,
-                              size: 20,
-                              color: AppColor.secondaryColor,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == "") {
-                              //return localization.username_required;
-                              return "Username is required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style:
+                              const TextStyle(color: AppColor.secondaryColor),
                           showCursor: true,
-                          //controller: usernameController,
+                          //controller: passwordController,
+                          //obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColor.primaryColor,
+                              border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColor.primaryColor),
                               ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            label: Text(
-                              "Username",
-                              //localization.username,
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.account_circle_outlined,
-                              size: 20,
-                              color: AppColor.secondaryColor,
-                            ),
-                          ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColor.primaryColor),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0),
+                              label: Text(
+                                "Confirm Password",
+                                //localization.password,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    letterSpacing: 1.5,
+                                    color: AppColor.secondaryColor),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock_open_outlined,
+                                size: 20,
+                                color: AppColor.secondaryColor,
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    //passwordVisible = !passwordVisible;
+                                  });
+                                },
+                                icon: const Icon(
+                                  //passwordVisible
+                                  //? Icons.visibility
+                                  //: Icons.visibility_off,
+                                  Icons.visibility_off,
+                                  color: AppColor.secondaryColor,
+                                ),
+                              )),
                           validator: (value) {
                             if (value == "") {
-                              //return localization.username_required;
-                              return "Username is required";
+                              // return localization.password_cannot_be_empty;
+                              return "Password cannot be empty";
                             }
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
-                          showCursor: true,
-                          //controller: usernameController,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColor.primaryColor,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            label: Text(
-                              "Username",
-                              //localization.username,
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.account_circle_outlined,
-                              size: 20,
-                              color: AppColor.secondaryColor,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == "") {
-                              //return localization.username_required;
-                              return "Username is required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
-                          showCursor: true,
-                          //controller: usernameController,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColor.primaryColor,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            label: Text(
-                              "Username",
-                              //localization.username,
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12,
-                                  letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.account_circle_outlined,
-                              size: 20,
-                              color: AppColor.secondaryColor,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == "") {
-                              //return localization.username_required;
-                              return "Username is required";
-                            }
-                            return null;
-                          },
                         ),
                       ],
                     ),
@@ -382,6 +379,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     //     ),
                     //   );
                     // },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  InkWell(
+                    child: Text(
+                      "Already have an account? Login",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 12,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.secondaryColor),
+                    ),
+                    onTap: () => Navigator.pushNamed(context, '/loginpage'),
                   ),
                   const SizedBox(
                     height: 20.0,
