@@ -13,12 +13,12 @@ void configLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.circle
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = Colors.black38
+    ..backgroundColor = AppColor.accent
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.clear
     ..maskColor = Colors.transparent
-    ..indicatorColor = AppColor.primaryColor
+    ..indicatorColor = AppColor.whiteText
     ..textStyle = const TextStyle(
       color: Colors.white,
     )

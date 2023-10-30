@@ -46,6 +46,8 @@ dependencies:
   carousel_slider: ^4.2.1
   shimmer: ^3.0.0
   flutter_easyloading: ^3.0.5
+  line_icons: ^2.0.3
+  salomon_bottom_bar: ^3.3.2
 
 dev_dependencies:
   flutter_test:

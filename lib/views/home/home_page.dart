@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.menu),
-          onPressed: () {},
+          onPressed: () {
+            EasyLoading.showInfo("This feature is coming soon.");
+          },
         ),
         actions: [
           IconButton(
@@ -107,25 +110,29 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: SalomonBottomBar(
+        unselectedItemColor: AppColor.primaryColor,
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
+        onTap: (i) => setState(() => _currentIndex = i),
+        items: [
+          SalomonBottomBarItem(
+              icon: const Icon(Icons.home),
+              title: const Text("Home"),
+              selectedColor: AppColor.secondaryColor),
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.favorite_border),
+            title: const Text("Likes"),
+            selectedColor: AppColor.secondaryColor,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Search",
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.search),
+            title: const Text("Search"),
+            selectedColor: AppColor.secondaryColor,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.person),
+            title: const Text("Profile"),
+            selectedColor: AppColor.secondaryColor,
           ),
         ],
       ),
