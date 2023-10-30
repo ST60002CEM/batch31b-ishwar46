@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		iy7kxe+XpOV9DiVqMWqCjx4DXaU=
+		U6r3gTMN69qBI3siGRNWuVmlCt0=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		eXA5zvxrxIZsg9IyNCwljyckcuA=
+		AFlXzBUyMRRy9FKJW544239vPlA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		O0lPno094RD/8AC8oYnGUZv3XMs=
+		sf/XeT1ZF8Uz6D4TXNNxetpexzA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/img/logo.png</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		KHBxwGq482XOKUX6W87Gp2Y6Ens=
+		3A+ROFGSv8D8f+QLZOg3T3pHMwM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/awesome_snackbar_content/assets/back.svg</key>
 		<data>
@@ -305,7 +305,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Aq196FmY0ELAYo7IyKcWHuZ9g6G2K7Ynv/XtCMESw7w=
+			mvzD+fsegpvcAGn02vCklnlyBLgThYZ+bEmEjNTBmO8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -319,7 +319,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			z8aWS/NRRjKGSX3/ucEd7NcDqGGQWklH50bpdKR+ts8=
+			vFK2EPS1OakCZJFRyu1Q8AZALszPxhp8BSCieC9lUtQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -340,7 +340,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dgyc4bAChjQDrY1Zv+1y4H1jBthPBwj+AsjfrqIEdAs=
+			q4kEZzqRMIS3es+iNaAxOUTMaUQkeP4LuCOXazlI7ys=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/img/logo.png</key>
@@ -375,7 +375,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3MEk1qZ9+omYB4n/hu3X2tcl41JhEMKyiHVHaeQ1fcQ=
+			IaZ0DWEKBK1rnjxhzKuYhAimaDxE61Dh2DOJHo+Q7I0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/awesome_snackbar_content/assets/back.svg</key>

@@ -42,6 +42,12 @@ dependencies:
   flutter_svg: ^2.0.0
   card_swiper: ^3.0.1
   google_nav_bar: ^5.0.6
+  package_info_plus: ^4.2.0
+  carousel_slider: ^4.2.1
+  shimmer: ^3.0.0
+  flutter_easyloading: ^3.0.5
+  line_icons: ^2.0.3
+  salomon_bottom_bar: ^3.3.2
 
 dev_dependencies:
   flutter_test:
