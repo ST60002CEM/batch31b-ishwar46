@@ -7,6 +7,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import '../../widgets/card_widget.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -76,6 +78,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               CarouselSlider(
                 options: CarouselOptions(
+                  aspectRatio: 10.0,
                   height: 120.0,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
@@ -110,29 +113,86 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Quick Access",
-                      style: GoogleFonts.montserrat(
-                        color: AppColor.primaryColor,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        EasyLoading.showInfo("This feature is coming soon.");
-                      },
+                    Container(
+                      padding: const EdgeInsets.all(10),
                       child: Text(
-                        "View All",
+                        "Quick Access",
                         style: GoogleFonts.montserrat(
                           color: AppColor.primaryColor,
-                          fontSize: 12,
+                          fontSize: 15,
                           fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: TextButton(
+                        onPressed: () {
+                          EasyLoading.showInfo("This feature is coming soon.");
+                        },
+                        child: Text(
+                          "View All",
+                          style: GoogleFonts.montserrat(
+                            color: AppColor.primaryColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/hospital",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: CardWidget(
+                      title: "Hospital",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
               ),
             ],
           ),
