@@ -164,8 +164,46 @@ class _HomePageState extends State<HomePage> {
                     height: 110,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
+                      title: "Health Care",
+                      routeName: "/appointment",
+                      iconData: Icons.healing,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
                       title: "Appointment",
                       routeName: "/appointment",
+                      iconData: Icons.policy,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Hospital",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/hospital",
                       iconData: Icons.local_hospital,
                     ),
                   ),
@@ -176,14 +214,24 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Appointment",
                       routeName: "/appointment",
-                      iconData: Icons.local_hospital,
+                      iconData: Icons.apartment_outlined,
                     ),
                   ),
                   Container(
                     width: 100,
                     height: 110,
                     padding: const EdgeInsets.all(10),
-                    child: CardWidget(
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/appointment",
+                      iconData: Icons.schedule,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
                       title: "Hospital",
                       routeName: "/appointment",
                       iconData: Icons.local_hospital,
@@ -191,8 +239,115 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Reminders",
+                        style: GoogleFonts.montserrat(
+                          color: AppColor.primaryColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: TextButton(
+                        onPressed: () {
+                          EasyLoading.showInfo("This feature is coming soon.");
+                        },
+                        child: Text(
+                          "View All",
+                          style: GoogleFonts.montserrat(
+                            color: AppColor.primaryColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              //For Reminders
+              // ListView(
+              //   shrinkWrap: true,
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   children: [
+              //     Container(
+              //       color: AppColor.accent,
+              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           Container(
+              //             padding: const EdgeInsets.all(10),
+              //             child: Text(
+              //               "Today",
+              //               style: GoogleFonts.montserrat(
+              //                 color: AppColor.primaryColor,
+              //                 fontSize: 15,
+              //                 fontWeight: FontWeight.w600,
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       height: 10,
+              //     ),
+              //     Container(
+              //       color: AppColor.accent,
+              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           Container(
+              //             padding: const EdgeInsets.all(10),
+              //             child: Text(
+              //               "Upcoming",
+              //               style: GoogleFonts.montserrat(
+              //                 color: AppColor.primaryColor,
+              //                 fontSize: 15,
+              //                 fontWeight: FontWeight.w600,
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       height: 10,
+              //     ),
+              //   ],
+              // ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  style: ListTileStyle.list,
+                  tileColor: Colors.amber[600],
+                  leading: const Icon(Icons.calendar_today),
+                  title: const Text("Today"),
+                  subtitle: const Text("No Reminders"),
+                  trailing: IconButton(
+                    onPressed: () {
+                      EasyLoading.showInfo("This feature is coming soon.");
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
+                ),
               ),
             ],
           ),
