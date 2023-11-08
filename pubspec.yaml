@@ -50,6 +50,9 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   awesome_dialog: ^3.1.0
   rive: ^0.11.4
+  shared_preferences: ^2.2.2
+  animate_do: ^3.0.2
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:
