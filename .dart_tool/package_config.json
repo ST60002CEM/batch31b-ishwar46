@@ -146,12 +146,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/Ishwar/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
-    },
-    {
       "name": "flutter_localizations",
       "rootUri": "file:///C:/src/flutter_windows_3.0.3-stable/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
@@ -246,12 +240,6 @@
       "rootUri": "file:///C:/Users/Ishwar/AppData/Local/Pub/Cache/hosted/pub.dev/line_icons-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "lints",
-      "rootUri": "file:///C:/Users/Ishwar/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
     },
     {
       "name": "matcher",
@@ -524,7 +512,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-11-08T10:26:18.049312Z",
+  "generated": "2023-11-08T10:46:32.948980Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }
