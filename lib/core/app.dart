@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.loginRoute: (context) => const LoginPage(),
         MyRoutes.signupRoute: (context) => const SignUpPage(),
+        MyRoutes.appointmentsRoute: (context) => const HomePage(),
       },
     );
   }
@@ -28,4 +29,5 @@ class MyRoutes {
   static String homeRoute = "/home";
   static String loginRoute = "/loginpage";
   static String signupRoute = "/signuppage";
+  static String appointmentsRoute = "/appointmentspage";
 }
