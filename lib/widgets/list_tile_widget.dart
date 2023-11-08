@@ -16,20 +16,35 @@ class CustomListTileWidget extends StatelessWidget {
           .map(
             (tileData) => Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: EdgeInsets.only(top: 5),
               child: ListTile(
+                hoverColor: AppColor.accent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 style: ListTileStyle.list,
-                tileColor: AppColor.accent,
-                leading: Icon(tileData.iconData),
-                title: Text(tileData.title),
-                subtitle: Text(tileData.subtitle),
+                tileColor: AppColor.whiteText,
+                //leading: Icon(tileData.iconData),
+                isThreeLine: true,
+                title: Text(
+                  tileData.title,
+                  style: GoogleFonts.montserrat(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w600,
+                      color: AppColor.secondaryColor),
+                ),
+                subtitle: Text(
+                  tileData.subtitle,
+                  style: GoogleFonts.montserrat(
+                    color: AppColor.primaryColor,
+                    fontSize: 12.0,
+                  ),
+                ),
                 trailing: IconButton(
                   onPressed: () {
                     EasyLoading.showInfo("This feature is coming soon.");
                   },
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.check_box_outline_blank_rounded),
                 ),
               ),
             ),

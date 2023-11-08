@@ -1,5 +1,6 @@
 import 'package:age_care/styles/appcolor.dart';
 import 'package:age_care/views/login/login_page.dart';
+import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+
+  List<ListTileData> tileDataList = [
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Medication for Diabetes",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        "Quick Access",
+                        "Our Services",
                         style: GoogleFonts.montserrat(
                           color: AppColor.primaryColor,
                           fontSize: 15,
@@ -142,9 +162,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 10.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                     height: 110,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Appointment",
+                      title: "Carer Details",
                       routeName: "/appointment",
                       iconData: Icons.policy,
                     ),
@@ -184,15 +201,12 @@ class _HomePageState extends State<HomePage> {
                     height: 110,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Hospital",
+                      title: "Clinics",
                       routeName: "/appointment",
-                      iconData: Icons.local_hospital,
+                      iconData: Icons.local_hospital_outlined,
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,81 +288,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
               //For Reminders
-              // ListView(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   children: [
-              //     Container(
-              //       color: AppColor.accent,
-              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Container(
-              //             padding: const EdgeInsets.all(10),
-              //             child: Text(
-              //               "Today",
-              //               style: GoogleFonts.montserrat(
-              //                 color: AppColor.primaryColor,
-              //                 fontSize: 15,
-              //                 fontWeight: FontWeight.w600,
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       height: 10,
-              //     ),
-              //     Container(
-              //       color: AppColor.accent,
-              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Container(
-              //             padding: const EdgeInsets.all(10),
-              //             child: Text(
-              //               "Upcoming",
-              //               style: GoogleFonts.montserrat(
-              //                 color: AppColor.primaryColor,
-              //                 fontSize: 15,
-              //                 fontWeight: FontWeight.w600,
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       height: 10,
-              //     ),
-              //   ],
-              // ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  style: ListTileStyle.list,
-                  tileColor: Colors.amber[600],
-                  leading: const Icon(Icons.calendar_today),
-                  title: const Text("Today"),
-                  subtitle: const Text("No Reminders"),
-                  trailing: IconButton(
-                    onPressed: () {
-                      EasyLoading.showInfo("This feature is coming soon.");
-                    },
-                    icon: const Icon(Icons.add),
-                  ),
-                ),
-              ),
+              CustomListTileWidget(tileDataList: tileDataList),
             ],
           ),
         ),
@@ -368,8 +309,8 @@ class _HomePageState extends State<HomePage> {
             selectedColor: AppColor.secondaryColor,
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.search),
-            title: const Text("Search"),
+            icon: const Icon(Icons.calendar_month_sharp),
+            title: const Text("Events"),
             selectedColor: AppColor.secondaryColor,
           ),
           SalomonBottomBarItem(
