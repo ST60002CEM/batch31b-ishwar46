@@ -3,6 +3,7 @@ import 'package:age_care/views/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../splash_screen.dart';
 import '../views/signup/signup_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Age Care App',
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: const LoginPage(),
+      home: const SplashScreen(),
       routes: {
+        MyRoutes.homeRoute: (context) => const LoginPage(),
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.loginRoute: (context) => const LoginPage(),
         MyRoutes.signupRoute: (context) => const SignUpPage(),
