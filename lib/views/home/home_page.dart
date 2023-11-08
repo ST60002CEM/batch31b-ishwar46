@@ -1,9 +1,14 @@
 import 'package:age_care/styles/appcolor.dart';
+import 'package:age_care/views/login/login_page.dart';
+import 'package:age_care/widgets/list_tile_widget.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import '../../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +19,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+
+  List<ListTileData> tileDataList = [
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Medication for Diabetes",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+    ListTileData(
+        iconData: Icons.calendar_today,
+        title: "Short Walk",
+        subtitle: "Wed, Oct 2\n12:00 PM"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +63,32 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.bottomSlide,
+                title: "Logout",
+                titleTextStyle: GoogleFonts.montserrat(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+                desc: "Are you sure you want to logout?",
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                },
+              ).show();
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -48,6 +98,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               CarouselSlider(
                 options: CarouselOptions(
+                  aspectRatio: 10.0,
                   height: 120.0,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
@@ -82,30 +133,163 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Quick Access",
-                      style: GoogleFonts.montserrat(
-                        color: AppColor.primaryColor,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        EasyLoading.showInfo("This feature is coming soon.");
-                      },
+                    Container(
+                      padding: const EdgeInsets.all(10),
                       child: Text(
-                        "View All",
+                        "Our Services",
                         style: GoogleFonts.montserrat(
                           color: AppColor.primaryColor,
-                          fontSize: 12,
+                          fontSize: 15,
                           fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: TextButton(
+                        onPressed: () {
+                          EasyLoading.showInfo("This feature is coming soon.");
+                        },
+                        child: Text(
+                          "View All",
+                          style: GoogleFonts.montserrat(
+                            color: AppColor.primaryColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/hospital",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Health Care",
+                      routeName: "/appointment",
+                      iconData: Icons.healing,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Carer Details",
+                      routeName: "/appointment",
+                      iconData: Icons.policy,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Clinics",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital_outlined,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/hospital",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/appointment",
+                      iconData: Icons.apartment_outlined,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Appointment",
+                      routeName: "/appointment",
+                      iconData: Icons.schedule,
+                    ),
+                  ),
+                  Container(
+                    width: 100,
+                    height: 110,
+                    padding: const EdgeInsets.all(10),
+                    child: const CardWidget(
+                      title: "Hospital",
+                      routeName: "/appointment",
+                      iconData: Icons.local_hospital,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Reminders",
+                        style: GoogleFonts.montserrat(
+                          color: AppColor.primaryColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: TextButton(
+                        onPressed: () {
+                          EasyLoading.showInfo("This feature is coming soon.");
+                        },
+                        child: Text(
+                          "View All",
+                          style: GoogleFonts.montserrat(
+                            color: AppColor.primaryColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //For Reminders
+              CustomListTileWidget(tileDataList: tileDataList),
             ],
           ),
         ),
@@ -125,8 +309,8 @@ class _HomePageState extends State<HomePage> {
             selectedColor: AppColor.secondaryColor,
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.search),
-            title: const Text("Search"),
+            icon: const Icon(Icons.calendar_month_sharp),
+            title: const Text("Events"),
             selectedColor: AppColor.secondaryColor,
           ),
           SalomonBottomBarItem(
