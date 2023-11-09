@@ -452,6 +452,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "time_planner",
+      "rootUri": "file:///C:/Users/Ishwar/AppData/Local/Pub/Cache/hosted/pub.dev/time_planner-0.1.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///C:/Users/Ishwar/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
@@ -512,7 +518,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-11-08T10:46:32.948980Z",
+  "generated": "2023-11-09T11:17:44.454415Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }

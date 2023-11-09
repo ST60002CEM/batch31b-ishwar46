@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../widgets/card_widget.dart';
+import '../events/events_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -91,208 +92,216 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Column(
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 10.0,
-                  height: 120.0,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                ),
-                items: [
-                  "assets/img/b1.png",
-                  "assets/img/b2.png",
-                  "assets/img/b1.png",
-                ].map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.amber,
-                        ),
-                        child: Image.asset(
-                          i,
-                          fit: BoxFit.cover,
-                        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          EventsPage(),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      aspectRatio: 10.0,
+                      height: 120.0,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                    ),
+                    items: [
+                      "assets/img/b1.png",
+                      "assets/img/b2.png",
+                      "assets/img/b1.png",
+                    ].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.amber,
+                            ),
+                            child: Image.asset(
+                              i,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
                       );
-                    },
-                  );
-                }).toList(),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        "Our Services",
-                        style: GoogleFonts.montserrat(
-                          color: AppColor.primaryColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextButton(
-                        onPressed: () {
-                          EasyLoading.showInfo("This feature is coming soon.");
-                        },
-                        child: Text(
-                          "View All",
-                          style: GoogleFonts.montserrat(
-                            color: AppColor.primaryColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                    }).toList(),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Our Services",
+                            style: GoogleFonts.montserrat(
+                              color: AppColor.primaryColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Appointment",
-                      routeName: "/hospital",
-                      iconData: Icons.local_hospital,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Health Care",
-                      routeName: "/appointment",
-                      iconData: Icons.healing,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Carer Details",
-                      routeName: "/appointment",
-                      iconData: Icons.policy,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Clinics",
-                      routeName: "/appointment",
-                      iconData: Icons.local_hospital_outlined,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Appointment",
-                      routeName: "/hospital",
-                      iconData: Icons.local_hospital,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Appointment",
-                      routeName: "/appointment",
-                      iconData: Icons.apartment_outlined,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Appointment",
-                      routeName: "/appointment",
-                      iconData: Icons.schedule,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Hospital",
-                      routeName: "/appointment",
-                      iconData: Icons.local_hospital,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        "Reminders",
-                        style: GoogleFonts.montserrat(
-                          color: AppColor.primaryColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextButton(
-                        onPressed: () {
-                          EasyLoading.showInfo("This feature is coming soon.");
-                        },
-                        child: Text(
-                          "View All",
-                          style: GoogleFonts.montserrat(
-                            color: AppColor.primaryColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: TextButton(
+                            onPressed: () {
+                              EasyLoading.showInfo(
+                                  "This feature is coming soon.");
+                            },
+                            child: Text(
+                              "View All",
+                              style: GoogleFonts.montserrat(
+                                color: AppColor.primaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Appointment",
+                          routeName: "/hospital",
+                          iconData: Icons.local_hospital,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Health Care",
+                          routeName: "/appointment",
+                          iconData: Icons.healing,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Carer Details",
+                          routeName: "/appointment",
+                          iconData: Icons.policy,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Clinics",
+                          routeName: "/appointment",
+                          iconData: Icons.local_hospital_outlined,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Appointment",
+                          routeName: "/hospital",
+                          iconData: Icons.local_hospital,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Appointment",
+                          routeName: "/appointment",
+                          iconData: Icons.apartment_outlined,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Appointment",
+                          routeName: "/appointment",
+                          iconData: Icons.schedule,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 110,
+                        padding: const EdgeInsets.all(10),
+                        child: const CardWidget(
+                          title: "Hospital",
+                          routeName: "/appointment",
+                          iconData: Icons.local_hospital,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Reminders",
+                            style: GoogleFonts.montserrat(
+                              color: AppColor.primaryColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: TextButton(
+                            onPressed: () {
+                              EasyLoading.showInfo(
+                                  "This feature is coming soon.");
+                            },
+                            child: Text(
+                              "View All",
+                              style: GoogleFonts.montserrat(
+                                color: AppColor.primaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // For Reminders
+                  CustomListTileWidget(tileDataList: tileDataList),
+                ],
               ),
-              //For Reminders
-              CustomListTileWidget(tileDataList: tileDataList),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
       bottomNavigationBar: SalomonBottomBar(
         unselectedItemColor: AppColor.primaryColor,
