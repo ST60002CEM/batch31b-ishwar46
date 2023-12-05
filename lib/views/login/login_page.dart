@@ -195,22 +195,12 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
                     child: Row(
-                      children: const [
-                        // Checkbox(
-                        //   side: const BorderSide(color: AppColor.secondaryColor),
-                        //   materialTapTargetSize: MaterialTapTargetSize.padded,
-                        //   overlayColor:
-                        //       MaterialStateProperty.all<Color>(AppColor.secondaryColor),
-                        //   checkColor: const Color.fromARGB(255, 255, 255, 255),
-                        //   activeColor: AppColor.primaryColor,
-                        //   //value: rememberMe,
-                        //   onChanged: (bool? value) {
-                        //     setState(() {
-                        //       rememberMe = value;
-                        //     });
-                        //     _onRememberMeChanged(value!);
-                        //   },
-                        // ),
+                      children: [
+                        Checkbox(
+                          value: false,
+                          onChanged: (value) {},
+                          activeColor: AppColor.primaryColor,
+                        ),
                         Text(
                           "Remember Me",
                           //localization.remember_me,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../styles/appcolor.dart';
@@ -24,8 +25,11 @@ class CardWidget extends StatelessWidget {
       elevation: 0.0,
       child: InkWell(
         enableFeedback: true,
+        // onTap: () {
+        //   Navigator.pushNamed(context, routeName);
+        // },
         onTap: () {
-          Navigator.pushNamed(context, routeName);
+          EasyLoading.showInfo("This feature is coming soon.");
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
