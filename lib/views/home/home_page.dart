@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color.fromARGB(255, 15, 75, 125),
         title: const Text("WELCOME"),
         titleTextStyle: GoogleFonts.montserrat(
-          color: Colors.white,
+          color: AppColor.whiteText,
           fontSize: 15,
           fontWeight: FontWeight.w600,
         ),
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Our Services",
                         style: GoogleFonts.montserrat(
-                          color: AppColor.primaryColor,
+                          color: Theme.of(context).secondaryHeaderColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "View All",
                           style: GoogleFonts.montserrat(
-                            color: AppColor.primaryColor,
+                            color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Reminders",
                         style: GoogleFonts.montserrat(
-                          color: AppColor.primaryColor,
+                          color: Theme.of(context).secondaryHeaderColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "View All",
                           style: GoogleFonts.montserrat(
-                            color: AppColor.primaryColor,
+                            color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),

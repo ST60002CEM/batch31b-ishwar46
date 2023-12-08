@@ -23,7 +23,7 @@ class CustomListTileWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 style: ListTileStyle.list,
-                tileColor: AppColor.whiteText,
+                tileColor: Theme.of(context).listTileTheme.tileColor,
                 //leading: Icon(tileData.iconData),
                 isThreeLine: true,
                 title: Text(
@@ -31,12 +31,12 @@ class CustomListTileWidget extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       fontSize: 13.0,
                       fontWeight: FontWeight.w600,
-                      color: AppColor.secondaryColor),
+                      color: Theme.of(context).textTheme.bodyText1!.color),
                 ),
                 subtitle: Text(
                   tileData.subtitle,
                   style: GoogleFonts.montserrat(
-                    color: AppColor.primaryColor,
+                    color: Theme.of(context).textTheme.bodyText2!.color,
                     fontSize: 12.0,
                   ),
                 ),
@@ -44,7 +44,8 @@ class CustomListTileWidget extends StatelessWidget {
                   onPressed: () {
                     EasyLoading.showInfo("This feature is coming soon.");
                   },
-                  icon: const Icon(Icons.check_box_outline_blank_rounded),
+                  icon: Icon(Icons.check_box_outline_blank_rounded,
+                      color: Theme.of(context).iconTheme.color),
                 ),
               ),
             ),
