@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../splash_screen.dart';
+import '../styles/appcolor.dart';
 import '../views/signup/signup_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Age Care App',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        //brightness: Bightness.dark,
+        scaffoldBackgroundColor: AppColor.whiteText,
+        primaryColor: AppColor.primaryColor,
+      ),
       builder: EasyLoading.init(),
       home: const SplashScreen(),
       routes: {
