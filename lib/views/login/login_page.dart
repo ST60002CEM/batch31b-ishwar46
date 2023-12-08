@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     var versionName;
     return Scaffold(
-      // backgroundColor: AppColor.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // key: _scaffoldKey,
       body: GestureDetector(
         onTap: () {
@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                     repeat: ImageRepeat.noRepeat,
                     width: 80,
                     height: 80,
+                    //color: Theme.of(context).primaryColor,
                   ),
                   const SizedBox(
                     height: 12,
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             letterSpacing: 1.5,
-                            color: AppColor.primaryColor),
+                            color: Theme.of(context).secondaryHeaderColor),
                       ),
                     ],
                   ),
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
                             letterSpacing: 1.5,
-                            color: AppColor.primaryColor),
+                            color: Theme.of(context).secondaryHeaderColor),
                       ),
                     ],
                   ),
@@ -93,20 +94,22 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style: TextStyle(
+                              color: Theme.of(context).secondaryHeaderColor),
                           showCursor: true,
                           //controller: usernameController,
                           decoration: InputDecoration(
-                            border: const OutlineInputBorder(
+                            border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.primaryColor,
-                              ),
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
                             ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
+                            contentPadding: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
                             label: Text(
                               "Username",
@@ -114,12 +117,13 @@ class _LoginPageState extends State<LoginPage> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 12,
                                   letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
                             ),
-                            prefixIcon: const Icon(
+                            prefixIcon: Icon(
                               Icons.account_circle_outlined,
                               size: 20,
-                              color: AppColor.secondaryColor,
+                              color: Theme.of(context).secondaryHeaderColor,
                             ),
                           ),
                           validator: (value) {
@@ -134,15 +138,16 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         TextFormField(
-                          style:
-                              const TextStyle(color: AppColor.secondaryColor),
+                          style: TextStyle(
+                              color: Theme.of(context).secondaryHeaderColor),
                           showCursor: true,
                           //controller: passwordController,
                           //obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                              border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:
+                                        Theme.of(context).secondaryHeaderColor),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
@@ -156,12 +161,13 @@ class _LoginPageState extends State<LoginPage> {
                                 style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     letterSpacing: 1.5,
-                                    color: AppColor.secondaryColor),
+                                    color:
+                                        Theme.of(context).secondaryHeaderColor),
                               ),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.lock_open_outlined,
                                 size: 20,
-                                color: AppColor.secondaryColor,
+                                color: Theme.of(context).secondaryHeaderColor,
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
@@ -205,7 +211,8 @@ class _LoginPageState extends State<LoginPage> {
                           "Remember Me",
                           //localization.remember_me,
                           style: TextStyle(
-                              fontSize: 13.0, color: AppColor.secondaryColor),
+                              fontSize: 13.0,
+                              color: Theme.of(context).secondaryHeaderColor),
                         ),
                       ],
                     ),
@@ -220,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        AppColor.primaryColor,
+                        Theme.of(context).secondaryHeaderColor,
                       ),
                       fixedSize: MaterialStateProperty.all<Size>(
                         const Size(278, 30),
@@ -262,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 12,
                           letterSpacing: 1,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.secondaryColor),
+                          color: Theme.of(context).secondaryHeaderColor),
                     ),
                     onTap: () => Navigator.pushNamed(context, '/signuppage'),
                   ),
@@ -278,7 +285,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 10,
                               letterSpacing: 1.5,
                               fontWeight: FontWeight.w500,
-                              color: AppColor.secondaryColor),
+                              color: Theme.of(context).secondaryHeaderColor),
                         ),
                         const SizedBox(
                           height: 5,
@@ -288,7 +295,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 10,
                                 letterSpacing: 1,
                                 fontWeight: FontWeight.w500,
-                                color: AppColor.secondaryColor)),
+                                color: Theme.of(context).secondaryHeaderColor)),
                       ],
                     ),
                   ),

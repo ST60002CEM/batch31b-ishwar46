@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../styles/appcolor.dart';
-
 class CardWidget extends StatelessWidget {
   final String title;
   final String routeName;
@@ -22,7 +20,7 @@ class CardWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      elevation: 0.0,
+      elevation: 1.0,
       child: InkWell(
         enableFeedback: true,
         // onTap: () {
@@ -37,7 +35,7 @@ class CardWidget extends StatelessWidget {
             Icon(
               iconData,
               size: 28,
-              color: AppColor.secondaryColor,
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
             const SizedBox(
               height: 18,
@@ -46,8 +44,8 @@ class CardWidget extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 12.0,
-                color: AppColor.secondaryColor,
-                fontFamily: GoogleFonts.nunito().fontFamily,
+                color: Theme.of(context).textTheme.bodyText2!.color,
+                fontFamily: GoogleFonts.montserrat().fontFamily,
               ),
               textAlign: TextAlign.center,
             )
