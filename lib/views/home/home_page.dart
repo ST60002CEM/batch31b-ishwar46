@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../widgets/card_widget.dart';
+import '../../widgets/drawer_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -52,12 +53,11 @@ class _HomePageState extends State<HomePage> {
         ),
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            EasyLoading.showInfo("This feature is coming soon.");
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.menu),
+        //   onPressed: () {
+        //   },
+        // ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
