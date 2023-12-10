@@ -10,6 +10,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
+import '../appointment/appointments_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,6 +40,19 @@ class _HomePageState extends State<HomePage> {
         title: "Short Walk",
         subtitle: "Wed, Oct 2\n12:00 PM"),
   ];
+
+  final List<Widget> _pages = [
+    HomePage(),
+    AppointmentsPage(),
+    //EventsPage(),
+    //ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -298,7 +312,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: SalomonBottomBar(
         unselectedItemColor: AppColor.primaryColor,
         currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
+        onTap: _onItemTapped,
         items: [
           SalomonBottomBarItem(
               icon: const Icon(Icons.home),
