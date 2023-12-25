@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../styles/appcolor.dart';
+import '../config/constants/app_colors.dart';
 
 class CustomListTileWidget extends StatelessWidget {
   final List<ListTileData> tileDataList;
@@ -18,7 +18,7 @@ class CustomListTileWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 5),
               child: ListTile(
-                hoverColor: AppColor.accent,
+                hoverColor: AppColors.accentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),

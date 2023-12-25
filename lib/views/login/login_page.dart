@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../styles/appcolor.dart';
+import '../../config/constants/app_colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                                    BorderSide(color: AppColors.primaryColor),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                                   //? Icons.visibility
                                   //: Icons.visibility_off,
                                   Icons.visibility_off,
-                                  color: AppColor.secondaryColor,
+                                  color: AppColors.secondaryColor,
                                 ),
                               )),
                           validator: (value) {
@@ -205,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                         Checkbox(
                           value: false,
                           onChanged: (value) {},
-                          activeColor: AppColor.primaryColor,
+                          activeColor: AppColors.primaryColor,
                         ),
                         Text(
                           "Remember Me",
@@ -239,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                       //localization.login.toUpperCase(),
                       style: GoogleFonts.montserrat(
                         letterSpacing: 1.3,
-                        color: AppColor.whiteText,
+                        color: AppColors.whiteText,
                         fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,

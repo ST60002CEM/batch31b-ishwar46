@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../styles/appcolor.dart';
+import '../config/constants/app_colors.dart';
 
 class RemitancePage extends StatelessWidget {
   const RemitancePage({super.key});
@@ -39,7 +39,7 @@ class RemitancePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColor.accent.withOpacity(0.2),
+                          color: AppColors.accentColor.withOpacity(0.2),
                           blurRadius: 5.0,
                           spreadRadius: 2.0,
                         ),
@@ -120,7 +120,7 @@ class HeadingWidget extends StatelessWidget {
         style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.bold,
-          color: AppColor.secondaryColor,
+          color: AppColors.secondaryColor,
         ),
       ),
     );
@@ -150,7 +150,7 @@ class RemitServiceWidget extends StatelessWidget {
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
           child: ListTile(
-            tileColor: AppColor.accent.withOpacity(0.2),
+            tileColor: AppColors.accentColor.withOpacity(0.2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
@@ -175,7 +175,7 @@ class RemitServiceWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ListTile(
-        tileColor: AppColor.accent.withOpacity(0.2),
+        tileColor: AppColors.accentColor.withOpacity(0.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -206,7 +206,7 @@ class DescriptionWidget extends StatelessWidget {
           style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w300,
-            color: AppColor.secondaryColor,
+            color: AppColors.secondaryColor,
           ),
         ),
       ),

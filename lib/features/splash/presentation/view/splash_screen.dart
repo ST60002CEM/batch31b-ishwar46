@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:age_care/styles/appcolor.dart';
 import 'package:age_care/utils/size_config.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import 'views/login/login_page.dart';
+import '../../../../config/constants/app_colors.dart';
+import '../../../../config/router/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,22 +18,19 @@ class _SplashScreenState extends State<SplashScreen> {
   SizeConfig screen = SizeConfig();
   @override
   void initState() {
-    super.initState();
-
-    Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return const LoginPage();
-        },
-      ));
+    //Wait for 2 seconds and then navigate to next page
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, MyRoutes.onBoardingRoute);
     });
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     screen.init(context);
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: Container(
         alignment: Alignment.center,
         child: Stack(
@@ -43,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: screen.screenWidth,
               child: Image.asset('assets/img/splashbg.png',
                   fit: BoxFit.fill,
-                  color: AppColor.primaryColor,
+                  color: AppColors.primaryColor,
                   colorBlendMode: BlendMode.lighten),
             ),
             Column(
@@ -66,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                               "assets/img/logo.png",
                               height: MediaQuery.of(context).size.width,
                               width: MediaQuery.of(context).size.width,
-                              color: AppColor.whiteText,
+                              color: AppColors.whiteText,
                             ),
                           ),
                         ),
