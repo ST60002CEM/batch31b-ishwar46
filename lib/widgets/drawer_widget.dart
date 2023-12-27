@@ -1,5 +1,6 @@
-import 'package:age_care/styles/appcolor.dart';
 import 'package:flutter/material.dart';
+
+import '../config/constants/app_colors.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -26,7 +27,7 @@ class MyDrawer extends StatelessWidget {
                 Text(
                   'Hello! Ishwar',
                   style: TextStyle(
-                    color: AppColor.whiteText,
+                    color: AppColors.whiteText,
                     fontSize: 18,
                   ),
                 ),

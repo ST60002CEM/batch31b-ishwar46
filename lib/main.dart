@@ -1,11 +1,17 @@
 import 'package:age_care/core/app.dart';
-import 'package:age_care/styles/appcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'config/constants/app_colors.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
   configLoading();
 }
 
@@ -13,12 +19,12 @@ void configLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.circle
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = AppColor.accent
+    ..backgroundColor = AppColors.accentColor
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.clear
     ..maskColor = Colors.transparent
-    ..indicatorColor = AppColor.whiteText
+    ..indicatorColor = AppColors.whiteText
     ..textStyle = const TextStyle(
       color: Colors.white,
     )

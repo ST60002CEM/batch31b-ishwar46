@@ -1,4 +1,3 @@
-import 'package:age_care/styles/appcolor.dart';
 import 'package:age_care/views/login/login_page.dart';
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import '../../config/constants/app_colors.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
 import '../appointment/appointments_page.dart';
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color.fromARGB(255, 15, 75, 125),
         title: const Text("WELCOME"),
         titleTextStyle: GoogleFonts.montserrat(
-          color: AppColor.whiteText,
+          color: AppColors.whiteText,
           fontSize: 15,
           fontWeight: FontWeight.w600,
         ),
@@ -310,28 +310,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: SalomonBottomBar(
-        unselectedItemColor: AppColor.primaryColor,
+        unselectedItemColor: AppColors.primaryColor,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         items: [
           SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text("Home"),
-              selectedColor: AppColor.secondaryColor),
+              selectedColor: AppColors.secondaryColor),
           SalomonBottomBarItem(
             icon: const Icon(Icons.favorite_border),
             title: const Text("Likes"),
-            selectedColor: AppColor.secondaryColor,
+            selectedColor: AppColors.secondaryColor,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.calendar_month_sharp),
             title: const Text("Events"),
-            selectedColor: AppColor.secondaryColor,
+            selectedColor: AppColors.secondaryColor,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.person),
             title: const Text("Profile"),
-            selectedColor: AppColor.secondaryColor,
+            selectedColor: AppColors.secondaryColor,
           ),
         ],
       ),

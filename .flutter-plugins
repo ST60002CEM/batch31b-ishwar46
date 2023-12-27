@@ -1,4 +1,5 @@
 # This is a generated file; do not edit or check into version control.
+flutter_native_splash=/Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_native_splash-2.3.8/
 package_info_plus=/Users/macbookpro/.pub-cache/hosted/pub.dev/package_info_plus-5.0.1/
 path_provider=/Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider-2.1.1/
 path_provider_android=/Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider_android-2.2.0/
@@ -12,3 +13,10 @@ shared_preferences_foundation=/Users/macbookpro/.pub-cache/hosted/pub.dev/shared
 shared_preferences_linux=/Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.3.2/
 shared_preferences_web=/Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences_web-2.2.1/
 shared_preferences_windows=/Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.3.2/
+url_launcher=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher-6.2.2/
+url_launcher_android=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_android-6.2.0/
+url_launcher_ios=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_ios-6.2.1/
+url_launcher_linux=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_linux-3.1.1/
+url_launcher_macos=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_macos-3.1.0/
+url_launcher_web=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_web-2.2.2/
+url_launcher_windows=/Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_windows-3.1.1/

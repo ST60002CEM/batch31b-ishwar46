@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles/appcolor.dart';
+import '../config/constants/app_colors.dart';
 
 class LoginButton extends StatelessWidget {
   void Function()? onTap;
@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-            color: AppColor.primaryColor,
+            color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(10)),
         child: Center(
             child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../styles/appcolor.dart';
+import '../../config/constants/app_colors.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -52,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             letterSpacing: 1.5,
-                            color: AppColor.primaryColor),
+                            color: AppColors.primaryColor),
                       ),
                     ],
                   ),
@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
                             letterSpacing: 1.5,
-                            color: AppColor.primaryColor),
+                            color: AppColors.primaryColor),
                       ),
                     ],
                   ),
@@ -83,18 +83,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Column(
                       children: [
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style: const TextStyle(color: AppColors.primaryColor),
                           showCursor: true,
                           //controller: usernameController,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
+                                  BorderSide(color: AppColors.primaryColor),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
@@ -104,12 +104,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 12,
                                   letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
+                                  color: AppColors.secondaryColor),
                             ),
                             prefixIcon: const Icon(
                               Icons.account_circle_outlined,
                               size: 20,
-                              color: AppColor.secondaryColor,
+                              color: AppColors.secondaryColor,
                             ),
                           ),
                         ),
@@ -117,18 +117,18 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style: const TextStyle(color: AppColors.primaryColor),
                           showCursor: true,
                           //controller: usernameController,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
+                                  BorderSide(color: AppColors.primaryColor),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
@@ -138,12 +138,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 12,
                                   letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
+                                  color: AppColors.secondaryColor),
                             ),
                             prefixIcon: const Icon(
                               Icons.account_circle_outlined,
                               size: 20,
-                              color: AppColor.secondaryColor,
+                              color: AppColors.secondaryColor,
                             ),
                           ),
                           validator: (value) {
@@ -158,19 +158,19 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style: const TextStyle(color: AppColors.primaryColor),
                           showCursor: true,
                           keyboardType: TextInputType.emailAddress,
                           //controller: usernameController,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
+                                  BorderSide(color: AppColors.primaryColor),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
@@ -180,12 +180,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 12,
                                   letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
+                                  color: AppColors.secondaryColor),
                             ),
                             prefixIcon: const Icon(
                               Icons.email_outlined,
                               size: 20,
-                              color: AppColor.secondaryColor,
+                              color: AppColors.secondaryColor,
                             ),
                           ),
                         ),
@@ -193,18 +193,18 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(color: AppColor.primaryColor),
+                          style: const TextStyle(color: AppColors.primaryColor),
                           showCursor: true,
                           //controller: usernameController,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: AppColor.primaryColor),
+                                  BorderSide(color: AppColors.primaryColor),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
@@ -214,12 +214,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 12,
                                   letterSpacing: 1.5,
-                                  color: AppColor.secondaryColor),
+                                  color: AppColors.secondaryColor),
                             ),
                             prefixIcon: const Icon(
                               Icons.location_pin,
                               size: 20,
-                              color: AppColor.secondaryColor,
+                              color: AppColors.secondaryColor,
                             ),
                           ),
                         ),
@@ -228,18 +228,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           style:
-                              const TextStyle(color: AppColor.secondaryColor),
+                              const TextStyle(color: AppColors.secondaryColor),
                           showCursor: true,
                           //controller: passwordController,
                           //obscureText: !_passwordVisible,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                                    BorderSide(color: AppColors.primaryColor),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                                    BorderSide(color: AppColors.primaryColor),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
@@ -249,12 +249,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                 style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     letterSpacing: 1.5,
-                                    color: AppColor.secondaryColor),
+                                    color: AppColors.secondaryColor),
                               ),
                               prefixIcon: const Icon(
                                 Icons.lock_open_outlined,
                                 size: 20,
-                                color: AppColor.secondaryColor,
+                                color: AppColors.secondaryColor,
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
@@ -267,7 +267,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   //? Icons.visibility
                                   //: Icons.visibility_off,
                                   Icons.visibility_off,
-                                  color: AppColor.secondaryColor,
+                                  color: AppColors.secondaryColor,
                                 ),
                               )),
                           validator: (value) {
@@ -283,18 +283,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           style:
-                              const TextStyle(color: AppColor.secondaryColor),
+                              const TextStyle(color: AppColors.secondaryColor),
                           showCursor: true,
                           //controller: passwordController,
                           //obscureText: !_passwordVisible,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                                    BorderSide(color: AppColors.primaryColor),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColor.primaryColor),
+                                    BorderSide(color: AppColors.primaryColor),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
@@ -304,12 +304,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                 style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     letterSpacing: 1.5,
-                                    color: AppColor.secondaryColor),
+                                    color: AppColors.secondaryColor),
                               ),
                               prefixIcon: const Icon(
                                 Icons.lock_open_outlined,
                                 size: 20,
-                                color: AppColor.secondaryColor,
+                                color: AppColors.secondaryColor,
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
@@ -322,7 +322,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   //? Icons.visibility
                                   //: Icons.visibility_off,
                                   Icons.visibility_off,
-                                  color: AppColor.secondaryColor,
+                                  color: AppColors.secondaryColor,
                                 ),
                               )),
                           validator: (value) {
@@ -350,7 +350,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        AppColor.primaryColor,
+                        AppColors.primaryColor,
                       ),
                       fixedSize: MaterialStateProperty.all<Size>(
                         const Size(278, 30),
@@ -361,7 +361,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       //localization.login.toUpperCase(),
                       style: GoogleFonts.montserrat(
                         letterSpacing: 1.3,
-                        color: AppColor.whiteText,
+                        color: AppColors.whiteText,
                         fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,
@@ -391,7 +391,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontSize: 12,
                           letterSpacing: 1,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.secondaryColor),
+                          color: AppColors.secondaryColor),
                     ),
                     onTap: () => Navigator.pushNamed(context, '/loginpage'),
                   ),
@@ -404,7 +404,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         Text(
                           "© ${DateTime.now().year} Herchaha Mobile Application",
                           style: const TextStyle(
-                              color: AppColor.secondaryColor, fontSize: 12),
+                              color: AppColors.secondaryColor, fontSize: 12),
                         ),
                         const SizedBox(
                           height: 5,
@@ -412,7 +412,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         Text(
                           "Version $versionName",
                           style: const TextStyle(
-                              color: AppColor.secondaryColor, fontSize: 10),
+                              color: AppColors.secondaryColor, fontSize: 10),
                         ),
                       ],
                     ),
