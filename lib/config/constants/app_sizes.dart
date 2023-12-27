@@ -52,8 +52,8 @@ class AppSizes {
 
   //Input Field
 
-  static const double inoutFieldRadius = 12.0;
-  static const double soaceBtwnInputFields = 16.0;
+  static const double inputFieldRadius = 12.0;
+  static const double spaceBtwnInputFields = 16.0;
 
   //Card sizes
 
