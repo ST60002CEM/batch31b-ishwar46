@@ -78,6 +78,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       TextFormField(
                         key: const ValueKey('password'),
                         controller: _passwordController,
+                        obscureText: isObscure,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Iconsax.password_check),
                           labelText: AppTexts.password,
@@ -98,6 +99,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           return error;
                         },
                       ),
+
                       const SizedBox(height: AppSizes.spaceBtwnInputFields / 2),
 
                       //Remeber Me and Forget Password
@@ -122,10 +124,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
                           onPressed: () async {
                             Navigator.pushNamed(context, MyRoutes.homeRoute);
                           },
-                          child: Text(AppTexts.login),
+                          child: Text(AppTexts.login.toUpperCase()),
                         ),
                       ),
                       SizedBox(

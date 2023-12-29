@@ -16,7 +16,7 @@ class AppTexts {
   static const String homeAppBarTitle = 'Hello Welcome!';
   static const String homeAppBarSubTitle = 'Ishwar Chaudhary';
 
-  //Login Page
+  //Login/Register Page
 
   static const String loginPageTitle = 'Login';
   static const String loginPageSubTitle = 'Please enter your credentials';
@@ -28,8 +28,21 @@ class AppTexts {
   static const String forgotPassword = 'Forgot Password?';
   static const String remeberme = 'Remember Me';
   static const String forgetPassword = 'Forget Password?';
-  static const String register = 'New User? Register Here';
-
+  static const String registernewuser = 'New User? Register Here';
   static const String username = 'Username';
   static const String usernamehint = 'Enter your user name';
+  static const String alreadyuser = 'Already a user? Login Here';
+  static const String registerPageTitle = 'Register';
+  static const String fullname = 'Full Name';
+  static const String fullnamehint = 'Enter your full name';
+  static const String address = 'Address';
+  static const String addresshint = 'Enter your address';
+  static const String phone = 'Phone';
+  static const String phonehint = 'Enter your phone number';
+  static const String register = 'Register';
+  static const String registerPageSubTitle =
+      'Please enter your details to continue';
+  static const String registerPageSubTitle2 = 'to create an account';
+  static const String confrimPassword = 'Confirm Password';
+  static const String confrimPasswordHint = 'Enter your password again';
 }
