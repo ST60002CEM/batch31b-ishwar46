@@ -1,6 +1,5 @@
-import 'package:age_care/views/signup/signup_page.dart';
-
 import '../../features/auth/presentation/view/login/login_view.dart';
+import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 import '../../views/appointment/appointments_page.dart';
@@ -20,7 +19,7 @@ class MyRoutes {
     return {
       homeRoute: (context) => HomePage(),
       loginRoute: (context) => LoginView(),
-      signupRoute: (context) => SignUpPage(),
+      signupRoute: (context) => RegisterView(),
       appointmentsRoute: (context) => AppointmentsPage(),
       splashRoute: (context) => SplashScreen(),
       onBoardingRoute: (context) => OnBoardingScreen(),
