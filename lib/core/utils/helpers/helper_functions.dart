@@ -26,7 +26,7 @@ class HelperFunctions {
     } else if (value == 'Success') {}
   }
 
-  // SHow Snack bar
+  // Show Snack bar
 
   //Truncate Text
   static String truncateText(String text, int maxLength) {

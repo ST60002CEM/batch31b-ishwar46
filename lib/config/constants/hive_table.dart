@@ -2,7 +2,7 @@ class HiveTableConstant {
   HiveTableConstant._();
 
   static const int staffTableId = 0;
-  static const String staffTable = 'staffBox';
+  static const String staffBox = 'staffBox';
 
   static const int clientTableId = 1;
   static const String clientTable = 'clientBox';

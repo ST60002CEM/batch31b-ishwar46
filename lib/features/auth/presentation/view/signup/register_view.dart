@@ -9,7 +9,9 @@ import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
-import '../../../../../core/utils/validators/validators.dart';
+import '../../../../../core/common/widgets/custom_snackbar.dart';
+import '../../../domain/entity/auth_entity.dart';
+import '../../auth_viewmodel/auth_viewmodel.dart';
 
 class RegisterView extends ConsumerStatefulWidget {
   const RegisterView({super.key});
@@ -19,18 +21,43 @@ class RegisterView extends ConsumerStatefulWidget {
 }
 
 class _RegisterViewState extends ConsumerState<RegisterView> {
-  final _formKey = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _fullnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _addressController = TextEditingController();
+  final _phoneNoController = TextEditingController();
   bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //Connectivity Status
+      // if (ref.watch(connectivityStatusProvider) ==
+      //     ConnectivityStatus.isDisconnected) {
+      //   showSnackBar(
+      //       message: 'No Internet Connection',
+      //       context: context,
+      //       color: Colors.red);
+      // } else if (ref.watch(connectivityStatusProvider) ==
+      //     ConnectivityStatus.isConnecting) {
+      //   showSnackBar(
+      //       message: 'Connecting...', context: context, color: Colors.yellow);
+      // } else if (ref.watch(connectivityStatusProvider) ==
+      //     ConnectivityStatus.isConnected) {
+      //   showSnackBar(
+      //       message: 'Connected', context: context, color: Colors.green);
+      // }
+      if (ref.watch(authViewModelProvider).showMessage!) {
+        showSnackBar(
+            message: 'Student Registerd Successfully', context: context);
+        ref.read(authViewModelProvider.notifier).resetMessage(false);
+      }
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -59,6 +86,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               ),
               //const SizedBox(height: AppSizes.spaceBtwnInputFields),
               Form(
+                key: _key,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: AppSizes.spaceBtwSections),
@@ -73,10 +101,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.fullname,
                           hintText: AppTexts.fullnamehint,
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validateUsername(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
                       ),
                       SizedBox(
                         height: AppSizes.spaceBtwnInputFields,
@@ -90,10 +118,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.username,
                           hintText: AppTexts.usernamehint,
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validateUsername(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
                       ),
                       SizedBox(
                         height: AppSizes.spaceBtwnInputFields,
@@ -107,10 +135,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.email,
                           hintText: AppTexts.emailHint,
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validateUsername(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
                       //Address
@@ -122,10 +150,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.address,
                           hintText: AppTexts.addresshint,
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validateUsername(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
                       //Password
@@ -149,40 +177,55 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             },
                           ),
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validatePassword(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validatePassword(value);
+                        //   return error;
+                        // },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
 
-                      // TextFormField for Confirm Password
+                      //Phone
                       TextFormField(
-                        key: const ValueKey('confirmpassword'),
-                        controller: _confirmPasswordController,
-                        obscureText: isObscure,
+                        key: const ValueKey('phone'),
+                        controller: _phoneNoController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Iconsax.password_check),
-                          labelText: AppTexts.confrimPassword,
-                          hintText: AppTexts.confrimPasswordHint,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isObscure ? Iconsax.eye : Iconsax.eye_slash,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                isObscure = !isObscure;
-                              });
-                            },
-                          ),
+                          prefixIcon: Icon(Iconsax.mobile),
+                          labelText: AppTexts.phone,
+                          hintText: AppTexts.phonehint,
                         ),
-                        validator: (value) {
-                          if (value != _passwordController.text) {
-                            return 'Passwords do not match';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
                       ),
+
+                      // // TextFormField for Confirm Password
+                      // TextFormField(
+                      //   key: const ValueKey('confirmpassword'),
+                      //   controller: _confirmPasswordController,
+                      //   obscureText: isObscure,
+                      //   decoration: InputDecoration(
+                      //     prefixIcon: Icon(Iconsax.password_check),
+                      //     labelText: AppTexts.confrimPassword,
+                      //     hintText: AppTexts.confrimPasswordHint,
+                      //     suffixIcon: IconButton(
+                      //       icon: Icon(
+                      //         isObscure ? Iconsax.eye : Iconsax.eye_slash,
+                      //       ),
+                      //       onPressed: () {
+                      //         setState(() {
+                      //           isObscure = !isObscure;
+                      //         });
+                      //       },
+                      //     ),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value != _passwordController.text) {
+                      //       return 'Passwords do not match';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                       const SizedBox(height: AppSizes.spaceBtwSections),
 
                       //Sign in Button
@@ -195,7 +238,23 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             ),
                           ),
                           onPressed: () async {
-                            Navigator.pushNamed(context, MyRoutes.homeRoute);
+                            final formState = _key.currentState;
+                            if (formState != null &&
+                                formState.mounted &&
+                                formState.validate()) {
+                              final entity = AuthEntity(
+                                fullName: _fullnameController.text,
+                                email: _emailController.text,
+                                address: _addressController.text,
+                                phone: _phoneNoController.text,
+                                username: _usernameController.text,
+                                password: _passwordController.text,
+                              );
+                              // Register staff
+                              ref
+                                  .read(authViewModelProvider.notifier)
+                                  .registerStaff(entity);
+                            }
                           },
                           child: Text(AppTexts.register.toUpperCase()),
                         ),
