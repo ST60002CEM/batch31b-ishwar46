@@ -1,4 +1,5 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,6 +9,7 @@ import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../config/router/app_routes.dart';
+import '../../../../../core/common/provider/connection.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
 import '../../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../domain/entity/auth_entity.dart';
@@ -36,25 +38,24 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     final dark = HelperFunctions.isDarkMode(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      //Connectivity Status
-      // if (ref.watch(connectivityStatusProvider) ==
-      //     ConnectivityStatus.isDisconnected) {
-      //   showSnackBar(
-      //       message: 'No Internet Connection',
-      //       context: context,
-      //       color: Colors.red);
-      // } else if (ref.watch(connectivityStatusProvider) ==
-      //     ConnectivityStatus.isConnecting) {
-      //   showSnackBar(
-      //       message: 'Connecting...', context: context, color: Colors.yellow);
-      // } else if (ref.watch(connectivityStatusProvider) ==
-      //     ConnectivityStatus.isConnected) {
-      //   showSnackBar(
-      //       message: 'Connected', context: context, color: Colors.green);
-      // }
-      if (ref.watch(authViewModelProvider).showMessage!) {
+      // Connectivity Status
+      if (ref.watch(connectivityStatusProvider) ==
+          ConnectivityStatus.isDisconnected) {
         showSnackBar(
-            message: 'Student Registerd Successfully', context: context);
+            message: 'No Internet Connection',
+            context: context,
+            color: Colors.red);
+      } else if (ref.watch(connectivityStatusProvider) ==
+          ConnectivityStatus.isConnecting) {
+        showSnackBar(
+            message: 'Connecting...', context: context, color: Colors.yellow);
+      } else if (ref.watch(connectivityStatusProvider) ==
+          ConnectivityStatus.isConnected) {
+        showSnackBar(
+            message: 'Connected', context: context, color: Colors.green);
+      }
+      if (ref.watch(authViewModelProvider).showMessage!) {
+        showSnackBar(message: 'User Registerd Successfully', context: context);
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });

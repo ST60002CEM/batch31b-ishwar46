@@ -77,4 +77,8 @@ class AuthHiveModel {
   String toString() {
     return 'staffId: $staffId, fullName: $fullName, lname: $email, phone: $phone,username: $username, password: $password, address: $address';
   }
+
+  @override
+  List<Object?> get props =>
+      [staffId, fullName, email, phone, phone, username, password, address];
 }
