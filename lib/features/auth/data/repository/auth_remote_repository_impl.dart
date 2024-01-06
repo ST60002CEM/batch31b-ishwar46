@@ -24,9 +24,8 @@ class AuthRemoteDataSource implements IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> registerStaff(AuthEntity staff) {
-    // TODO: implement registerStaff
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> registerStaff(AuthEntity staff) async {
+    return await _authRemoteDataSource.registerStaff(staff);
   }
 
   @override
@@ -34,6 +33,4 @@ class AuthRemoteDataSource implements IAuthRepository {
     // TODO: implement uploadProfilePicture
     throw UnimplementedError();
   }
-
- 
 }
