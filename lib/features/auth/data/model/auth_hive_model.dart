@@ -80,5 +80,5 @@ class AuthHiveModel {
 
   @override
   List<Object?> get props =>
-      [staffId, fullName, email, phone, phone, username, password, address];
+      [staffId, fullName, email, phone, username, password, address];
 }
