@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:age_care/features/auth/data/repository/auth_remote_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,7 +9,7 @@ import '../../data/repository/auth_local_repository_impl.dart';
 import '../entity/auth_entity.dart';
 
 final authRepositoryProvider = Provider<IAuthRepository>(
-  (ref) => ref.read(authLocalRepositoryProvider),
+  (ref) => ref.read(authRemoteRepositoryProvider),
 );
 
 abstract class IAuthRepository {

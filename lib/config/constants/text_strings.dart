@@ -45,4 +45,9 @@ class AppTexts {
   static const String registerPageSubTitle2 = 'to create an account';
   static const String confrimPassword = 'Confirm Password';
   static const String confrimPasswordHint = 'Enter your password again';
+
+  static const String firstName = 'First Name';
+  static const String firstNameHint = 'Enter your first name';
+  static const String lastName = 'Last Name';
+  static const String lastNameHint = 'Enter your last name';
 }

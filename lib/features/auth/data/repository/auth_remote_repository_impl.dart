@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:age_care/core/failure/failure.dart';
-import 'package:age_care/features/auth/data/repository/auth_local_repository_impl.dart';
+import 'package:age_care/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:age_care/features/auth/domain/entity/auth_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,13 +9,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/repository/auth_repository.dart';
 
 final authRemoteRepositoryProvider = Provider<IAuthRepository>(
-  (ref) => ref.read(authLocalRepositoryProvider),
+  (ref) => AuthRemoteRepository(
+    ref.read(authRemoteDataSourceProvider),
+  ),
 );
 
-class AuthRemoteDataSource implements IAuthRepository {
+class AuthRemoteRepository implements IAuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
 
-  AuthRemoteDataSource(this._authRemoteDataSource);
+  AuthRemoteRepository(this._authRemoteDataSource);
 
   @override
   Future<Either<Failure, bool>> loginStaff(String username, String password) {

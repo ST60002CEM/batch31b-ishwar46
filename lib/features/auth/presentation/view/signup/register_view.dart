@@ -1,5 +1,4 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
@@ -25,12 +24,12 @@ class RegisterView extends ConsumerStatefulWidget {
 class _RegisterViewState extends ConsumerState<RegisterView> {
   final _key = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
-  final _fullnameController = TextEditingController();
+  final _firstNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _addressController = TextEditingController();
-  final _phoneNoController = TextEditingController();
+  final _phoneController = TextEditingController();
   bool isObscure = true;
 
   @override
@@ -93,14 +92,30 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       vertical: AppSizes.spaceBtwSections),
                   child: Column(
                     children: [
-                      //Fullname
+                      //first name
                       TextFormField(
-                        key: const ValueKey('fullname'),
-                        controller: _fullnameController,
+                        key: const ValueKey('firstName'),
+                        controller: _firstNameController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Iconsax.user),
-                          labelText: AppTexts.fullname,
-                          hintText: AppTexts.fullnamehint,
+                          labelText: AppTexts.firstName,
+                          hintText: AppTexts.firstNameHint,
+                        ),
+                        // validator: (value) {
+                        //   final error = AppValidator.validateUsername(value);
+                        //   return error;
+                        // },
+                      ),
+                      SizedBox(
+                        height: AppSizes.spaceBtwnInputFields,
+                      ),
+                      TextFormField(
+                        key: const ValueKey('lastName'),
+                        controller: _lastNameController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Iconsax.user),
+                          labelText: AppTexts.lastName,
+                          hintText: AppTexts.lastNameHint,
                         ),
                         // validator: (value) {
                         //   final error = AppValidator.validateUsername(value);
@@ -188,7 +203,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       //Phone
                       TextFormField(
                         key: const ValueKey('phone'),
-                        controller: _phoneNoController,
+                        controller: _phoneController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Iconsax.mobile),
                           labelText: AppTexts.phone,
@@ -244,10 +259,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                 formState.mounted &&
                                 formState.validate()) {
                               final entity = AuthEntity(
-                                fullName: _fullnameController.text,
+                                firstName: _firstNameController.text,
+                                lastName: _lastNameController.text,
                                 email: _emailController.text,
                                 address: _addressController.text,
-                                phone: _phoneNoController.text,
+                                phone: _phoneController.text,
                                 username: _usernameController.text,
                                 password: _passwordController.text,
                               );
