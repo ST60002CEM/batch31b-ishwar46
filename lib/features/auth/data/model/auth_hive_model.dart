@@ -12,27 +12,31 @@ class AuthHiveModel {
   final String staffId;
 
   @HiveField(1)
-  final String fullName;
+  final String firstName;
 
   @HiveField(2)
-  final String email;
+  final String lastName;
 
   @HiveField(3)
-  final String phone;
+  final String email;
 
   @HiveField(4)
-  final String username;
+  final String phone;
 
   @HiveField(5)
-  final String password;
+  final String username;
 
   @HiveField(6)
+  final String password;
+
+  @HiveField(7)
   final String address;
 
   // Constructor
   AuthHiveModel({
     String? staffId,
-    required this.fullName,
+    required this.firstName,
+    required this.lastName,
     required this.email,
     required this.phone,
     required this.username,
@@ -44,7 +48,8 @@ class AuthHiveModel {
   AuthHiveModel.empty()
       : this(
           staffId: '',
-          fullName: '',
+          firstName: '',
+          lastName: '',
           email: '',
           phone: '',
           username: '',
@@ -54,7 +59,8 @@ class AuthHiveModel {
 
   // Convert Entity to Hive Object
   factory AuthHiveModel.toHiveModel(AuthEntity entity) => AuthHiveModel(
-        fullName: entity.fullName,
+        firstName: entity.firstName,
+        lastName: entity.lastName,
         email: entity.email,
         phone: entity.phone,
         username: entity.username,
@@ -65,7 +71,8 @@ class AuthHiveModel {
   // Convert Hive Object to Entity
   static AuthEntity toEntity(AuthHiveModel hiveModel) => AuthEntity(
         staffId: hiveModel.staffId,
-        fullName: hiveModel.fullName,
+        firstName: hiveModel.firstName,
+        lastName: hiveModel.lastName,
         email: hiveModel.email,
         phone: hiveModel.phone,
         username: hiveModel.username,
@@ -75,10 +82,10 @@ class AuthHiveModel {
 
   @override
   String toString() {
-    return 'staffId: $staffId, fullName: $fullName, lname: $email, phone: $phone,username: $username, password: $password, address: $address';
+    return 'staffId: $staffId, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone,username: $username, password: $password, address: $address';
   }
 
   @override
   List<Object?> get props =>
-      [staffId, fullName, email, phone, phone, username, password, address];
+      [staffId, firstName, lastName, email, phone, username, password, address];
 }

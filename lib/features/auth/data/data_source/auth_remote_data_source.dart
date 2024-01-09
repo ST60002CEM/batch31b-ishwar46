@@ -1,0 +1,56 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../config/constants/api_endpoints.dart';
+import '../../../../core/failure/failure.dart';
+import '../../../../core/network/http_service.dart';
+import '../../domain/entity/auth_entity.dart';
+import '../model/auth_api_model.dart';
+
+final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>(
+  (ref) => AuthRemoteDataSource(
+    ref.read(httpServiceProvider),
+  ),
+);
+
+class AuthRemoteDataSource {
+  final Dio dio;
+
+  AuthRemoteDataSource(this.dio);
+
+  Future<Either<Failure, bool>> registerStaff(AuthEntity staff) async {
+    try {
+      AuthApiModel apiModel = AuthApiModel.fromEntity(staff);
+      Response response = await dio.post(
+        ApiEndpoints.register,
+        data: {
+          "firstName": apiModel.firstName,
+          "lastName": apiModel.lastName,
+          "email": apiModel.email,
+          "phone": apiModel.phone,
+          "username": apiModel.username,
+          "password": apiModel.password,
+          "address": apiModel.address,
+        },
+      );
+      if (response.statusCode == 200) {
+        return const Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data["message"],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(
+          error: e.error.toString(),
+          statusCode: e.response?.statusCode.toString() ?? '0',
+        ),
+      );
+    }
+  }
+}

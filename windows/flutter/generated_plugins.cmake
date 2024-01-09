@@ -4,6 +4,8 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
+  file_selector_windows
+  permission_handler_windows
   rive_common
   url_launcher_windows
 )
