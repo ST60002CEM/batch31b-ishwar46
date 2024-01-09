@@ -1,5 +1,6 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:line_icons/line_icons.dart';
@@ -54,7 +55,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
             message: 'Connected', context: context, color: Colors.green);
       }
       if (ref.watch(authViewModelProvider).showMessage!) {
-        showSnackBar(message: 'User Registerd Successfully', context: context);
+        EasyLoadingAnimationStyle.custom;
+        EasyLoading.showSuccess('User Registered Successfully',
+            dismissOnTap: false);
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });
@@ -270,7 +273,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                               // Register staff
                               ref
                                   .read(authViewModelProvider.notifier)
-                                  .registerStaff(entity);
+                                  .registerStaff(entity, context);
                             }
                           },
                           child: Text(AppTexts.register.toUpperCase()),
@@ -296,5 +299,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
         ),
       ),
     );
+  }
+
+  void _navigateToLoginAfterDelay() async {
+    EasyLoading.showSuccess('Registered Successfully', dismissOnTap: false);
+    await Future.delayed(const Duration(seconds: 2));
+    Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
+    EasyLoading.dismiss();
   }
 }

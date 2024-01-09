@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/router/app_routes.dart';
@@ -18,6 +19,7 @@ class MyApp extends ConsumerWidget {
       //theme: AppTheme.getApplicationTheme(isDark: false),
       initialRoute: MyRoutes.splashRoute,
       routes: MyRoutes.getApplicationRoute(),
+      builder: EasyLoading.init(),
     );
   }
 }
