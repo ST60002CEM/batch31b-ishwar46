@@ -12,6 +12,6 @@ class ApiEndpoints {
   //static const String baseUrl = "http://192.168.4.4:3000/api/v1/";
 
   // ====================== Auth Routes ======================
-  static const String login = "auth/login";
+  static const String login = "api/users/login";
   static const String register = "api/users/create";
 }
