@@ -12,6 +12,7 @@ import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/provider/connection.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
 import '../../../../../core/common/widgets/custom_snackbar.dart';
+import '../../../../../core/utils/validators/validators.dart';
 import '../../../domain/entity/auth_entity.dart';
 import '../../auth_viewmodel/auth_viewmodel.dart';
 
@@ -104,10 +105,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.firstName,
                           hintText: AppTexts.firstNameHint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validateFirstName(value);
+                          return error;
+                        },
                       ),
                       SizedBox(
                         height: AppSizes.spaceBtwnInputFields,
@@ -120,10 +121,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.lastName,
                           hintText: AppTexts.lastNameHint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validateLastName(value);
+                          return error;
+                        },
                       ),
                       SizedBox(
                         height: AppSizes.spaceBtwnInputFields,
@@ -137,10 +138,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.username,
                           hintText: AppTexts.usernamehint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validateUsername(value);
+                          return error;
+                        },
                       ),
                       SizedBox(
                         height: AppSizes.spaceBtwnInputFields,
@@ -154,10 +155,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.email,
                           hintText: AppTexts.emailHint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validateEmail(value);
+                          return error;
+                        },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
                       //Address
@@ -169,10 +170,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.address,
                           hintText: AppTexts.addresshint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validateAddress(value);
+                          return error;
+                        },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
                       //Password
@@ -196,10 +197,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             },
                           ),
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validatePassword(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validatePassword(value);
+                          return error;
+                        },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
 
@@ -212,39 +213,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           labelText: AppTexts.phone,
                           hintText: AppTexts.phonehint,
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validateUsername(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validatePhoneNumber(value);
+                          return error;
+                        },
                       ),
-
-                      // // TextFormField for Confirm Password
-                      // TextFormField(
-                      //   key: const ValueKey('confirmpassword'),
-                      //   controller: _confirmPasswordController,
-                      //   obscureText: isObscure,
-                      //   decoration: InputDecoration(
-                      //     prefixIcon: Icon(Iconsax.password_check),
-                      //     labelText: AppTexts.confrimPassword,
-                      //     hintText: AppTexts.confrimPasswordHint,
-                      //     suffixIcon: IconButton(
-                      //       icon: Icon(
-                      //         isObscure ? Iconsax.eye : Iconsax.eye_slash,
-                      //       ),
-                      //       onPressed: () {
-                      //         setState(() {
-                      //           isObscure = !isObscure;
-                      //         });
-                      //       },
-                      //     ),
-                      //   ),
-                      //   validator: (value) {
-                      //     if (value != _passwordController.text) {
-                      //       return 'Passwords do not match';
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
                       const SizedBox(height: AppSizes.spaceBtwSections),
 
                       //Sign in Button
@@ -299,12 +272,5 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
         ),
       ),
     );
-  }
-
-  void _navigateToLoginAfterDelay() async {
-    EasyLoading.showSuccess('Registered Successfully', dismissOnTap: false);
-    await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
-    EasyLoading.dismiss();
   }
 }
