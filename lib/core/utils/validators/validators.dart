@@ -122,4 +122,52 @@ class AppValidator {
 
     return null;
   }
+
+  // Validate First Name
+  static String? validateFirstName(String? value) {
+    if (value!.isEmpty) {
+      return 'First Name cannot be empty';
+    }
+
+    // Check for minimum and maximum length for username
+    if (value.length < 3 || value.length > 20) {
+      return 'First Name must be between 3 and 20 characters';
+    }
+
+    // Check for alphanumeric characters and underscores
+    final usernameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (!usernameRegExp.hasMatch(value)) {
+      return 'First Name can only contain letters, numbers, and underscores';
+    }
+
+    return null;
+  }
+
+  // Validate Last Name
+  static String? validateLastName(String? value) {
+    if (value!.isEmpty) {
+      return 'Last Name Cannot be empty';
+    }
+
+    //Check for minimum and maximum length for username
+    if (value.length < 3 || value.length > 20) {
+      return 'Last Name must be between 3 and 20 characters';
+    }
+
+    //Check for alphanumeric characters and underscores
+    final usernameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (!usernameRegExp.hasMatch(value)) {
+      return 'Last Name can only contain letters, numbers, and underscores';
+    }
+    return null;
+  }
+
+  //validate Address
+  static String? validateAddress(String? value) {
+    if (value!.isEmpty) {
+      return 'Address cannot be empty';
+    }
+
+    return null;
+  }
 }
