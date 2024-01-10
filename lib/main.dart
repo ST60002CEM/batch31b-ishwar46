@@ -22,7 +22,7 @@ void configLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.circle
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = AppColors.accentColor
+    ..backgroundColor = AppColors.primaryColor
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.clear
