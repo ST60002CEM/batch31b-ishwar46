@@ -53,4 +53,35 @@ class AuthRemoteDataSource {
       );
     }
   }
+
+  //Login User
+  Future<Either<Failure, bool>> loginStaff(
+      String username, String password) async {
+    try {
+      Response response = await dio.post(
+        ApiEndpoints.login,
+        data: {
+          "username": username,
+          "password": password,
+        },
+      );
+      if (response.statusCode == 200) {
+        return const Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data["message"],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(
+          error: e.error.toString(),
+          statusCode: e.response?.statusCode.toString() ?? '0',
+        ),
+      );
+    }
+  }
 }

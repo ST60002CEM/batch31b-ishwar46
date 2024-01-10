@@ -1,4 +1,3 @@
-import 'package:age_care/views/login/login_page.dart';
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../config/constants/app_colors.dart';
+import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
 import '../appointment/appointments_page.dart';
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+                      builder: (context) => const LoginView(),
                     ),
                   );
                 },
