@@ -16,4 +16,7 @@ class ApiEndpoints {
   // Auth Routes
   static const String login = "api/users/login";
   static const String register = "api/users/create";
+
+  //Staff Routes
+  static const String allstaff = "api/users/getallstaffs";
 }

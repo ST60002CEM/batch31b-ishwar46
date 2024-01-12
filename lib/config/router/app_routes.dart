@@ -25,7 +25,7 @@ class MyRoutes {
       appointmentsRoute: (context) => AppointmentsPage(),
       splashRoute: (context) => SplashScreen(),
       onBoardingRoute: (context) => OnBoardingScreen(),
-      staffDetailsRoute: (context) => StaffDetailsView(),
+      staffDetailsRoute: (context) => AddStaffView(),
     };
   }
 }

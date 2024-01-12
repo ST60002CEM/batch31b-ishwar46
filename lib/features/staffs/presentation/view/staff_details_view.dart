@@ -1,45 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../staff_viewmodel/staff_view_model.dart';
 
-import '../widgets/staff_card.dart';
+class AddStaffView extends ConsumerWidget {
+  AddStaffView({Key? key}) : super(key: key);
 
-class StaffDetailsView extends ConsumerStatefulWidget {
-  const StaffDetailsView({super.key});
+  final gap = const SizedBox(height: 8);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _StaffDetailsViewState();
-}
-
-class _StaffDetailsViewState extends ConsumerState<StaffDetailsView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Staff Details'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StaffCard(
-                staffName: 'Ishwar Chaudhary',
-                staffAddress: 'Kathmandu, Nepal',
-                routeName: '/staff-details',
-                imageUrl:
-                    'https://images.unsplash.com/photo-1612833609248-5e9f9d0b1b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3RhZmYlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWw',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final staffState = ref.watch(staffViewModelProvider);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            gap,
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'List of Staffs',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              StaffCard(
-                staffName: 'John Doe',
-                staffAddress: 'Kathmandu, Nepal',
-                routeName: '/staff-details',
-                imageUrl:
-                    'https://images.unsplash.com/photo-1612833609248-5e9f9d0b1b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3RhZmYlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWwlMjBzdHVmZiUyMHN0YWZmJTIwZGVzaWduJTIwY29sb3JmdWw',
-              ),
-            ],
-          ),
+            ),
+            BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            gap,
+            staffState.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: staffState.staffs.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            staffState.staffs[index].firstName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          subtitle: Text(
+                            staffState.staffs[index].staffId ?? 'No id',
+                            style: const TextStyle(
+                              color: Colors.indigo,
+                              fontSize: 12,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+          ],
         ),
       ),
     );
