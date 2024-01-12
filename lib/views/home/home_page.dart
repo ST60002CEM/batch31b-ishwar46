@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../config/constants/app_colors.dart';
@@ -77,10 +78,12 @@ class _HomePageState extends State<HomePage> {
         // ),
         actions: [
           IconButton(
+            color: AppColors.whiteText,
             icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
           IconButton(
+            color: AppColors.whiteText,
             icon: const Icon(Icons.logout),
             onPressed: () {
               AwesomeDialog(
@@ -89,8 +92,8 @@ class _HomePageState extends State<HomePage> {
                 animType: AnimType.bottomSlide,
                 title: "Logout",
                 titleTextStyle: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 20,
+                  color: AppColors.primaryColor,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
                 desc: "Are you sure you want to logout?",
@@ -156,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Our Services",
                         style: GoogleFonts.montserrat(
-                          color: Theme.of(context).secondaryHeaderColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -171,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "View All",
                           style: GoogleFonts.montserrat(
-                            color: Theme.of(context).secondaryHeaderColor,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -219,9 +222,9 @@ class _HomePageState extends State<HomePage> {
                     height: 110,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Clinics",
-                      routeName: "/appointment",
-                      iconData: Icons.local_hospital_outlined,
+                      title: "Staffs",
+                      routeName: "/staffdetails",
+                      iconData: Iconsax.people5,
                     ),
                   ),
                 ],
@@ -281,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Reminders",
                         style: GoogleFonts.montserrat(
-                          color: Theme.of(context).secondaryHeaderColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -296,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "View All",
                           style: GoogleFonts.montserrat(
-                            color: Theme.of(context).secondaryHeaderColor,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),

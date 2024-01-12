@@ -23,12 +23,12 @@ class CardWidget extends StatelessWidget {
       elevation: 1.0,
       child: InkWell(
         enableFeedback: true,
-        // onTap: () {
-        //   Navigator.pushNamed(context, routeName);
-        // },
         onTap: () {
-          EasyLoading.showInfo("This feature is coming soon.");
+          Navigator.pushNamed(context, routeName);
         },
+        // onTap: () {
+        //   EasyLoading.showInfo("This feature is coming soon.");
+        // },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
