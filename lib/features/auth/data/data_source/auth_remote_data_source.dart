@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
 import '../../../../core/failure/failure.dart';
@@ -54,6 +56,17 @@ class AuthRemoteDataSource {
     }
   }
 
+  // // Token storage functions
+  // Future<void> storeToken(String token) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('token', token);
+  // }
+
+  // Future<String?> getToken() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   return prefs.getString('token');
+  // }
+
   //Login User
   Future<Either<Failure, bool>> loginStaff(
       String username, String password) async {
@@ -66,6 +79,9 @@ class AuthRemoteDataSource {
         },
       );
       if (response.statusCode == 200) {
+        final token = response.data['token'];
+        // Store token
+        await storeToken(token);
         return const Right(true);
       } else {
         return Left(
@@ -83,5 +99,16 @@ class AuthRemoteDataSource {
         ),
       );
     }
+  }
+
+  // Token storage functions
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+
+  Future<void> storeToken(String token) async {
+    await _storage.write(key: 'token', value: token);
+  }
+
+  Future<String?> getToken() async {
+    return await _storage.read(key: 'token');
   }
 }
