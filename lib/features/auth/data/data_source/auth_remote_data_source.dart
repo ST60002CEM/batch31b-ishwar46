@@ -1,7 +1,9 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
@@ -56,18 +58,7 @@ class AuthRemoteDataSource {
     }
   }
 
-  // // Token storage functions
-  // Future<void> storeToken(String token) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString('token', token);
-  // }
-
-  // Future<String?> getToken() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   return prefs.getString('token');
-  // }
-
-  //Login User
+  // Login User
   Future<Either<Failure, bool>> loginStaff(
       String username, String password) async {
     try {
@@ -78,11 +69,33 @@ class AuthRemoteDataSource {
           "password": password,
         },
       );
+
       if (response.statusCode == 200) {
         final token = response.data['token'];
-        // Store token
-        await storeToken(token);
-        return const Right(true);
+        final userData = response.data['userData'];
+
+        // Parse the token payload
+        final decodedToken = JwtDecoder.decode(token);
+        final tokenUsername = decodedToken['username'];
+
+        print('Decoded Token: $decodedToken');
+        print('Provided Username: $username');
+        print('Token Username: $tokenUsername');
+
+        // Compare provided username with token data
+        if (username == tokenUsername) {
+          // Store token
+          await storeToken(token);
+          return const Right(true);
+        } else {
+          // Username mismatch
+          return Left(
+            Failure(
+              error: "Username mismatch",
+              statusCode: response.statusCode.toString(),
+            ),
+          );
+        }
       } else {
         return Left(
           Failure(

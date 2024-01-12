@@ -13,7 +13,7 @@ class ApiEndpoints {
   //From WIFI or IP config
   //static const String baseUrl = "http://192.168.4.4:3000/api/v1/";
 
-  // ====================== Auth Routes ======================
+  // Auth Routes
   static const String login = "api/users/login";
   static const String register = "api/users/create";
 }
