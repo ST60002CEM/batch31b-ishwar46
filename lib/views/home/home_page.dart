@@ -22,6 +22,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
+  // late final Map<String, dynamic> userData;
+  //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
+
   List<ListTileData> tileDataList = [
     ListTileData(
         iconData: Icons.calendar_today,
@@ -305,6 +308,13 @@ class _HomePageState extends State<HomePage> {
               ),
               //For Reminders
               CustomListTileWidget(tileDataList: tileDataList),
+
+              // Container(
+              //   child: Text(
+              //     'First Name: ${userData['firstName']}',
+              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              //   ),
+              // )
             ],
           ),
         ),

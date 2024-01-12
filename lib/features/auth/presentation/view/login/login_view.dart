@@ -1,4 +1,5 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
+import 'package:age_care/features/auth/presentation/auth_viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,6 +9,7 @@ import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
+import '../../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../../../core/utils/validators/validators.dart';
 
 class LoginView extends ConsumerStatefulWidget {
@@ -26,6 +28,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
+    final authState = ref.watch(authViewModelProvider);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (authState.showMessage! && authState.error != null) {
+        showSnackBar(message: 'Invalid Credentials', context: context);
+        ref.read(authViewModelProvider.notifier).reset();
+      }
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -54,6 +63,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
               ),
               const SizedBox(height: AppSizes.spaceBtwnInputFields),
               Form(
+                key: _key,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: AppSizes.spaceBtwSections),
@@ -94,10 +104,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             },
                           ),
                         ),
-                        validator: (value) {
-                          final error = AppValidator.validatePassword(value);
-                          return error;
-                        },
+                        // validator: (value) {
+                        //   final error = AppValidator.validatePassword(value);
+                        //   return error;
+                        // },
                       ),
 
                       const SizedBox(height: AppSizes.spaceBtwnInputFields / 2),
@@ -129,7 +139,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             borderRadius: BorderRadius.circular(10),
                           )),
                           onPressed: () async {
-                            Navigator.pushNamed(context, MyRoutes.homeRoute);
+                            if (_key.currentState!.validate()) {
+                              await ref
+                                  .read(authViewModelProvider.notifier)
+                                  .loginStaff(_usernameController.text,
+                                      _passwordController.text, context);
+                            }
                           },
                           child: Text(AppTexts.login.toUpperCase()),
                         ),

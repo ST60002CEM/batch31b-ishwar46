@@ -1,6 +1,10 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
 import '../../../../core/failure/failure.dart';
@@ -54,7 +58,7 @@ class AuthRemoteDataSource {
     }
   }
 
-  //Login User
+  // Login User
   Future<Either<Failure, bool>> loginStaff(
       String username, String password) async {
     try {
@@ -65,8 +69,33 @@ class AuthRemoteDataSource {
           "password": password,
         },
       );
+
       if (response.statusCode == 200) {
-        return const Right(true);
+        final token = response.data['token'];
+        final userData = response.data['userData'];
+
+        // Parse the token payload
+        final decodedToken = JwtDecoder.decode(token);
+        final tokenUsername = decodedToken['username'];
+
+        print('Decoded Token: $decodedToken');
+        print('Provided Username: $username');
+        print('Token Username: $tokenUsername');
+
+        // Compare provided username with token data
+        if (username == tokenUsername) {
+          // Store token
+          await storeToken(token);
+          return const Right(true);
+        } else {
+          // Username mismatch
+          return Left(
+            Failure(
+              error: "Username mismatch",
+              statusCode: response.statusCode.toString(),
+            ),
+          );
+        }
       } else {
         return Left(
           Failure(
@@ -83,5 +112,16 @@ class AuthRemoteDataSource {
         ),
       );
     }
+  }
+
+  // Token storage functions
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+
+  Future<void> storeToken(String token) async {
+    await _storage.write(key: 'token', value: token);
+  }
+
+  Future<String?> getToken() async {
+    return await _storage.read(key: 'token');
   }
 }
