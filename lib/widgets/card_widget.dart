@@ -1,3 +1,4 @@
+import 'package:age_care/config/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,18 +18,19 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.primaryBackground,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      elevation: 1.0,
+      elevation: 0.0,
       child: InkWell(
         enableFeedback: true,
-        // onTap: () {
-        //   Navigator.pushNamed(context, routeName);
-        // },
         onTap: () {
-          EasyLoading.showInfo("This feature is coming soon.");
+          Navigator.pushNamed(context, routeName);
         },
+        // onTap: () {
+        //   EasyLoading.showInfo("This feature is coming soon.");
+        // },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
