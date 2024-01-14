@@ -6,8 +6,8 @@ class StaffEntity extends Equatable {
   final String lastName;
   final String email;
   final String? image;
-  final String phone;
-  final String username;
+  final String? phone;
+  final String? username;
   final String address;
 
   const StaffEntity({
@@ -17,7 +17,7 @@ class StaffEntity extends Equatable {
     required this.email,
     this.image,
     required this.phone,
-    required this.username,
+    this.username,
     required this.address,
   });
 

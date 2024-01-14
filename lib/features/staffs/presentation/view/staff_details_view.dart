@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../config/constants/app_colors.dart';
+import '../../../../config/constants/text_strings.dart';
+import '../../../../core/utils/helpers/helper_functions.dart';
 import '../staff_viewmodel/staff_view_model.dart';
 
 class AddStaffView extends ConsumerWidget {
@@ -9,29 +12,31 @@ class AddStaffView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final dark = HelperFunctions.isDarkMode(context);
     final staffState = ref.watch(staffViewModelProvider);
-    return SafeArea(
-      child: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        foregroundColor: AppColors.whiteText,
+        backgroundColor: AppColors.primaryColor,
+        title: Text(
+          AppTexts.staffDetails.toUpperCase(),
+          style: TextStyle(
+            color: AppColors.white,
+          ),
+        ),
+        leading: IconButton(
+          color: AppColors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
+      ),
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            gap,
-            const Align(
-              alignment: Alignment.center,
-              child: Text(
-                'List of Staffs',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            gap,
             staffState.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
@@ -39,20 +44,27 @@ class AddStaffView extends ConsumerWidget {
                       itemCount: staffState.staffs.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(
-                            staffState.staffs[index].firstName,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              staffState.staffs[index].image ?? 'N/A',
                             ),
                           ),
-                          subtitle: Text(
-                            staffState.staffs[index].staffId ?? 'No id',
+                          title: Text(
+                            staffState.staffs[index].firstName +
+                                ' ' +
+                                staffState.staffs[index].lastName,
                             style: const TextStyle(
                               color: Colors.indigo,
                               fontSize: 12,
                             ),
                           ),
+                          // subtitle: Text(
+
+                          //   style: const TextStyle(
+                          //     fontWeight: FontWeight.bold,
+                          //     fontSize: 16,
+                          //   ),
+                          // ),
                         );
                       },
                     ),

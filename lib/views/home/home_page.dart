@@ -188,18 +188,18 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
                       title: "Appointment",
                       routeName: "/hospital",
-                      iconData: Icons.local_hospital,
+                      iconData: Iconsax.calendar_2,
                     ),
                   ),
                   Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
                       title: "Health Care",
@@ -207,19 +207,19 @@ class _HomePageState extends State<HomePage> {
                       iconData: Icons.healing,
                     ),
                   ),
+                  // Container(
+                  //   width: 100,
+                  //   height: 110,
+                  //   padding: const EdgeInsets.all(10),
+                  //   child: const CardWidget(
+                  //     title: "Carer Details",
+                  //     routeName: "/appointment",
+                  //     iconData: Icons.policy,
+                  //   ),
+                  // ),
                   Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Carer Details",
-                      routeName: "/appointment",
-                      iconData: Icons.policy,
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
                       title: "Staffs",
@@ -233,45 +233,45 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Appointment",
+                      title: "Emergency",
                       routeName: "/hospital",
                       iconData: Icons.local_hospital,
                     ),
                   ),
                   Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Appointment",
+                      title: "Hospital",
                       routeName: "/appointment",
                       iconData: Icons.apartment_outlined,
                     ),
                   ),
                   Container(
-                    width: 100,
-                    height: 110,
+                    width: 120,
+                    height: 140,
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
-                      title: "Appointment",
+                      title: "Schedules",
                       routeName: "/appointment",
                       iconData: Icons.schedule,
                     ),
                   ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    padding: const EdgeInsets.all(10),
-                    child: const CardWidget(
-                      title: "Hospital",
-                      routeName: "/appointment",
-                      iconData: Icons.local_hospital,
-                    ),
-                  ),
+                  // Container(
+                  //   width: 100,
+                  //   height: 110,
+                  //   padding: const EdgeInsets.all(10),
+                  //   child: const CardWidget(
+                  //     title: "Hospital",
+                  //     routeName: "/appointment",
+                  //     iconData: Icons.local_hospital,
+                  //   ),
+                  // ),
                 ],
               ),
               Container(

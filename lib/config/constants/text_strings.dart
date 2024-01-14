@@ -50,4 +50,10 @@ class AppTexts {
   static const String firstNameHint = 'Enter your first name';
   static const String lastName = 'Last Name';
   static const String lastNameHint = 'Enter your last name';
+
+  //Staff Page
+  static const String staffPageTitle = 'Staffs';
+  static const String staffPageSubTitle = 'All Staffs';
+  static const String addStaff = 'Add Staff';
+  static const String staffDetails = 'Staff Details';
 }

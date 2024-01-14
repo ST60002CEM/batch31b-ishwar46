@@ -12,8 +12,8 @@ class StaffAPIModel {
   final String lastName;
   final String email;
   final String? image;
-  final String phone;
-  final String username;
+  final String? phone;
+  final String? username;
   final String address;
 
   StaffAPIModel({
@@ -22,8 +22,8 @@ class StaffAPIModel {
     required this.lastName,
     required this.email,
     this.image,
-    required this.phone,
-    required this.username,
+    this.phone,
+    this.username,
     required this.address,
   });
 
@@ -56,7 +56,7 @@ class StaffAPIModel {
   // From entity to model
   factory StaffAPIModel.fromEntity(StaffEntity entity) {
     return StaffAPIModel(
-      staffId: entity.staffId ?? '', // Handle null case appropriately
+      staffId: entity.staffId,
       firstName: entity.firstName,
       lastName: entity.lastName,
       email: entity.email,

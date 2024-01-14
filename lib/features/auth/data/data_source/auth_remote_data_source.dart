@@ -72,7 +72,6 @@ class AuthRemoteDataSource {
         final token = response.data['token'];
         final userData = response.data['userData'];
 
-        // Parse the token payload
         final decodedToken = JwtDecoder.decode(token);
         final tokenUsername = decodedToken['username'];
 
@@ -80,16 +79,13 @@ class AuthRemoteDataSource {
         print('Provided Username: $username');
         print('Token Username: $tokenUsername');
 
-        // Compare provided username with token data
         if (username == tokenUsername) {
-          // Store token
           await storeToken(token);
           return const Right(true);
         } else {
-          // Username mismatch
           return Left(
             Failure(
-              error: "Username mismatch",
+              error: "Invalid Username",
               statusCode: response.statusCode.toString(),
             ),
           );
@@ -112,8 +108,7 @@ class AuthRemoteDataSource {
     }
   }
 
-  // Token storage functions
-  final FlutterSecureStorage _storage = FlutterSecureStorage();
+  FlutterSecureStorage _storage = FlutterSecureStorage();
 
   Future<void> storeToken(String token) async {
     await _storage.write(key: 'token', value: token);

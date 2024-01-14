@@ -19,4 +19,5 @@ class ApiEndpoints {
 
   //Staff Routes
   static const String allstaff = "api/users/getallstaffs";
+  static const String deletestaff = "/api/users/delete/";
 }

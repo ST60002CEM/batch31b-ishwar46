@@ -13,8 +13,8 @@ StaffAPIModel _$StaffAPIModelFromJson(Map<String, dynamic> json) =>
       lastName: json['lastName'] as String,
       email: json['email'] as String,
       image: json['image'] as String?,
-      phone: json['phone'] as String,
-      username: json['username'] as String,
+      phone: json['phone'] as String?,
+      username: json['username'] as String?,
       address: json['address'] as String,
     );
 
