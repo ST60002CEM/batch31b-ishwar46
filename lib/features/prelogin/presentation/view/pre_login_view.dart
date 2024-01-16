@@ -98,7 +98,7 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
