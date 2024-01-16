@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/image_strings.dart';
 import '../widgets/biometric_button.dart';
 import '../widgets/card_widget.dart';
@@ -84,21 +85,16 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text(
-                          "Our Services",
-                          style: GoogleFonts.montserrat(
-                            color: Theme.of(context).textTheme.bodySmall!.color,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Services",
+                    style: TextStyle(
+                      fontSize: 14,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -107,11 +103,12 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Container(
-                          height: 120,
-                          padding: const EdgeInsets.all(10),
+                          height: 110,
+                          //padding: const EdgeInsets.all(5),
                           child: const CardWidgetPre(
                             title: "Service 1",
                             routeName: "/hospital",
@@ -121,8 +118,8 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                       ),
                       Expanded(
                         child: Container(
-                          height: 120,
-                          padding: const EdgeInsets.all(10),
+                          height: 110,
+                          //padding: const EdgeInsets.all(10),
                           child: const CardWidgetPre(
                             title: "Service 2",
                             routeName: "/appointment",
@@ -132,8 +129,8 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                       ),
                       Expanded(
                         child: Container(
-                          height: 120,
-                          padding: const EdgeInsets.all(10),
+                          height: 110,
+                          //padding: const EdgeInsets.all(10),
                           child: const CardWidgetPre(
                             title: "Service 3",
                             routeName: "/appointment",
@@ -143,8 +140,8 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                       ),
                       Expanded(
                         child: Container(
-                          height: 120,
-                          padding: const EdgeInsets.all(10),
+                          height: 110,
+                          //padding: const EdgeInsets.all(10),
                           child: const CardWidgetPre(
                             title: "Service 4",
                             routeName: "/appointment",
@@ -153,6 +150,27 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: Swiper.children(
+                      curve: Curves.easeInOut,
+                      autoplay: true,
+                      duration: 1000,
+                      children: images
+                          .map((imagePath) => Image.asset(
+                                imagePath,
+                                fit: BoxFit.fill,
+                              ))
+                          .toList(),
+                    ),
                   ),
                 ),
               ],
