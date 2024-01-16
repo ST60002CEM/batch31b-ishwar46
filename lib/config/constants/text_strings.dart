@@ -56,4 +56,5 @@ class AppTexts {
   static const String staffPageSubTitle = 'All Staffs';
   static const String addStaff = 'Add Staff';
   static const String staffDetails = 'Staff Details';
+  static const String bootAppointment = 'Book Appointment';
 }
