@@ -29,22 +29,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   void _startAutoSlide() {
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (_currentPageIndex < 2) {
-        _currentPageIndex++;
-      } else {
-        _currentPageIndex = 0;
-      }
-      _pageController.animateToPage(
-        _currentPageIndex,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    });
+    _timer = Timer.periodic(
+      const Duration(seconds: 10),
+      (timer) {
+        if (_currentPageIndex < 2) {
+          _currentPageIndex++;
+        } else {
+          _currentPageIndex = 0;
+        }
+        _pageController.animateToPage(
+          _currentPageIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      },
+    );
   }
 
   void _skipOnboarding() {
-    Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
+    //Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
+    Navigator.pushReplacementNamed(context, MyRoutes.preloginRoute);
   }
 
   void _nextPage() {

@@ -1,5 +1,6 @@
 import 'package:age_care/core/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +8,10 @@ import 'config/constants/app_colors.dart';
 import 'core/network/hive_service.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: AppColors.primaryColor, // navigation bar color
+    statusBarColor: AppColors.primaryColor, // status bar color
+  ));
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService().init();
 

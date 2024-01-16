@@ -46,10 +46,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image(
-                    height: 150,
-                    image: AssetImage(
-                        dark ? AppImages.darkAppLogo : AppImages.lightAppLogo),
+                  Hero(
+                    tag: 'logo',
+                    child: Image(
+                      height: 150,
+                      image: AssetImage(dark
+                          ? AppImages.darkAppLogo
+                          : AppImages.lightAppLogo),
+                    ),
                   ),
                   SizedBox(
                     height: AppSizes.spaceBtwItems,
@@ -131,22 +135,25 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       const SizedBox(height: AppSizes.spaceBtwSections),
 
                       //Sign in Button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                          onPressed: () async {
-                            if (_key.currentState!.validate()) {
-                              await ref
-                                  .read(authViewModelProvider.notifier)
-                                  .loginStaff(_usernameController.text,
-                                      _passwordController.text, context);
-                            }
-                          },
-                          child: Text(AppTexts.login.toUpperCase()),
+                      Hero(
+                        tag: 'loginbutton',
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )),
+                            onPressed: () async {
+                              if (_key.currentState!.validate()) {
+                                await ref
+                                    .read(authViewModelProvider.notifier)
+                                    .loginStaff(_usernameController.text,
+                                        _passwordController.text, context);
+                              }
+                            },
+                            child: Text(AppTexts.login.toUpperCase()),
+                          ),
                         ),
                       ),
                       SizedBox(
