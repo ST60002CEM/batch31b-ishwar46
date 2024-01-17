@@ -18,6 +18,7 @@ class MyRoutes {
   static String onBoardingRoute = "/onboardingpage";
   static String staffDetailsRoute = "/staffdetails";
   static String preloginRoute = "/preloginpage";
+  static String smoothpage = "/smoothpage";
 
   static getApplicationRoute() {
     return {
@@ -29,6 +30,7 @@ class MyRoutes {
       onBoardingRoute: (context) => OnBoardingScreen(),
       staffDetailsRoute: (context) => AddStaffView(),
       preloginRoute: (context) => PreLoginPage(),
+      //smoothpage: (context) => CarouselDemo(),
     };
   }
 }

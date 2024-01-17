@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../config/constants/app_colors.dart';
+import '../../../../config/router/app_routes.dart';
 
 class Biometric extends StatelessWidget {
   const Biometric({
@@ -12,7 +13,9 @@ class Biometric extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, MyRoutes.smoothpage);
+        },
         child: Icon(
           Iconsax.finger_scan,
           size: 20,

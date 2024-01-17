@@ -9,8 +9,8 @@ import 'core/network/hive_service.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: AppColors.primaryColor, // navigation bar color
-    statusBarColor: AppColors.primaryColor, // status bar color
+    systemNavigationBarColor: AppColors.primaryColor,
+    statusBarColor: AppColors.primaryColor,
   ));
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService().init();
@@ -27,7 +27,7 @@ void configLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.circle
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = AppColors.primaryColor
+    ..backgroundColor = AppColors.black
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.clear

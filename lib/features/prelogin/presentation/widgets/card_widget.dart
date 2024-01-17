@@ -1,5 +1,6 @@
 import 'package:age_care/config/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardWidgetPre extends StatelessWidget {
@@ -25,12 +26,12 @@ class CardWidgetPre extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         enableFeedback: true,
-        onTap: () {
-          Navigator.pushNamed(context, routeName);
-        },
         // onTap: () {
-        //   EasyLoading.showInfo("This feature is coming soon.");
+        //   Navigator.pushNamed(context, routeName);
         // },
+        onTap: () {
+          EasyLoading.showInfo("This feature is coming soon.");
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -41,7 +42,7 @@ class CardWidgetPre extends StatelessWidget {
               //color: Theme.of(context).textTheme.bodyLarge!.color,
             ),
             const SizedBox(
-              height: 18,
+              height: 15,
             ),
             Text(
               title,

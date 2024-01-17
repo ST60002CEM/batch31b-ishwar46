@@ -1,15 +1,17 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:card_swiper/card_swiper.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/image_strings.dart';
 import '../widgets/biometric_button.dart';
 import '../widgets/card_widget.dart';
 import '../widgets/login_button.dart';
+import '../widgets/services_card_widget.dart';
+import '../widgets/vertical_card.dart';
 
 class PreLoginPage extends ConsumerStatefulWidget {
   const PreLoginPage({super.key});
@@ -28,10 +30,10 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
   //bioMetric visibility
 
   //bool isBioMetricVisible = true;
+
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -100,76 +102,39 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 110,
-                          //padding: const EdgeInsets.all(5),
-                          child: const CardWidgetPre(
-                            title: "Service 1",
-                            routeName: "/hospital",
-                            imagePath: AppImages.cardImage1,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 110,
-                          //padding: const EdgeInsets.all(10),
-                          child: const CardWidgetPre(
-                            title: "Service 2",
-                            routeName: "/appointment",
-                            imagePath: AppImages.cardImage2,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 110,
-                          //padding: const EdgeInsets.all(10),
-                          child: const CardWidgetPre(
-                            title: "Service 3",
-                            routeName: "/appointment",
-                            imagePath: AppImages.cardImage3,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 110,
-                          //padding: const EdgeInsets.all(10),
-                          child: const CardWidgetPre(
-                            title: "Service 4",
-                            routeName: "/appointment",
-                            imagePath: AppImages.cardImage4,
-                          ),
-                        ),
-                      ),
-                    ],
+                ServicesCard(),
+                SizedBox(
+                  height: 20,
+                ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "News and Offers",
+                    style: TextStyle(
+                      fontSize: 14,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
+                SizedBox(height: 200, child: NewsSlider()),
                 SizedBox(
-                  width: double.infinity,
-                  height: 180,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5.0),
-                    child: Swiper.children(
-                      curve: Curves.easeInOut,
-                      autoplay: true,
-                      duration: 1000,
-                      children: images
-                          .map((imagePath) => Image.asset(
-                                imagePath,
-                                fit: BoxFit.fill,
-                              ))
-                          .toList(),
+                  height: 20,
+                ),
+                //Version and Copyright
+                const Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    "Version 1.0.0",
+                    style: TextStyle(
+                      fontSize: 10,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.normal,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),
