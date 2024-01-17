@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/image_strings.dart';
 import '../widgets/biometric_button.dart';
-import '../widgets/card_widget.dart';
 import '../widgets/login_button.dart';
 import '../widgets/services_card_widget.dart';
 import '../widgets/vertical_card.dart';

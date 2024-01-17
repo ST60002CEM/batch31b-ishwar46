@@ -117,4 +117,12 @@ class AuthRemoteDataSource {
   Future<String?> getToken() async {
     return await _storage.read(key: 'token');
   }
+
+  Future<bool> isTokenValid(String token) async {
+    final decodedToken = JwtDecoder.decode(token);
+    final expiryDate = DateTime.fromMillisecondsSinceEpoch(
+      decodedToken['exp'] * 1000,
+    );
+    return DateTime.now().isBefore(expiryDate);
+  }
 }
