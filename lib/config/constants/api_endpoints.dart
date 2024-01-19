@@ -21,5 +21,5 @@ class ApiEndpoints {
   static const String allstaff = "api/users/getallstaffs";
   static const String deletestaff = "/api/users/delete/";
 
-  static const limitPage = 20;
+  static const limitPage = 5;
 }

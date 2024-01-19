@@ -17,6 +17,10 @@ class StaffViewModel extends StateNotifier<StaffState> {
   }) : super(StaffState.initialState()) {
     getAllStaff();
   }
+  Future resetState() async {
+    state = StaffState.initialState();
+    getAllStaff();
+  }
 
   Future<void> getAllStaff() async {
     state = state.copyWith(isLoading: true);
