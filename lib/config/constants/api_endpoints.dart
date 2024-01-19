@@ -4,6 +4,8 @@ class ApiEndpoints {
   static const Duration connectionTimeout = Duration(seconds: 1000);
   static const Duration receiveTimeout = Duration(seconds: 1000);
 
+  static const limitPage = 10;
+
   // For Android Device
   static const String baseUrl = "http://10.0.2.2:5000/";
 

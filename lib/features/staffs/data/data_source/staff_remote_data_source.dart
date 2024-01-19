@@ -23,9 +23,14 @@ class StaffRemoteDataSource {
   StaffRemoteDataSource({required this.dio});
 
   //Get all Staffs
-  Future<Either<Failure, List<StaffEntity>>> getAllStaff() async {
+  Future<Either<Failure, List<StaffEntity>>> getAllStaff(int page) async {
     try {
-      var response = await dio.get(ApiEndpoints.allstaff);
+      var response = await dio.get(ApiEndpoints.allstaff,
+       queryParameters: {
+          '_page': page,
+          '_limit': ApiEndpoints.limitPage,
+        },
+      );
       if (response.statusCode == 200) {
         GetAllStaffDTO staffAddDTO = GetAllStaffDTO.fromJson(response.data);
 
