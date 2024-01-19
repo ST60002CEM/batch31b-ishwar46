@@ -57,4 +57,10 @@ class AppTexts {
   static const String addStaff = 'Add Staff';
   static const String staffDetails = 'Staff Details';
   static const String bootAppointment = 'Book Appointment';
+
+  //PreLogin Page
+  static const String newsandoffer = 'News and Offers';
+  static const String newsone = '';
+  static const String newstwo = '';
+  static const String newsthree = '';
 }

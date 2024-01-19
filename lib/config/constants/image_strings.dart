@@ -11,4 +11,9 @@ class AppImages {
       'assets/img/onboarding/omboarding2.png';
   static const String onBoardingImage3 =
       'assets/img/onboarding/onboarding3.png';
+
+  static const String cardImage1 = 'assets/img/doctor.png';
+  static const String cardImage2 = 'assets/img/ther.png';
+  static const String cardImage3 = 'assets/img/grandma.png';
+  static const String cardImage4 = 'assets/img/medicalteam.png';
 }
