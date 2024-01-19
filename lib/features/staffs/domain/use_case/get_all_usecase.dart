@@ -14,7 +14,7 @@ class GetAllStaffUsecase {
 
   GetAllStaffUsecase({required this.repository});
 
-  Future<Either<Failure, List<StaffEntity>>> getAllStaff() async {
-    return await repository.getAllStaff();
+  Future<Either<Failure, List<StaffEntity>>> getAllStaff(int page) async {
+    return await repository.getAllStaff(page: page);
   }
 }

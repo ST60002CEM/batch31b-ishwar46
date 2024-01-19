@@ -3,7 +3,6 @@ import 'package:age_care/features/staffs/domain/entity/staff_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
 import '../../../../core/network/http_service.dart';
@@ -22,10 +21,19 @@ class StaffRemoteDataSource {
 
   StaffRemoteDataSource({required this.dio});
 
-  //Get all Staffs
-  Future<Either<Failure, List<StaffEntity>>> getAllStaff() async {
+  // Get all Staffs with pagination
+  Future<Either<Failure, List<StaffEntity>>> getAllStaff(int page) async {
     try {
-      var response = await dio.get(ApiEndpoints.allstaff);
+      var response = await dio.get(
+        ApiEndpoints.allstaff,
+        queryParameters: {
+          'page': page,
+          '_limit': ApiEndpoints.limitPage,
+        },
+      );
+
+      print("API Response Data: ${response.data}");
+
       if (response.statusCode == 200) {
         GetAllStaffDTO staffAddDTO = GetAllStaffDTO.fromJson(response.data);
 
@@ -43,35 +51,8 @@ class StaffRemoteDataSource {
         );
       }
     } on DioException catch (e) {
-      return Left(Failure(error: e.response?.data['message']));
-    }
-  }
-
-  Future<Either<Failure, bool>> deleteStaff(String staffId) async {
-    try {
-      FlutterSecureStorage _storage = FlutterSecureStorage();
-
-      String? token = await _storage.read(key: 'token');
-
-      if (token != null) {
-        dio.options.headers['Authorization'] = 'Bearer $token';
-      } else {
-        return Left(Failure(error: 'Authorization token not available'));
-      }
-
-      var response = await dio.delete(ApiEndpoints.deletestaff + staffId);
-
-      if (response.statusCode == 200) {
-        return const Right(true);
-      } else {
-        return Left(
-          Failure(
-            error: response.statusMessage.toString(),
-            statusCode: response.statusCode.toString(),
-          ),
-        );
-      }
-    } on DioException catch (e) {
+      print("DioException: $e");
+      print("Error Response: ${e.response}");
       return Left(Failure(error: e.response?.data['message']));
     }
   }

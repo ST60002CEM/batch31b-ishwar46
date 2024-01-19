@@ -12,5 +12,7 @@ final staffRepositoryProvider = Provider.autoDispose<IStaffRepository>(
 );
 
 abstract class IStaffRepository {
-  Future<Either<Failure, List<StaffEntity>>> getAllStaff();
+  Future<Either<Failure, List<StaffEntity>>> getAllStaff({
+    required int page,
+  });
 }
