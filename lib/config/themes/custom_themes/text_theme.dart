@@ -51,7 +51,7 @@ class CustomTextTheme {
       color: Colors.black,
     ),
     bodySmall: const TextStyle().copyWith(
-      fontSize: 13.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.w500,
       color: Colors.black.withOpacity(0.5),
     ),
