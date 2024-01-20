@@ -14,8 +14,20 @@ class StaffRemoteRepoImpl implements IStaffRepository {
   final StaffRemoteDataSource staffRemoteDataSource;
 
   const StaffRemoteRepoImpl(this.staffRemoteDataSource);
+
   @override
-  Future<Either<Failure, List<StaffEntity>>> getAllStaff() {
-    return staffRemoteDataSource.getAllStaff();
+  Future<Either<Failure, List<StaffEntity>>> getAllStaff({
+    required int page,
+  }) async {
+    try {
+      final result = await staffRemoteDataSource.getAllStaff(page);
+
+      return result.fold(
+        (failure) => Left(failure),
+        (staffList) => Right(staffList),
+      );
+    } catch (e) {
+      return Left(Failure(error: e.toString()));
+    }
   }
 }

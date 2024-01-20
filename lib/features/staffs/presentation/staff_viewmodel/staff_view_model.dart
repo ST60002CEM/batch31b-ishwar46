@@ -17,17 +17,44 @@ class StaffViewModel extends StateNotifier<StaffState> {
   }) : super(StaffState.initialState()) {
     getAllStaff();
   }
+  Future resetState() async {
+    state = StaffState.initialState();
+    getAllStaff();
+  }
 
-  void getAllStaff() {
+  Future<void> getAllStaff() async {
     state = state.copyWith(isLoading: true);
-    getAllStaffUsecase.getAllStaff().then((value) {
-      value.fold(
-        (failure) => state = state.copyWith(isLoading: false),
-        (staffs) {
-          state = state.copyWith(isLoading: false, staffs: staffs);
-        },
-      );
-    });
+    final currentState = state;
+    final page = currentState.page + 1;
+    final staffs = currentState.staffs;
+    final hasReachedMax = currentState.hasReachedMax;
+
+    if (!hasReachedMax) {
+      try {
+        // get data from data source
+        final result = await getAllStaffUsecase.getAllStaff(page);
+        result.fold(
+          (failure) {
+            print("Error fetching data: ${failure.error}");
+            state = state.copyWith(hasReachedMax: true, isLoading: false);
+          },
+          (data) {
+            if (data.isEmpty) {
+              state = state.copyWith(hasReachedMax: true);
+            } else {
+              state = state.copyWith(
+                staffs: [...staffs, ...data],
+                page: page,
+                isLoading: false,
+              );
+            }
+          },
+        );
+      } catch (e) {
+        print("Unexpected error: $e");
+        state = state.copyWith(hasReachedMax: true, isLoading: false);
+      }
+    }
   }
 
   void resetMessage(bool value) {
