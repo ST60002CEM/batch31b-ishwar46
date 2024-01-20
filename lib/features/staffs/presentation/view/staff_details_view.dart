@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/text_strings.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../staff_viewmodel/staff_view_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class AddStaffView extends ConsumerStatefulWidget {
   AddStaffView({Key? key}) : super(key: key);
@@ -56,7 +58,7 @@ class _AddStaffViewState extends ConsumerState<AddStaffView> {
           child: Column(
             children: [
               staffState.isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Center(child: ShimmerLoadingEffect())
                   : staffState.staffs.isEmpty
                       ? const Center(child: Text("No data available"))
                       : Expanded(
@@ -65,6 +67,8 @@ class _AddStaffViewState extends ConsumerState<AddStaffView> {
                               await ref
                                   .read(staffViewModelProvider.notifier)
                                   .resetState();
+                              EasyLoading.showSuccess(
+                                  AppTexts.refreshedSuccessfully.toUpperCase());
                             },
                             child: ListView.builder(
                               controller: _scrollController,
@@ -171,4 +175,49 @@ class _AddStaffViewState extends ConsumerState<AddStaffView> {
       ),
     );
   }
+}
+
+Widget ShimmerLoadingEffect() {
+  return Column(
+    children: List.generate(
+      8,
+      (index) => Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.white,
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 12,
+                width: 150,
+                color: Colors.white,
+                margin: EdgeInsets.only(bottom: 6),
+              ),
+              Container(
+                height: 12,
+                width: 200,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 8),
+              Container(
+                height: 12,
+                width: 180,
+                color: Colors.white,
+                margin: EdgeInsets.only(bottom: 6),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }
