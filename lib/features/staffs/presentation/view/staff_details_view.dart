@@ -24,7 +24,9 @@ class _AddStaffViewState extends ConsumerState<AddStaffView> {
     return NotificationListener(
       onNotification: (notification) {
         if (notification is ScrollEndNotification) {
-          if (_scrollController.position.extentAfter == 0) {
+          if (_scrollController.position.extentAfter == 0 &&
+              !staffState.isLoading &&
+              !staffState.hasReachedMax) {
             ref.read(staffViewModelProvider.notifier).getAllStaff();
           }
         }
@@ -66,86 +68,99 @@ class _AddStaffViewState extends ConsumerState<AddStaffView> {
                             },
                             child: ListView.builder(
                               controller: _scrollController,
-                              itemCount: staffState.staffs.length,
+                              itemCount: staffState.hasReachedMax
+                                  ? staffState.staffs.length
+                                  : staffState.staffs.length + 1,
                               physics: const AlwaysScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
-                                List<Color> cardColors = [
-                                  AppColors.primaryColor,
-                                  AppColors.secondaryColor
-                                ]; // Hot pink
-                                return Card(
-                                  color: cardColors[index % 2],
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                        // backgroundImage: NetworkImage(
-                                        //   //staffState.staffs[index].avatar,
-                                        // ),
-                                        ),
-                                    title: Text(
-                                      staffState.staffs[index].firstName +
-                                          ' ' +
-                                          staffState.staffs[index].lastName,
-                                      style: TextStyle(
-                                        color: dark
-                                            ? AppColors.black
-                                            : AppColors.white,
-                                      ),
-                                    ),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        gap,
-                                        Text(
-                                          staffState.staffs[index].email,
-                                          style: TextStyle(
-                                            color: dark
-                                                ? AppColors.black
-                                                : AppColors.white,
+                                if (index < staffState.staffs.length) {
+                                  List<Color> cardColors = [
+                                    AppColors.primaryColor,
+                                    AppColors.secondaryColor
+                                  ];
+                                  return Card(
+                                    color: cardColors[index % 2],
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                          // backgroundImage: NetworkImage(
+                                          //   //staffState.staffs[index].avatar,
+                                          // ),
                                           ),
-                                        ),
-                                        Text(
-                                          staffState.staffs[index].address,
-                                          style: TextStyle(
-                                            color: dark
-                                                ? AppColors.black
-                                                : AppColors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    trailing: ElevatedButton(
-                                      onPressed: () {
-                                        // Navigator.pushNamed(
-                                        //   context,
-                                        //   AppRoutes.bookAppointment,
-                                        //   arguments: staffState.staffs[index],
-                                        // );
-                                      },
-                                      child: Text(
-                                        AppTexts.bootAppointment,
+                                      title: Text(
+                                        staffState.staffs[index].firstName +
+                                            ' ' +
+                                            staffState.staffs[index].lastName,
                                         style: TextStyle(
-                                          color: AppColors.white,
-                                          fontSize: 12,
+                                          color: dark
+                                              ? AppColors.black
+                                              : AppColors.white,
                                         ),
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        shape: const RoundedRectangleBorder(
-                                          side: BorderSide.none,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          gap,
+                                          Text(
+                                            staffState.staffs[index].email,
+                                            style: TextStyle(
+                                              color: dark
+                                                  ? AppColors.black
+                                                  : AppColors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            staffState.staffs[index].address,
+                                            style: TextStyle(
+                                              color: dark
+                                                  ? AppColors.black
+                                                  : AppColors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      trailing: ElevatedButton(
+                                        onPressed: () {
+                                          // Navigator.pushNamed(
+                                          //   context,
+                                          //   AppRoutes.bookAppointment,
+                                          //   arguments: staffState.staffs[index],
+                                          // );
+                                        },
+                                        child: Text(
+                                          AppTexts.bootAppointment,
+                                          style: TextStyle(
+                                            color: AppColors.white,
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                        elevation: 5,
-                                        // shadowColor: Colors.black26,
-                                        splashFactory: InkRipple.splashFactory,
-                                        backgroundColor: AppColors.success,
-                                        foregroundColor: AppColors.white,
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          shape: const RoundedRectangleBorder(
+                                            side: BorderSide.none,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                          ),
+                                          elevation: 5,
+                                          // shadowColor: Colors.black26,
+                                          splashFactory:
+                                              InkRipple.splashFactory,
+                                          backgroundColor: AppColors.success,
+                                          foregroundColor: AppColors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                } else {
+                                  // Loading indicator for additional data
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
                               },
                             ),
                           ),
