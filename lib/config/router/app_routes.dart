@@ -1,3 +1,4 @@
+import '../../features/appointment/sensor.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
@@ -19,6 +20,7 @@ class MyRoutes {
   static String staffDetailsRoute = "/staffdetails";
   static String preloginRoute = "/preloginpage";
   static String smoothpage = "/smoothpage";
+  static String lightpage = "/lightpage";
 
   static getApplicationRoute() {
     return {
@@ -31,6 +33,7 @@ class MyRoutes {
       staffDetailsRoute: (context) => AddStaffView(),
       preloginRoute: (context) => PreLoginPage(),
       //smoothpage: (context) => CarouselDemo(),
+      lightpage: (context) => DarkModePage(),
     };
   }
 }

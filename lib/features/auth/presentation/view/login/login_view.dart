@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/features/auth/presentation/auth_viewmodel/auth_viewmodel.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:light/light.dart';
 
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/image_strings.dart';
@@ -11,6 +15,7 @@ import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
 import '../../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../../../core/utils/validators/validators.dart';
+import '../../../../appointment/apptheme.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -20,10 +25,71 @@ class LoginView extends ConsumerStatefulWidget {
 }
 
 class _LoginViewState extends ConsumerState<LoginView> {
+  String _luxString = 'Unknown';
+  Light? _light;
+  StreamSubscription? _subscription;
+  bool isObscure = true;
+  bool isDarkModeDialogShown = false;
+
   final _key = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool isObscure = true;
+
+  void onData(int luxValue) async {
+    print("Lux value: $luxValue");
+    setState(() {
+      _luxString = "$luxValue";
+
+      // Check if luxValue is below a certain threshold (adjust the threshold as needed)
+      if (luxValue < 20 && !isDarkModeDialogShown) {
+        isDarkModeDialogShown = true; // Set to true to prevent multiple dialogs
+        showDarkModeAlertDialog(context);
+      }
+    });
+  }
+
+  void showDarkModeAlertDialog(BuildContext context) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.topSlide,
+      title: 'Low Light Detected!',
+      desc: 'Do you want to enable dark mode?',
+      btnCancelOnPress: () {
+        isDarkModeDialogShown = true;
+      },
+      btnOkOnPress: () {
+        ref.read(appThemeProvider.notifier).toggleDarkMode();
+        isDarkModeDialogShown = false;
+      },
+    )..show();
+  }
+
+  void stopListening() {
+    _subscription?.cancel();
+  }
+
+  void startListening() {
+    _light = Light();
+    try {
+      _subscription = _light?.lightSensorStream.listen(onData);
+    } on LightException catch (exception) {
+      print(exception);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startListening();
+  }
+
+  @override
+  void dispose() {
+    // Dispose the sensor subscription when the widget is disposed
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

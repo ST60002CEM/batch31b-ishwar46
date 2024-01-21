@@ -66,3 +66,27 @@ class HelperFunctions {
     return wrappedList;
   }
 }
+
+//Toogle Dark Mode
+
+void toggleDarkMode(BuildContext context) {
+  final theme = Theme.of(context);
+  final brightness = theme.brightness;
+  final newTheme = brightness == Brightness.dark
+      ? ThemeData.light()
+      : ThemeData.dark().copyWith(
+          primaryColor: const Color.fromARGB(255, 13, 84, 142),
+          hintColor: const Color.fromARGB(255, 22, 126, 216),
+        );
+  final newMaterial = MaterialApp(
+    theme: newTheme,
+    home: const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    ),
+  );
+  Navigator.of(context).pushReplacement(
+    MaterialPageRoute(builder: (context) => newMaterial),
+  );
+}

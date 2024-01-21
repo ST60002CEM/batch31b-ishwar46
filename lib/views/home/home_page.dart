@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
                       title: "Appointment",
-                      routeName: "/hospital",
+                      routeName: "/lightpage",
                       iconData: Iconsax.calendar_2,
                     ),
                   ),

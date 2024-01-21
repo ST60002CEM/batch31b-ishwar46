@@ -5,13 +5,13 @@ class ApiEndpoints {
   static const Duration receiveTimeout = Duration(seconds: 1000);
 
   // For Android Device
-  static const String baseUrl = "http://10.0.2.2:5000/";
+  // static const String baseUrl = "http://10.0.2.2:5000/";
 
   // For IOS Device
   // static const String baseUrl = "http://localhost:5000/";
 
   //From WIFI or IP config
-  //static const String baseUrl = "http://192.168.4.4:3000/api/v1/";
+  static const String baseUrl = "http://172.25.10.25:5000/";
 
   // Auth Routes
   static const String login = "api/users/login";

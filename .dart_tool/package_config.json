@@ -566,6 +566,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "light",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/light-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "line_icons",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/line_icons-2.0.3",
       "packageUri": "lib/",
@@ -1100,7 +1106,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-01-21T05:34:39.008375Z",
+  "generated": "2024-01-21T09:59:30.119973Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
