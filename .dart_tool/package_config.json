@@ -794,6 +794,30 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sensors_plus",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sensors_plus-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sensors_plus_platform_interface",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sensors_plus_platform_interface-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "sensors_plus_web",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sensors_plus_web-1.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "shake",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shake-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences-2.2.2",
       "packageUri": "lib/",
@@ -1076,7 +1100,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-01-20T10:02:57.433606Z",
+  "generated": "2024-01-21T05:34:39.008375Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

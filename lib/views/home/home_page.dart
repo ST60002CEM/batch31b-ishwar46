@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shake/shake.dart';
 
 import '../../config/constants/app_colors.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  late ShakeDetector shakeDetector;
 
   // late final Map<String, dynamic> userData;
   //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
@@ -52,10 +54,54 @@ class _HomePageState extends State<HomePage> {
     //ProfilePage(),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize shake detector
+    shakeDetector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        // Logout logic goes here
+        _showLogoutDialog();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // Dispose of shake detector when the widget is disposed
+    shakeDetector.stopListening();
+    super.dispose();
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  void _showLogoutDialog() {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
+      title: "Logout",
+      titleTextStyle: GoogleFonts.montserrat(
+        color: AppColors.primaryColor,
+        fontSize: 15,
+        fontWeight: FontWeight.w600,
+      ),
+      desc: "Are you sure you want to logout?",
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginView(),
+          ),
+        );
+      },
+    ).show();
   }
 
   @override
