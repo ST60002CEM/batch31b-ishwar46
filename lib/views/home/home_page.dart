@@ -12,7 +12,6 @@ import '../../config/constants/app_colors.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
-import '../appointment/appointments_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,7 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     HomePage(),
-    AppointmentsPage(),
+    //AppointmentsPage(),
     //EventsPage(),
     //ProfilePage(),
   ];
@@ -239,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10),
                     child: const CardWidget(
                       title: "Appointment",
-                      routeName: "/lightpage",
+                      routeName: "/appointmentspage",
                       iconData: Iconsax.calendar_2,
                     ),
                   ),

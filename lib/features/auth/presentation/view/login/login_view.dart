@@ -15,7 +15,7 @@ import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
 import '../../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../../../core/utils/validators/validators.dart';
-import '../../../../appointment/apptheme.dart';
+import '../../../../../config/themes/apptheme.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});

@@ -64,4 +64,24 @@ class AppTexts {
   static const String newsone = '';
   static const String newstwo = '';
   static const String newsthree = '';
+
+  //Appointment Page
+
+  static const String appointmentPageTitle = 'Appointments';
+  static const String appointmentPageSubTitle = 'All Appointments';
+  static const String addAppointment = 'Add Appointment';
+  static const String appointmentDetails = 'Appointment Details';
+  static const String appointmentDate = 'Appointment Date';
+  static const String appointmentTime = 'Appointment Time';
+  static const String appointmentType = 'Appointment Type';
+  static const String appointmentStatus = 'Appointment Status';
+  static const String appointmentNote = 'Appointment Note';
+  static const String appointmentNoteHint = 'Enter your note here';
+  static const String appointmentTypeHint = 'Select your appointment type';
+  static const String appointmentStatusHint = 'Select your appointment status';
+  static const String appointmentDateHint = 'Select your appointment date';
+  static const String appointmentTimeHint = 'Select your appointment time';
+  static const String appointmentNoteError = 'Please enter your note';
+  static const String appointmentTypeerror =
+      'Please select your appointment type';
 }
