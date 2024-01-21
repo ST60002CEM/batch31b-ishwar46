@@ -1,3 +1,4 @@
+import 'package:age_care/config/themes/apptheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,10 +11,11 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(appThemeProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Age Care App',
-      themeMode: ThemeMode.system,
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: MyAppTheme.lightTheme,
       darkTheme: MyAppTheme.darkTheme,
       //theme: AppTheme.getApplicationTheme(isDark: false),
