@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,6 +11,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shake/shake.dart';
 
 import '../../config/constants/app_colors.dart';
+import '../../config/constants/text_strings.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
@@ -23,6 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late ShakeDetector shakeDetector;
+  int shakeCount = 0;
 
   // late final Map<String, dynamic> userData;
   //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
@@ -60,8 +64,16 @@ class _HomePageState extends State<HomePage> {
     // Initialize shake detector
     shakeDetector = ShakeDetector.autoStart(
       onPhoneShake: () {
-        // Logout logic goes here
-        _showLogoutDialog();
+        shakeCount++;
+
+        // If the user shakes the phone four times, show the emergency bottom sheet
+        if (shakeCount >= 2) {
+          shakeCount = 0;
+          _showEmergencyBottomSheet();
+        }
+        Timer(Duration(seconds: 3), () {
+          shakeCount = 0;
+        });
       },
     );
   }
@@ -77,6 +89,78 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  void _showEmergencyBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 16,
+              right: 16,
+              top: 16,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Report Emergency',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Urgent Emergency Call',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                TextField(
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    hintText: 'Enter emergency details...',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Hero(
+                  tag: 'emergency',
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () async {
+                        EasyLoading.showSuccess(
+                            'Emergency reported successfully.',
+                            dismissOnTap: false);
+
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Submit'),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _showLogoutDialog() {
