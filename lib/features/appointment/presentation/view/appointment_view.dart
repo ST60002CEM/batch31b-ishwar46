@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../config/constants/app_colors.dart';
@@ -36,8 +35,12 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
       ),
-
       //Body
+      body: Column(
+        children: [
+          Text(AppTexts.appointmentDetails),
+        ],
+      ),
 
       //Column
 
