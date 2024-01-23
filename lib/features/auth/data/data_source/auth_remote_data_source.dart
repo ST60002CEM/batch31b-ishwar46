@@ -69,23 +69,34 @@ class AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        final token = response.data['token'];
-        final userData = response.data['userData'];
+        final Map<String, dynamic>? responseData =
+            response.data as Map<String, dynamic>?;
 
-        final decodedToken = JwtDecoder.decode(token);
-        final tokenUsername = decodedToken['username'];
+        if (responseData != null && responseData.containsKey('token')) {
+          final token = responseData['token'];
 
-        print('Decoded Token: $decodedToken');
-        print('Provided Username: $username');
-        print('Token Username: $tokenUsername');
+          final decodedToken = JwtDecoder.decode(token);
+          final tokenUsername = decodedToken['username'];
 
-        if (username == tokenUsername) {
-          await storeToken(token);
-          return const Right(true);
+          print('Decoded Token: $decodedToken');
+          print('Provided Username: $username');
+          print('Token Username: $tokenUsername');
+
+          if (username == tokenUsername) {
+            await storeToken(token);
+            return const Right(true);
+          } else {
+            return Left(
+              Failure(
+                error: response.data?['message'] ?? "Invalid Username",
+                statusCode: response.statusCode.toString(),
+              ),
+            );
+          }
         } else {
           return Left(
             Failure(
-              error: "Invalid Username",
+              error: response.data?['message'] ?? "Unknown error",
               statusCode: response.statusCode.toString(),
             ),
           );
@@ -93,18 +104,22 @@ class AuthRemoteDataSource {
       } else {
         return Left(
           Failure(
-            error: response.data["message"],
+            error: response.data?['message'] ?? "Unknown error",
             statusCode: response.statusCode.toString(),
           ),
         );
       }
     } on DioException catch (e) {
-      return Left(
-        Failure(
-          error: e.error.toString(),
-          statusCode: e.response?.statusCode.toString() ?? '0',
-        ),
-      );
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        return Left(Failure(error: "Connection timeout. Please try again."));
+      } else if (e.type == DioExceptionType.badResponse) {
+        return Left(Failure(error: "Server error. Please try again later."));
+      } else {
+        return Left(Failure(error: "An unexpected error occurred."));
+      }
+    } catch (e) {
+      return Left(Failure(error: "An unexpected error occurred."));
     }
   }
 

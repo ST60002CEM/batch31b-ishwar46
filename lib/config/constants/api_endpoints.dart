@@ -1,8 +1,8 @@
 class ApiEndpoints {
   ApiEndpoints._();
 
-  static const Duration connectionTimeout = Duration(seconds: 1000);
-  static const Duration receiveTimeout = Duration(seconds: 1000);
+  static const Duration connectionTimeout = Duration(seconds: 1);
+  static const Duration receiveTimeout = Duration(seconds: 1);
 
   // For Android Device
   // static const String baseUrl = "http://10.0.2.2:5000/";
@@ -19,7 +19,7 @@ class ApiEndpoints {
 
   //Staff Routes
   static const String allstaff = "api/users/getallstaffs";
-  static const String deletestaff = "/api/users/delete/";
+  static const String deletestaff = "/api/users/delete";
 
   static const limitPage = 8;
 }

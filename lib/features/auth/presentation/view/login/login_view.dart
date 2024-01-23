@@ -94,13 +94,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-    final authState = ref.watch(authViewModelProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (authState.showMessage! && authState.error != null) {
-        showSnackBar(message: 'Invalid Credentials', context: context);
-        ref.read(authViewModelProvider.notifier).reset();
-      }
-    });
+    // final authState = ref.watch(authViewModelProvider);
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (authState.showMessage! && authState.error != null) {
+    //     showSnackBar(message: 'Invalid Credentials', context: context);
+    //     ref.read(authViewModelProvider.notifier).reset();
+    //   }
+    // });
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

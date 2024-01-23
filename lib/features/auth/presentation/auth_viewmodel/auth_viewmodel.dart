@@ -50,14 +50,18 @@ class AuthViewModel extends StateNotifier<AuthState> {
   Future<void> loginStaff(
       String username, String password, BuildContext context) async {
     state = state.copyWith(isLoading: true);
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     final result = await _loginUseCase.loginStaff(username, password);
     state = state.copyWith(isLoading: false);
 
     result.fold(
-      (failure) => state = state.copyWith(
-        error: failure.error,
-        showMessage: true,
-      ),
+      (failure) {
+        state = state.copyWith(
+          error: failure.error,
+          showMessage: true,
+        );
+        EasyLoading.showError(failure.error, dismissOnTap: false);
+      },
       (success) {
         if (success) {
           EasyLoading.showSuccess('Logging you in...', dismissOnTap: false);
