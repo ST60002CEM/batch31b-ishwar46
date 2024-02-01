@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
       theme: MyAppTheme.lightTheme,
       darkTheme: MyAppTheme.darkTheme,
       //theme: AppTheme.getApplicationTheme(isDark: false),
-      initialRoute: MyRoutes.splashRoute,
+      initialRoute: MyRoutes.appointmentsRoute,
       routes: MyRoutes.getApplicationRoute(),
       builder: EasyLoading.init(),
     );
