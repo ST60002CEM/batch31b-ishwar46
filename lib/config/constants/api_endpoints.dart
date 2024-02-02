@@ -11,7 +11,7 @@ class ApiEndpoints {
   // static const String baseUrl = "http://localhost:5000/";
 
   //From WIFI or IP config
-  static const String baseUrl = "http://172.25.10.25:5000/";
+  static const String baseUrl = "http://192.168.18.236:5000/";
 
   // Auth Routes
   static const String login = "api/users/login";
