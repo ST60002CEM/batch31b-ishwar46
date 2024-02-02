@@ -13,7 +13,7 @@ import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
-import '../../../../../core/common/widgets/custom_snackbar.dart';
+
 import '../../../../../core/utils/validators/validators.dart';
 import '../../../../../config/themes/apptheme.dart';
 
@@ -174,10 +174,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             },
                           ),
                         ),
-                        // validator: (value) {
-                        //   final error = AppValidator.validatePassword(value);
-                        //   return error;
-                        // },
+                        validator: (value) {
+                          final error = AppValidator.validatePassword(value);
+                          return error;
+                        },
                       ),
 
                       const SizedBox(height: AppSizes.spaceBtwnInputFields / 2),

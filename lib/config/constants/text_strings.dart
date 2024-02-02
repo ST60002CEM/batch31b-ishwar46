@@ -67,7 +67,7 @@ class AppTexts {
 
   //Appointment Page
 
-  static const String appointmentPageTitle = 'Appointments';
+  static const String appointmentPageTitle = 'Create Appointment';
   static const String appointmentPageSubTitle = 'All Appointments';
   static const String addAppointment = 'Add Appointment';
   static const String appointmentDetails = 'Appointment Details';
@@ -84,4 +84,6 @@ class AppTexts {
   static const String appointmentNoteError = 'Please enter your note';
   static const String appointmentTypeerror =
       'Please select your appointment type';
+
+  static const String bookAppointment = 'Book Appointment';
 }

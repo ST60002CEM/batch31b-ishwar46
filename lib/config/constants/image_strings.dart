@@ -1,7 +1,7 @@
 class AppImages {
   //App Logos
-  static const String darkAppLogo = 'assets/img/uralogomob.png';
-  static const String lightAppLogo = 'assets/img/uralogomob.png';
+  static const String darkAppLogo = 'assets/img/uracarelogo.png';
+  static const String lightAppLogo = 'assets/img/uracarelogo.png';
 
   //OnBoarding Images
 
