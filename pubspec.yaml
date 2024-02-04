@@ -84,6 +84,7 @@ dependencies:
   shake: ^2.2.0
   light: ^3.0.1
   google_maps_flutter: ^2.5.3
+  lottie: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -122,6 +123,7 @@ flutter:
     - assets/img/
     - assets/svg/
     - assets/img/onboarding/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
