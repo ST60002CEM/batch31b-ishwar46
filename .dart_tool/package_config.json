@@ -416,6 +416,42 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "google_maps",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_maps_flutter",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter-2.5.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_maps_flutter_android",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_maps_flutter_ios",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_maps_flutter_platform_interface",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_platform_interface-2.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_maps_flutter_web",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.4+3",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "google_nav_bar",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_nav_bar-5.0.6",
       "packageUri": "lib/",
@@ -546,6 +582,12 @@
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "js_wrapping",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/js_wrapping-0.7.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "json_annotation",
@@ -796,6 +838,12 @@
     {
       "name": "salomon_bottom_bar",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/salomon_bottom_bar-3.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sanitize_html",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sanitize_html-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1106,7 +1154,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-01-21T11:56:40.874831Z",
+  "generated": "2024-02-02T11:56:01.815291Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

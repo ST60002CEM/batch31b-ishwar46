@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(12),
                             child: Image.asset(
-                              "assets/img/logo.png",
+                              "assets/img/uracarelogo.png",
                               height: MediaQuery.of(context).size.width,
                               width: MediaQuery.of(context).size.width,
                               color: AppColors.whiteText,

@@ -48,3 +48,8 @@ app.*.map.json
 /android/app/release
 .dart_tool/package_config.json
 .flutter-plugins-dependencies
+.flutter-plugins-dependencies
+.flutter-plugins
+.dart_tool/package_config_subset
+.dart_tool/package_config.json
+.dart_tool/dartpad/web_plugin_registrant.dart

@@ -38,10 +38,10 @@ class AppValidator {
     }
 
     // Check for at least one uppercase letter
-    final upperCaseRegExp = RegExp(r'^(?=.*?[A-Z]).{8,}$');
-    if (!upperCaseRegExp.hasMatch(value)) {
-      return 'Password must contain at least one uppercase letter';
-    }
+    // final upperCaseRegExp = RegExp(r'^(?=.*?[A-Z]).{8,}$');
+    // if (!upperCaseRegExp.hasMatch(value)) {
+    //   return 'Password must contain at least one uppercase letter';
+    // }
 
     // Check for at least one lowercase letter
     if (!value.contains(RegExp(r'^(?=.*?[a-z]).{8,}$'))) {
