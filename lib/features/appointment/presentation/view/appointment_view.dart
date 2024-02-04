@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +22,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   final _startTimeController = TextEditingController();
   final _endTimeController = TextEditingController();
   final _locationController = TextEditingController();
+  final _notesController = TextEditingController();
 
   List<String> services = ['Service 1', 'Service 2', 'Service 3'];
   String selectedService = '';
@@ -57,6 +59,271 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
     }
   }
 
+  //Bottom Modal Sheet for Confirmation
+  void _showConfirmationModal(BuildContext context) {
+    bool isAnyFieldNull = false;
+
+    //check if any field is empty
+    if (selectedService.isEmpty ||
+        _serviceDateController.text.isEmpty ||
+        _startTimeController.text.isEmpty ||
+        _endTimeController.text.isEmpty ||
+        _locationController.text.isEmpty ||
+        _notesController.text.isEmpty) {
+      isAnyFieldNull = true;
+    }
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            height: 500,
+            color: AppColors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: AppSizes.spaceBtwnInputFields,
+                  ),
+                  Text(
+                    'Please Review Your Appointment Details',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppSizes.spaceBtwnInputFields,
+                  ),
+                  //Service Type
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Service Type:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          selectedService.isNotEmpty ? selectedService : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //Service Date
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Service Date:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _serviceDateController.text.isNotEmpty
+                              ? _serviceDateController.text
+                              : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //Start Time
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Start Time:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _startTimeController.text.isNotEmpty
+                              ? _startTimeController.text
+                              : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //End Time
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'End Time:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _endTimeController.text.isNotEmpty
+                              ? _endTimeController.text
+                              : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //Location
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Location:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _locationController.text.isNotEmpty
+                              ? _locationController.text
+                              : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //Notes
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Notes:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          _notesController.text.isNotEmpty
+                              ? _notesController.text
+                              : 'N/A',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (isAnyFieldNull)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Please Fill All Fields To Proceed!',
+                        style: TextStyle(
+                          color: AppColors.error,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  SizedBox(
+                    height: AppSizes.spaceBtwSections,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: isAnyFieldNull
+                              ? null
+                              : () {
+                                  EasyLoading.show(
+                                    status: 'Booking Appointment...',
+                                    maskType: EasyLoadingMaskType.black,
+                                  );
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    EasyLoading.dismiss();
+                                    EasyLoading.showSuccess(
+                                      'Appointment Booked Successfully!',
+                                    );
+                                    Navigator.pushReplacementNamed(
+                                        context, '/home');
+                                  });
+                                },
+                          child: Text('Confirm'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: AppColors.success,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: AppSizes.spaceBtwnInputFields,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.error,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +332,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.appointmentPageTitle.toUpperCase(),
+          AppTexts.bookAppointment.toUpperCase(),
           style: TextStyle(
             color: AppColors.white,
           ),
@@ -160,6 +427,18 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         ),
                       ),
                       const SizedBox(
+                        height: AppSizes.spaceBtwnInputFields,
+                      ),
+                      TextFormField(
+                        controller: _notesController,
+                        decoration: InputDecoration(
+                          labelText: 'Notes',
+                          hintText: 'Add Notes',
+                          suffixIcon: Icon(Iconsax.note),
+                        ),
+                        maxLines: 2,
+                      ),
+                      const SizedBox(
                         height: AppSizes.spaceBtwSections,
                       ),
                       SizedBox(
@@ -169,7 +448,9 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           )),
-                          onPressed: () {},
+                          onPressed: () {
+                            _showConfirmationModal(context);
+                          },
                           child: Text(AppTexts.bookAppointment.toUpperCase()),
                         ),
                       ),

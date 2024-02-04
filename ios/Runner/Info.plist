@@ -5,7 +5,7 @@
 	<key>io.flutter.embedded_views_preview</key>
 <string>YES</string>
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>Search Location</string>
+<string>Need Location For Using This App.</string>
 
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>

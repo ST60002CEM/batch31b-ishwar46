@@ -64,7 +64,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
       },
       (success) {
         if (success) {
-          EasyLoading.showSuccess('Logging you in...', dismissOnTap: false);
+          EasyLoading.show(
+              status: 'Logging in...', maskType: EasyLoadingMaskType.black);
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
             EasyLoading.dismiss();
