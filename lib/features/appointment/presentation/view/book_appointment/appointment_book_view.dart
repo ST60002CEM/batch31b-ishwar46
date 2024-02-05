@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../config/constants/app_colors.dart';
-import '../../../../config/constants/app_sizes.dart';
-import '../../../../config/constants/text_strings.dart';
+import '../../../../../config/constants/app_colors.dart';
+import '../../../../../config/constants/app_sizes.dart';
+import '../../../../../config/constants/text_strings.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({Key? key}) : super(key: key);
@@ -343,7 +343,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.bookAppointment.toUpperCase(),
+          AppTexts.viewBookedAppointment.toUpperCase(),
           style: TextStyle(
             color: AppColors.white,
           ),
@@ -463,6 +463,42 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                             _showConfirmationModal(context);
                           },
                           child: Text(AppTexts.bookAppointment.toUpperCase()),
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppSizes.spaceBtwnInputFields,
+                      ),
+                      //View All Appointments
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            side: BorderSide(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/viewbookedappointment');
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "View All Appointments",
+                                style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                              Icon(
+                                Icons.file_copy,
+                                color: AppColors.primaryColor,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
