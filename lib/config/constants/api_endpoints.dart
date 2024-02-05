@@ -11,7 +11,8 @@ class ApiEndpoints {
   // static const String baseUrl = "http://localhost:5000/";
 
   //From WIFI or IP config
-  static const String baseUrl = "http://192.168.18.236:5000/";
+  //static const String baseUrl = "http://192.168.18.236:5000/";
+  static const String baseUrl = "http://172.20.10.2:5000/";
 
   // Auth Routes
   static const String login = "api/users/login";
@@ -20,6 +21,9 @@ class ApiEndpoints {
   //Staff Routes
   static const String allstaff = "api/users/getallstaffs";
   static const String deletestaff = "/api/users/delete";
+
+  //Booking Appointment
+  static const String bookappointment = "api/appointments/create";
 
   static const limitPage = 8;
 }

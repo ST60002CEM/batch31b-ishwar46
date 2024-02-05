@@ -68,11 +68,14 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         _serviceDateController.text.isEmpty ||
         _startTimeController.text.isEmpty ||
         _endTimeController.text.isEmpty ||
-        _locationController.text.isEmpty ||
-        _notesController.text.isEmpty) {
+        _locationController.text.isEmpty) {
       isAnyFieldNull = true;
     }
     showModalBottomSheet(
+      transitionAnimationController: AnimationController(
+        vsync: Navigator.of(context),
+        duration: Duration(milliseconds: 500),
+      ),
       context: context,
       builder: (BuildContext context) {
         return SingleChildScrollView(
@@ -105,7 +108,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Service Type:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -113,6 +116,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                           selectedService.isNotEmpty ? selectedService : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -128,7 +132,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Service Date:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -138,6 +142,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -153,7 +158,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Start Time:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -163,6 +168,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            color: AppColors.success,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -178,7 +185,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'End Time:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -188,6 +195,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            color: AppColors.error,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -202,7 +211,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Location:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -212,6 +221,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -227,7 +237,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         child: Text(
                           'Notes:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -240,6 +250,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

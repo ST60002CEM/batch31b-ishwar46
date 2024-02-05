@@ -632,6 +632,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "lottie",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/lottie-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/matcher-0.12.16",
       "packageUri": "lib/",
@@ -735,37 +741,37 @@
     },
     {
       "name": "permission_handler",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler-11.1.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler-11.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_android",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.1",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_apple",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_apple-9.2.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_apple-9.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_html",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.0+2",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "permission_handler_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-4.0.2",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "permission_handler_windows",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1154,7 +1160,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-02T11:56:01.815291Z",
+  "generated": "2024-02-05T03:47:27.898267Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
