@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:light/light.dart';
+import 'package:local_auth/local_auth.dart';
 
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../config/router/app_routes.dart';
 import '../../../../../core/common/styles/spacing_styles.dart';
-
 import '../../../../../core/utils/validators/validators.dart';
 import '../../../../../config/themes/apptheme.dart';
 
 class LoginView extends ConsumerStatefulWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
@@ -78,6 +78,23 @@ class _LoginViewState extends ConsumerState<LoginView> {
     }
   }
 
+  Future<bool> _authenticateUser(BuildContext context) async {
+    final LocalAuthentication localAuth = LocalAuthentication();
+
+    try {
+      bool isAuthenticated = await localAuth.authenticate(
+        localizedReason: 'Authenticate to access the app',
+      );
+
+      return isAuthenticated;
+    } catch (e) {
+      // Handle authentication errors
+      print('Authentication failed: $e');
+      // You may want to show an error message to the user
+      return false;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -94,20 +111,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-    // final authState = ref.watch(authViewModelProvider);
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   if (authState.showMessage! && authState.error != null) {
-    //     showSnackBar(message: 'Invalid Credentials', context: context);
-    //     ref.read(authViewModelProvider.notifier).reset();
-    //   }
-    // });
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: AppSpacingStyle.paddingWithAppBarHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            //Logo
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +149,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       vertical: AppSizes.spaceBtwSections),
                   child: Column(
                     children: [
-                      //Username
                       TextFormField(
                         key: const ValueKey('username'),
                         controller: _usernameController,
@@ -154,7 +163,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         },
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
-                      //Password
                       TextFormField(
                         key: const ValueKey('password'),
                         controller: _passwordController,
@@ -179,10 +187,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           return error;
                         },
                       ),
-
                       const SizedBox(height: AppSizes.spaceBtwnInputFields / 2),
-
-                      //Remeber Me and Forget Password
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -199,23 +204,48 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ],
                       ),
                       const SizedBox(height: AppSizes.spaceBtwSections),
+                      Row(
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              bool isAuthenticated =
+                                  await _authenticateUser(context);
 
-                      //Sign in Button
+                              if (isAuthenticated) {
+                                await ref
+                                    .read(authViewModelProvider.notifier)
+                                    .loginStaff(
+                                      _usernameController.text,
+                                      _passwordController.text,
+                                      context,
+                                    );
+                              }
+                            },
+                            icon: Icon(Iconsax.finger_scan),
+                            label: Text('Biometric Login'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
                       Hero(
                         tag: 'loginbutton',
                         child: SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
                             onPressed: () async {
                               if (_key.currentState!.validate()) {
                                 await ref
                                     .read(authViewModelProvider.notifier)
-                                    .loginStaff(_usernameController.text,
-                                        _passwordController.text, context);
+                                    .loginStaff(
+                                      _usernameController.text,
+                                      _passwordController.text,
+                                      context,
+                                    );
                               }
                             },
                             child: Text(AppTexts.login.toUpperCase()),
@@ -225,7 +255,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       SizedBox(
                         height: AppSizes.spaceBtwSections,
                       ),
-
                       InkWell(
                         key: const ValueKey('registerButton'),
                         onTap: () {

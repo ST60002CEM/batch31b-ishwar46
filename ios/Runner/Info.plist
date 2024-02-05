@@ -7,6 +7,10 @@
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>Need Location For Using This App.</string>
 
+<key>NSFaceIDUsageDescription</key>
+<string>We use Face ID to authenticate you.</string>
+
+
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
