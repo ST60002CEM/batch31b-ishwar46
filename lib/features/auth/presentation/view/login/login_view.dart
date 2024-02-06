@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:light/light.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/image_strings.dart';
@@ -30,19 +31,37 @@ class _LoginViewState extends ConsumerState<LoginView> {
   StreamSubscription? _subscription;
   bool isObscure = true;
   bool isDarkModeDialogShown = false;
-
+  late SharedPreferences preferences;
   final _key = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool? rememberMe = false;
+
+  void _onRememberMeChanged(bool newValue) async {
+    preferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      rememberMe = newValue;
+      if (rememberMe!) {
+        if (_usernameController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty) {
+          preferences.setBool("REMEMBER_ME", true);
+          preferences.setString("Username", _usernameController.text);
+        }
+      } else {
+        preferences.setBool('REMEMBER_ME', false);
+        preferences.remove("Username");
+      }
+    });
+  }
 
   void onData(int luxValue) async {
     print("Lux value: $luxValue");
     setState(() {
       _luxString = "$luxValue";
 
-      // Check if luxValue is below a certain threshold (adjust the threshold as needed)
       if (luxValue < 20 && !isDarkModeDialogShown) {
-        isDarkModeDialogShown = true; // Set to true to prevent multiple dialogs
+        isDarkModeDialogShown = true;
         showDarkModeAlertDialog(context);
       }
     });
@@ -78,10 +97,21 @@ class _LoginViewState extends ConsumerState<LoginView> {
     }
   }
 
+  void _loadSavedUsername() async {
+    preferences = await SharedPreferences.getInstance();
+    final savedUsername = preferences.getString("Username");
+    if (savedUsername != null) {
+      setState(() {
+        _usernameController.text = savedUsername;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     startListening();
+    _loadSavedUsername();
   }
 
   @override
@@ -187,8 +217,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Checkbox(
-                            value: false,
-                            onChanged: (value) {},
+                            value: rememberMe ?? false,
+                            onChanged: (value) {
+                              _onRememberMeChanged(value!);
+                            },
                           ),
                           Text(AppTexts.remeberme),
                           Spacer(),
