@@ -49,13 +49,13 @@ class _ViewBookedAppointmentsState
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   return AppointmentCard(
-                    serviceType: 'Service Type',
+                    serviceType: 'Service 1',
                     serviceDate: 'Service Date',
                     startTime: 'Start Time',
                     endTime: 'End Time',
                     location: 'Location',
-                    notes: 'wqdweddeded\ddwqdwqdwqdwd\ndwdwdswddad',
-                    status: 2,
+                    notes: 'Please bring your ID card for verification',
+                    status: 1,
                   );
                 },
               ),

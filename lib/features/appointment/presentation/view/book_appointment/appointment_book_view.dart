@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:chip_list/chip_list.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
@@ -72,6 +73,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       isAnyFieldNull = true;
     }
     showModalBottomSheet(
+      elevation: 10,
+      showDragHandle: false,
       transitionAnimationController: AnimationController(
         vsync: Navigator.of(context),
         duration: Duration(milliseconds: 500),
