@@ -6,12 +6,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shake/shake.dart';
 
 import '../../config/constants/app_colors.dart';
-import '../../config/constants/text_strings.dart';
+
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
@@ -323,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Appointment",
                       routeName: "/appointmentspage",
-                      iconData: Iconsax.calendar_2,
+                      imagePath: "assets/img/appointment.png",
                     ),
                   ),
                   Container(
@@ -333,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Health Care",
                       routeName: "/appointment",
-                      iconData: Icons.healing,
+                      imagePath: "assets/img/doctor.png",
                     ),
                   ),
                   // Container(
@@ -353,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Staffs",
                       routeName: "/staffdetails",
-                      iconData: Iconsax.people5,
+                      imagePath: "assets/img/medicalteam.png",
                     ),
                   ),
                 ],
@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Emergency",
                       routeName: "/hospital",
-                      iconData: Icons.local_hospital,
+                      imagePath: "assets/img/emergency.png",
                     ),
                   ),
                   Container(
@@ -378,7 +378,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Hospital",
                       routeName: "/appointment",
-                      iconData: Icons.apartment_outlined,
+                      imagePath: "assets/img/hospital.png",
                     ),
                   ),
                   Container(
@@ -388,7 +388,7 @@ class _HomePageState extends State<HomePage> {
                     child: const CardWidget(
                       title: "Schedules",
                       routeName: "/appointment",
-                      iconData: Icons.schedule,
+                      imagePath: "assets/img/grandma.png",
                     ),
                   ),
                   // Container(
