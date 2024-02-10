@@ -3,10 +3,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-import '../../../../config/constants/app_colors.dart';
-import '../../../../config/constants/app_sizes.dart';
-import '../../../../config/constants/text_strings.dart';
+import '../../../../../config/constants/app_colors.dart';
+import '../../../../../config/constants/app_sizes.dart';
+import '../../../../../config/constants/text_strings.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   final _endTimeController = TextEditingController();
   final _locationController = TextEditingController();
   final _notesController = TextEditingController();
+  final _locationFocusNode = FocusNode();
 
   List<String> services = ['Service 1', 'Service 2', 'Service 3'];
   String selectedService = '';
@@ -68,11 +70,16 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         _serviceDateController.text.isEmpty ||
         _startTimeController.text.isEmpty ||
         _endTimeController.text.isEmpty ||
-        _locationController.text.isEmpty ||
-        _notesController.text.isEmpty) {
+        _locationController.text.isEmpty) {
       isAnyFieldNull = true;
     }
     showModalBottomSheet(
+      elevation: 10,
+      showDragHandle: false,
+      transitionAnimationController: AnimationController(
+        vsync: Navigator.of(context),
+        duration: Duration(milliseconds: 500),
+      ),
       context: context,
       builder: (BuildContext context) {
         return SingleChildScrollView(
@@ -105,7 +112,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Service Type:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -113,12 +120,12 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                           selectedService.isNotEmpty ? selectedService : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                   ),
-
                   //Service Date
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -128,7 +135,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Service Date:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -138,6 +145,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -153,7 +161,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Start Time:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -163,6 +171,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            color: AppColors.success,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -178,7 +188,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'End Time:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -188,6 +198,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            color: AppColors.error,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -202,7 +214,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         Text(
                           'Location:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -212,6 +224,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -227,7 +240,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         child: Text(
                           'Notes:',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -240,6 +253,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : 'N/A',
                           style: TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -325,6 +339,36 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestLocationPermission();
+    });
+  }
+
+  @override
+  void dispose() {
+    _locationFocusNode.dispose();
+    super.dispose();
+  }
+
+  Future<void> _requestLocationPermission() async {
+    if (await Permission.location.serviceStatus.isEnabled) {
+      // Location permission granted
+    } else {
+      var status = await Permission.locationWhenInUse.request();
+      if (status.isGranted) {
+        // Location permission granted
+      } else if (status.isDenied) {
+        // Handle permission denied
+      } else if (status.isPermanentlyDenied) {
+        // Open app settings if permission is permanently denied
+        openAppSettings();
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -332,7 +376,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.bookAppointment.toUpperCase(),
+          AppTexts.viewBookedAppointment.toUpperCase(),
           style: TextStyle(
             color: AppColors.white,
           ),
@@ -452,6 +496,42 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                             _showConfirmationModal(context);
                           },
                           child: Text(AppTexts.bookAppointment.toUpperCase()),
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppSizes.spaceBtwnInputFields,
+                      ),
+                      //View All Appointments
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            side: BorderSide(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/viewbookedappointment');
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "View All Appointments",
+                                style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                              Icon(
+                                Icons.file_copy,
+                                color: AppColors.primaryColor,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],

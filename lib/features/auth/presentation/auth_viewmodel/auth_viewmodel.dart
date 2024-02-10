@@ -1,3 +1,4 @@
+import 'package:age_care/core/common/widgets/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,13 +66,14 @@ class AuthViewModel extends StateNotifier<AuthState> {
       (success) {
         if (success) {
           EasyLoading.show(
-              status: 'Logging in...', maskType: EasyLoadingMaskType.black);
+            status: 'Please wait...',
+            maskType: EasyLoadingMaskType.black,
+          );
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
             EasyLoading.dismiss();
           });
         } else {
-          // Show error message using EasyLoading
           EasyLoading.showError('Invalid username or password',
               dismissOnTap: false);
         }

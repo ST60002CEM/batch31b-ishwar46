@@ -66,7 +66,6 @@ class AppTexts {
   static const String newsthree = '';
 
   //Appointment Page
-
   static const String appointmentPageTitle = 'Create Appointment';
   static const String appointmentPageSubTitle = 'All Appointments';
   static const String addAppointment = 'Add Appointment';
@@ -86,4 +85,10 @@ class AppTexts {
       'Please select your appointment type';
 
   static const String bookAppointment = 'Book Appointment';
+
+  //View Booked Appointment
+  static const String viewBookedAppointment = 'Booked Appointments';
+  static const String search = 'Search';
+  static const String serviceType = 'Service Type';
+  static const String searchAppointment = 'Search Appointment';
 }

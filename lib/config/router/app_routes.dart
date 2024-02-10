@@ -1,4 +1,5 @@
-import '../../features/appointment/presentation/view/appointment_view.dart';
+import '../../features/appointment/presentation/view/book_appointment/appointment_book_view.dart';
+import '../../features/appointment/presentation/view/view_appointment/view_appointment.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
@@ -20,6 +21,7 @@ class MyRoutes {
   static String preloginRoute = "/preloginpage";
   static String smoothpage = "/smoothpage";
   static String lightpage = "/lightpage";
+  static String viewbookedappointment = "/viewbookedappointment";
 
   static getApplicationRoute() {
     return {
@@ -31,6 +33,7 @@ class MyRoutes {
       onBoardingRoute: (context) => OnBoardingScreen(),
       staffDetailsRoute: (context) => AddStaffView(),
       preloginRoute: (context) => PreLoginPage(),
+      viewbookedappointment: (context) => ViewBookedAppointments(),
       //smoothpage: (context) => CarouselDemo(),
       // lightpage: (context) => AppointmentsPage(),
     };
