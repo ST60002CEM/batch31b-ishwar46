@@ -1,4 +1,6 @@
 PODS:
+  - babstrap_settings_screen (0.0.1):
+    - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -38,6 +40,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - babstrap_settings_screen (from `.symlinks/plugins/babstrap_settings_screen/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -59,6 +62,8 @@ SPEC REPOS:
     - ReachabilitySwift
 
 EXTERNAL SOURCES:
+  babstrap_settings_screen:
+    :path: ".symlinks/plugins/babstrap_settings_screen/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
@@ -89,6 +94,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  babstrap_settings_screen: 535097da0fa521a47fef6f6678ff2b464ee15937
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef

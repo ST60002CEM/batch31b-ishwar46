@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/image_strings.dart';
+import '../../../../core/common/provider/biometric_provider.dart';
 import '../widgets/biometric_button.dart';
 import '../widgets/login_button.dart';
 import '../widgets/services_card_widget.dart';
@@ -34,6 +35,7 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
+    final isBiometricVisible = ref.watch(biometricProvider);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: AppColors.primaryColor,
@@ -58,10 +60,14 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
               width: 20,
             ),
             //BioMetric
-            Biometric(),
-            SizedBox(
-              width: 15,
-            )
+            if (isBiometricVisible) ...[
+              Biometric(),
+              SizedBox(width: 15),
+            ],
+            // Biometric(),
+            // SizedBox(
+            //   width: 15,
+            // )
           ],
         ),
         body: SingleChildScrollView(

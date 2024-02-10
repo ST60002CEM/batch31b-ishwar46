@@ -132,6 +132,19 @@ class _LoginViewState extends ConsumerState<LoginView> {
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 40,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: AppColors.primaryColor,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.preloginRoute);
+            },
+          ),
+        ),
+        backgroundColor: Colors.white.withOpacity(.94),
         body: SingleChildScrollView(
           child: Padding(
             padding: AppSpacingStyle.paddingWithAppBarHeight,

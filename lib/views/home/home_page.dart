@@ -218,6 +218,7 @@ class _HomePageState extends State<HomePage> {
         );
       },
       child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 15, 75, 125),
           title: const Text("WELCOME"),
@@ -361,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       child: const CardWidget(
                         title: "Health Care",
-                        routeName: "/appointment",
+                        routeName: "/settings",
                         imagePath: "assets/img/doctor.png",
                       ),
                     ),
@@ -502,7 +503,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.person),
-              title: const Text("Profile"),
+              title: const Text("Settings"),
               selectedColor: AppColors.secondaryColor,
             ),
           ],
