@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../config/constants/app_colors.dart';
 
@@ -26,21 +27,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     return Scaffold(
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.primaryColor,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_new,
-              color: AppColors.primaryColor,
+              color: AppColors.whiteText,
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           title: Text(
-            "Settings",
-            style: const TextStyle(
-              color: AppColors.primaryColor,
-              fontWeight: FontWeight.bold,
+            "Settings".toUpperCase(),
+            style: GoogleFonts.montserrat(
+              color: AppColors.whiteText,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
           centerTitle: true,
@@ -52,7 +54,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           child: ListView(
             children: [
               SimpleUserCard(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/userprofile');
+                },
                 userName: "Ishwar Chaudhary",
                 userProfilePic: AssetImage("assets/img/user.png"),
               ),

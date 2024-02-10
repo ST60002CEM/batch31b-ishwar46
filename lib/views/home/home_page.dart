@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 15, 75, 125),
-          title: const Text("WELCOME"),
+          title: const Text("Age Care"),
           titleTextStyle: GoogleFonts.montserrat(
             color: AppColors.whiteText,
             fontSize: 15,
@@ -229,11 +229,16 @@ class _HomePageState extends State<HomePage> {
           ),
           elevation: 0,
           centerTitle: true,
-          // leading: IconButton(
-          //   icon: const Icon(Icons.menu),
-          //   onPressed: () {
-          //   },
-          // ),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu, color: AppColors.whiteText),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
           actions: [
             IconButton(
               color: AppColors.whiteText,
@@ -277,6 +282,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
+                    clipBehavior: Clip.antiAlias,
                     aspectRatio: 10.0,
                     height: 120.0,
                     autoPlay: true,
@@ -293,11 +299,14 @@ class _HomePageState extends State<HomePage> {
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: const BoxDecoration(
-                            color: Colors.amber,
+                            color: Colors.transparent,
                           ),
-                          child: Image.asset(
-                            i,
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              i,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         );
                       },
@@ -366,16 +375,6 @@ class _HomePageState extends State<HomePage> {
                         imagePath: "assets/img/doctor.png",
                       ),
                     ),
-                    // Container(
-                    //   width: 100,
-                    //   height: 110,
-                    //   padding: const EdgeInsets.all(10),
-                    //   child: const CardWidget(
-                    //     title: "Carer Details",
-                    //     routeName: "/appointment",
-                    //     iconData: Icons.policy,
-                    //   ),
-                    // ),
                     Container(
                       width: 120,
                       height: 140,
@@ -421,56 +420,47 @@ class _HomePageState extends State<HomePage> {
                         imagePath: "assets/img/grandma.png",
                       ),
                     ),
-                    // Container(
-                    //   width: 100,
-                    //   height: 110,
-                    //   padding: const EdgeInsets.all(10),
-                    //   child: const CardWidget(
-                    //     title: "Hospital",
-                    //     routeName: "/appointment",
-                    //     iconData: Icons.local_hospital,
-                    //   ),
-                    // ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Reminders",
-                          style: GoogleFonts.montserrat(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: TextButton(
-                          onPressed: () {
-                            EasyLoading.showInfo(
-                                "This feature is coming soon.");
-                          },
-                          child: Text(
-                            "View All",
-                            style: GoogleFonts.montserrat(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
+                // Container(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Container(
+                //         padding: const EdgeInsets.all(10),
+                //         child: Text(
+                //           "Reminders",
+                //           style: GoogleFonts.montserrat(
+                //             color: Theme.of(context).primaryColor,
+                //             fontSize: 15,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //         ),
+                //       ),
+                //       Container(
+                //         padding: const EdgeInsets.all(10),
+                //         child: TextButton(
+                //           onPressed: () {
+                //             EasyLoading.showInfo(
+                //                 "This feature is coming soon.");
+                //           },
+                //           child: Text(
+                //             "View All",
+                //             style: GoogleFonts.montserrat(
+                //               color: Theme.of(context).primaryColor,
+                //               fontSize: 12,
+                //               fontWeight: FontWeight.w600,
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 //For Reminders
-                CustomListTileWidget(tileDataList: tileDataList),
+                //CustomListTileWidget(tileDataList: tileDataList),
 
                 // Container(
                 //   child: Text(

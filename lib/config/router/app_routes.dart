@@ -7,6 +7,7 @@ import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 import '../../features/staffs/presentation/view/staff_details_view.dart';
+import '../../features/useprofile/presentation/view/user_profile.dart';
 import '../../views/home/home_page.dart';
 
 class MyRoutes {
@@ -24,6 +25,7 @@ class MyRoutes {
   static String lightpage = "/lightpage";
   static String settingsRoute = "/settings";
   static String viewbookedappointment = "/viewbookedappointment";
+  static String userProfileRoute = "/userprofile";
 
   static getApplicationRoute() {
     return {
@@ -37,6 +39,7 @@ class MyRoutes {
       preloginRoute: (context) => PreLoginPage(),
       viewbookedappointment: (context) => ViewBookedAppointments(),
       settingsRoute: (context) => SettingsView(),
+      userProfileRoute: (context) => UserProfileView(),
       //smoothpage: (context) => CarouselDemo(),
       // lightpage: (context) => AppointmentsPage(),
     };

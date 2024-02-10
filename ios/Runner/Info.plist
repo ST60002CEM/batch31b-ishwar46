@@ -22,6 +22,14 @@
         <string>appTrackingTransparency</string>
         <!-- Permissions lists ends here -->
 
+		<key>NSPhotoLibraryUsageDescription</key>
+<string>Our application needs access to your photo gallery for profile picture selection.</string>
+<key>NSCameraUsageDescription</key>
+<string>Our application needs access to your camera for taking profile pictures.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Our application needs access to your microphone if you want to record videos.</string>
+
+
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
