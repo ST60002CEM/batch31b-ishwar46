@@ -18,8 +18,8 @@ class CardWidgetPre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      surfaceTintColor: AppColors.white,
-      //color: AppColors.white,
+      surfaceTintColor: AppColors.whiteText,
+      color: AppColors.whiteText,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

@@ -111,7 +111,7 @@ class _UserProfileViewState extends ConsumerState<UserProfileView> {
                   radius: 50,
                   backgroundImage: _image != null
                       ? FileImage(_image!)
-                      : AssetImage("assets/images/user.png") as ImageProvider,
+                      : AssetImage("assets/img/user.png") as ImageProvider,
                 ),
                 Container(
                   padding: EdgeInsets.all(5),
