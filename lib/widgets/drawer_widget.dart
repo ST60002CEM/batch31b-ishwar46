@@ -1,6 +1,7 @@
+import 'package:age_care/config/router/app_routes.dart';
 import 'package:flutter/material.dart';
-
-import '../config/constants/app_colors.dart';
+import 'package:flutter/services.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -8,113 +9,90 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
               children: [
-                CircleAvatar(
-                  //networkImage: ,
-                  backgroundImage: NetworkImage(
-                      'https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/398680604_3685629311712485_2859045614418116677_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=DeLUWMtI0f8AX8Ye6U3&_nc_ht=scontent.fktm8-1.fna&oh=00_AfCKshbA_C81hrCsQK6-9IR4j-utdoPCIeBmeaD5Jlr2Uw&oe=657866AF'),
-                  radius: 30,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Hello! Ishwar',
-                  style: TextStyle(
-                    color: AppColors.whiteText,
-                    fontSize: 18,
+                UserAccountsDrawerHeader(
+                  accountName: Text(
+                    "Ishwar",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  accountEmail: Text("ishwar@example.com"),
+                  currentAccountPicture: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/userprofile');
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/img/user.png"),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Theme.of(context).primaryColor,
+                        Theme.of(context).primaryColorDark
+                      ],
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                    ),
                   ),
                 ),
+                _createDrawerItem(
+                    icon: Iconsax.home5, text: 'Home', context: context),
+                _customDivider(),
+                _createDrawerItem(
+                    icon: Iconsax.user, text: 'Care Givers', context: context),
+                _customDivider(),
+                _createDrawerItem(
+                    icon: Iconsax.calendar, text: 'Events', context: context),
+                _customDivider(),
+                _createDrawerItem(
+                    icon: Iconsax.call, text: 'Emergency', context: context),
+                _customDivider(),
+                _createDrawerItem(
+                    icon: Iconsax.setting_2,
+                    text: 'Settings',
+                    context: context),
               ],
             ),
           ),
+          // Footer section
           ListTile(
-            leading: Icon(Icons.home, color: Theme.of(context).iconTheme.color),
-            title: Text(
-              'Home',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 18,
-              ),
-            ),
+            leading: Icon(Iconsax.logout),
+            title: Text('Log out'),
             onTap: () {
-              // Handle Item 1 tap
+              // Handle log out
             },
-          ),
-          ListTile(
-            leading:
-                Icon(Icons.settings, color: Theme.of(context).iconTheme.color),
-            title: Text(
-              'Item 2',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
-            title: Text(
-              'Item 3',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading:
-                Icon(Icons.email, color: Theme.of(context).iconTheme.color),
-            title: Text(
-              'Item 4',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading:
-                Icon(Icons.phone, color: Theme.of(context).iconTheme.color),
-            title: Text(
-              'Item 5',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {},
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: DropdownButton<String>(
-              hint: Text(
-                'Appointments',
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyLarge!.color,
-                  fontSize: 18,
-                ),
-              ),
-              items: <String>['Day', 'Evening', 'Night'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {},
-            ),
           ),
         ],
       ),
+    );
+  }
+
+  Divider _customDivider() =>
+      Divider(indent: 16, endIndent: 16, color: Colors.grey.shade400);
+
+  ListTile _createDrawerItem({
+    required IconData icon,
+    required String text,
+    required BuildContext context,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: Theme.of(context).iconTheme.color),
+      title: Text(
+        text,
+        style: TextStyle(
+          fontSize: 18,
+          color: Theme.of(context).textTheme.bodyMedium!.color,
+        ),
+      ),
+      onTap: () {
+        // Handle navigation
+        HapticFeedback.lightImpact();
+      },
     );
   }
 }

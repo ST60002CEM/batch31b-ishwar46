@@ -64,10 +64,6 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
               Biometric(),
               SizedBox(width: 15),
             ],
-            // Biometric(),
-            // SizedBox(
-            //   width: 15,
-            // )
           ],
         ),
         body: SingleChildScrollView(
