@@ -25,13 +25,23 @@ void main() async {
 
 void configLoading() {
   EasyLoading.instance
-    ..indicatorType = EasyLoadingIndicatorType.circle
+    ..indicatorType = EasyLoadingIndicatorType.ripple
     ..loadingStyle = EasyLoadingStyle.custom
     ..backgroundColor = AppColors.black
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.clear
     ..maskColor = Colors.transparent
+    ..errorWidget = const Icon(
+      Icons.error,
+      color: Colors.red,
+      size: 40,
+    )
+    ..successWidget = const Icon(
+      Icons.check,
+      color: Colors.green,
+      size: 40,
+    )
     ..indicatorColor = AppColors.whiteText
     ..textStyle = const TextStyle(
       color: Colors.white,
@@ -41,5 +51,5 @@ void configLoading() {
     ..indicatorSize = 30.0
     ..dismissOnTap = false
     ..animationStyle = EasyLoadingAnimationStyle.scale
-    ..toastPosition = EasyLoadingToastPosition.bottom;
+    ..toastPosition = EasyLoadingToastPosition.top;
 }

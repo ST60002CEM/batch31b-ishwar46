@@ -65,7 +65,10 @@ class AuthViewModel extends StateNotifier<AuthState> {
       },
       (success) {
         if (success) {
-          CustomLoaderWidget();
+          EasyLoading.show(
+            status: 'Please wait...',
+            maskType: EasyLoadingMaskType.black,
+          );
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
             EasyLoading.dismiss();

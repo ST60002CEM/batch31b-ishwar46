@@ -88,4 +88,7 @@ class AppTexts {
 
   //View Booked Appointment
   static const String viewBookedAppointment = 'Booked Appointments';
+  static const String search = 'Search';
+  static const String serviceType = 'Service Type';
+  static const String searchAppointment = 'Search Appointment';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
@@ -15,6 +16,7 @@ class ViewBookedAppointments extends ConsumerStatefulWidget {
 
 class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +45,36 @@ class _ViewBookedAppointmentsState
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            //Search bar
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                autocorrect: true,
+                controller: searchController,
+                decoration: InputDecoration(
+                  labelText: AppTexts.searchAppointment,
+                  hintText: AppTexts.search,
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+
             //listview
             Expanded(
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: 3,
                 itemBuilder: (context, index) {
                   return AppointmentCard(
                     serviceType: 'Service 1',
-                    serviceDate: 'Service Date',
-                    startTime: 'Start Time',
-                    endTime: 'End Time',
-                    location: 'Location',
+                    serviceDate: '2024-02-06',
+                    startTime: '11:00',
+                    endTime: '13:00',
+                    location: 'Kathmandu Nepal',
                     notes: 'Please bring your ID card for verification',
-                    status: 1,
+                    status: 2,
                   );
                 },
               ),

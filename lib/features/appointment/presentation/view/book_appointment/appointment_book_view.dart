@@ -3,7 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import 'package:chip_list/chip_list.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
@@ -24,6 +24,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   final _endTimeController = TextEditingController();
   final _locationController = TextEditingController();
   final _notesController = TextEditingController();
+  final _locationFocusNode = FocusNode();
 
   List<String> services = ['Service 1', 'Service 2', 'Service 3'];
   String selectedService = '';
@@ -125,7 +126,6 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                       ],
                     ),
                   ),
-
                   //Service Date
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -336,6 +336,36 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestLocationPermission();
+    });
+  }
+
+  @override
+  void dispose() {
+    _locationFocusNode.dispose();
+    super.dispose();
+  }
+
+  Future<void> _requestLocationPermission() async {
+    if (await Permission.location.serviceStatus.isEnabled) {
+      // Location permission granted
+    } else {
+      var status = await Permission.locationWhenInUse.request();
+      if (status.isGranted) {
+        // Location permission granted
+      } else if (status.isDenied) {
+        // Handle permission denied
+      } else if (status.isPermanentlyDenied) {
+        // Open app settings if permission is permanently denied
+        openAppSettings();
+      }
+    }
   }
 
   @override

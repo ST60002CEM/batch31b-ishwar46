@@ -25,199 +25,114 @@ class AppointmentCard extends StatefulWidget {
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
-  bool isModalSheetVisible = false;
-
   @override
   Widget build(BuildContext context) {
-    void _showModalSheet() {
-      showModalBottomSheet(
-          enableDrag: true,
-          showDragHandle: false,
-          transitionAnimationController: AnimationController(
-            vsync: Navigator.of(context),
-            duration: Duration(milliseconds: 500),
-          ),
-          context: context,
-          builder: (builder) {
-            return Container(
-              height: 300,
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.whiteText,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Notes',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 5.0),
-                      Text(
-                        widget.notes,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Cancel Appointment'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.error,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          });
-    }
-
-    SizedBox gap = SizedBox(height: 5.0);
+    SizedBox gap = SizedBox(height: 8.0);
     Color statusColor = _getStatusColor();
+    String statusText = _getStatusText();
 
     return GestureDetector(
-      onTap: () {
-        _showModalSheet();
-      },
+      onTap: _showModalSheet,
       child: Card(
         surfaceTintColor: AppColors.whiteText,
         color: AppColors.whiteText,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-          side: BorderSide(
-            color: statusColor,
-            width: 1.0,
-          ),
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: statusColor, width: 2.0),
         ),
-        margin: EdgeInsets.all(8.0),
+        elevation: 4,
+        margin: EdgeInsets.all(10.0),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 8.0,
-                height: 110,
-                color: statusColor,
-              ),
-              SizedBox(width: 8.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      Text(
-                        'Service Type:',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Text(
-                        widget.serviceType,
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            color: AppColors.primaryColor),
-                      ),
-                    ]),
-                    gap,
-                    Row(
-                      children: [
-                        Text(
-                          'Service Date:',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          widget.serviceDate,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.primaryColor),
-                        ),
-                      ],
-                    ),
-                    gap,
-                    Row(
-                      children: [
-                        Text(
-                          'Start Time:',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primaryColor),
-                        ),
-                        Spacer(),
-                        Text(
-                          widget.startTime,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.success),
-                        ),
-                      ],
-                    ),
-                    gap,
-                    Row(
-                      children: [
-                        Text(
-                          'End Time:',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          widget.endTime,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.error),
-                        ),
-                      ],
-                    ),
-                    gap,
-                    Row(
-                      children: [
-                        Text(
-                          'Location:',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          widget.location,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.primaryColor),
-                        ),
-                      ],
-                    ),
-                    gap,
-                  ],
-                ),
-              ),
-            ],
+          padding: const EdgeInsets.all(12.0),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildStatusIndicator(statusColor),
+                SizedBox(width: 12.0),
+                Expanded(child: _buildAppointmentDetails(gap, statusText)),
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildStatusIndicator(Color statusColor) {
+    return Container(
+      width: 10.0,
+      decoration: BoxDecoration(
+        color: statusColor,
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+    );
+  }
+
+  Widget _buildAppointmentDetails(SizedBox gap, String statusText) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildDetailRow(
+            'Service Type:', widget.serviceType, AppColors.primaryColor),
+        gap,
+        _buildDetailRow(
+            'Service Date:', widget.serviceDate, AppColors.primaryColor),
+        gap,
+        _buildDetailRow('Time:', '${widget.startTime} - ${widget.endTime}',
+            AppColors.primaryColor),
+        gap,
+        _buildDetailRow('Location:', widget.location, AppColors.primaryColor),
+        gap,
+        Text('Status: $statusText',
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: _getStatusColor())),
+      ],
+    );
+  }
+
+  Widget _buildDetailRow(String title, String value, Color valueColor) {
+    return Row(
+      children: [
+        Text(title,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        Spacer(),
+        Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
+      ],
+    );
+  }
+
+  void _showModalSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => _buildModalContent(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      isScrollControlled: true,
+    );
+  }
+
+  Widget _buildModalContent() {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('Notes: ${widget.notes}', style: TextStyle(fontSize: 14)),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Close'),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.error,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
+          ),
+        ],
       ),
     );
   }
@@ -231,9 +146,9 @@ class _AppointmentCardState extends State<AppointmentCard> {
       case 2:
         return AppColors.warning; // Pending
       case 3:
-        return AppColors.success; // Completed
+        return AppColors.info; // Completed
       default:
-        return AppColors.whiteText;
+        return AppColors.grey;
     }
   }
 
@@ -248,7 +163,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
       case 3:
         return 'Completed';
       default:
-        return '';
+        return 'Unknown';
     }
   }
 }

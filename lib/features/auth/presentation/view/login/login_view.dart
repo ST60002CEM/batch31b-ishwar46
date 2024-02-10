@@ -4,11 +4,13 @@ import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/features/auth/presentation/auth_viewmodel/auth_viewmodel.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:light/light.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/image_strings.dart';
 import '../../../../../config/constants/text_strings.dart';
@@ -124,152 +126,152 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-    // final authState = ref.watch(authViewModelProvider);
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   if (authState.showMessage! && authState.error != null) {
-    //     showSnackBar(message: 'Invalid Credentials', context: context);
-    //     ref.read(authViewModelProvider.notifier).reset();
-    //   }
-    // });
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: AppSpacingStyle.paddingWithAppBarHeight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            //Logo
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Hero(
-                    tag: 'logo',
-                    child: Image(
-                      height: 150,
-                      image: AssetImage(dark
-                          ? AppImages.darkAppLogo
-                          : AppImages.lightAppLogo),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: AppColors.primaryColor,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: AppSpacingStyle.paddingWithAppBarHeight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //Logo
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: 'logo',
+                      child: Image(
+                        height: 150,
+                        image: AssetImage(dark
+                            ? AppImages.darkAppLogo
+                            : AppImages.lightAppLogo),
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppSizes.spaceBtwItems,
+                    ),
+                    Text(AppTexts.loginPageTitle,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    SizedBox(height: AppSizes.sm),
+                    Text(AppTexts.loginPageSubTitle,
+                        style: Theme.of(context).textTheme.bodyMedium),
+                  ],
+                ),
+                const SizedBox(height: AppSizes.spaceBtwnInputFields),
+                Form(
+                  key: _key,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSizes.spaceBtwSections),
+                    child: Column(
+                      children: [
+                        //Username
+                        TextFormField(
+                          key: const ValueKey('username'),
+                          controller: _usernameController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Iconsax.user),
+                            labelText: AppTexts.username,
+                            hintText: AppTexts.usernamehint,
+                          ),
+                          validator: (value) {
+                            final error = AppValidator.validateUsername(value);
+                            return error;
+                          },
+                        ),
+                        const SizedBox(height: AppSizes.spaceBtwnInputFields),
+                        //Password
+                        TextFormField(
+                          key: const ValueKey('password'),
+                          controller: _passwordController,
+                          obscureText: isObscure,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Iconsax.password_check),
+                            labelText: AppTexts.password,
+                            hintText: AppTexts.passwordHint,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isObscure ? Iconsax.eye : Iconsax.eye_slash,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isObscure = !isObscure;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            final error = AppValidator.validatePassword(value);
+                            return error;
+                          },
+                        ),
+
+                        const SizedBox(
+                            height: AppSizes.spaceBtwnInputFields / 2),
+
+                        //Remeber Me and Forget Password
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Checkbox(
+                              value: rememberMe ?? false,
+                              onChanged: (value) {
+                                _onRememberMeChanged(value!);
+                              },
+                            ),
+                            Text(AppTexts.remeberme),
+                            Spacer(),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(AppTexts.forgetPassword),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
+
+                        //Sign in Button
+                        Hero(
+                          tag: 'loginbutton',
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                              onPressed: () async {
+                                if (_key.currentState!.validate()) {
+                                  await ref
+                                      .read(authViewModelProvider.notifier)
+                                      .loginStaff(_usernameController.text,
+                                          _passwordController.text, context);
+                                }
+                              },
+                              child: Text(AppTexts.login.toUpperCase()),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: AppSizes.spaceBtwSections,
+                        ),
+
+                        InkWell(
+                          key: const ValueKey('registerButton'),
+                          onTap: () {
+                            Navigator.pushNamed(context, MyRoutes.signupRoute);
+                          },
+                          child: Text(AppTexts.register),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: AppSizes.spaceBtwItems,
-                  ),
-                  Text(AppTexts.loginPageTitle,
-                      style: Theme.of(context).textTheme.headlineMedium),
-                  SizedBox(height: AppSizes.sm),
-                  Text(AppTexts.loginPageSubTitle,
-                      style: Theme.of(context).textTheme.bodyMedium),
-                ],
-              ),
-              const SizedBox(height: AppSizes.spaceBtwnInputFields),
-              Form(
-                key: _key,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: AppSizes.spaceBtwSections),
-                  child: Column(
-                    children: [
-                      //Username
-                      TextFormField(
-                        key: const ValueKey('username'),
-                        controller: _usernameController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Iconsax.user),
-                          labelText: AppTexts.username,
-                          hintText: AppTexts.usernamehint,
-                        ),
-                        validator: (value) {
-                          final error = AppValidator.validateUsername(value);
-                          return error;
-                        },
-                      ),
-                      const SizedBox(height: AppSizes.spaceBtwnInputFields),
-                      //Password
-                      TextFormField(
-                        key: const ValueKey('password'),
-                        controller: _passwordController,
-                        obscureText: isObscure,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Iconsax.password_check),
-                          labelText: AppTexts.password,
-                          hintText: AppTexts.passwordHint,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isObscure ? Iconsax.eye : Iconsax.eye_slash,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                isObscure = !isObscure;
-                              });
-                            },
-                          ),
-                        ),
-                        validator: (value) {
-                          final error = AppValidator.validatePassword(value);
-                          return error;
-                        },
-                      ),
-
-                      const SizedBox(height: AppSizes.spaceBtwnInputFields / 2),
-
-                      //Remeber Me and Forget Password
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Checkbox(
-                            value: rememberMe ?? false,
-                            onChanged: (value) {
-                              _onRememberMeChanged(value!);
-                            },
-                          ),
-                          Text(AppTexts.remeberme),
-                          Spacer(),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(AppTexts.forgetPassword),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: AppSizes.spaceBtwSections),
-
-                      //Sign in Button
-                      Hero(
-                        tag: 'loginbutton',
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                            onPressed: () async {
-                              if (_key.currentState!.validate()) {
-                                await ref
-                                    .read(authViewModelProvider.notifier)
-                                    .loginStaff(_usernameController.text,
-                                        _passwordController.text, context);
-                              }
-                            },
-                            child: Text(AppTexts.login.toUpperCase()),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: AppSizes.spaceBtwSections,
-                      ),
-
-                      InkWell(
-                        key: const ValueKey('registerButton'),
-                        onTap: () {
-                          Navigator.pushNamed(context, MyRoutes.signupRoute);
-                        },
-                        child: Text(AppTexts.register),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
