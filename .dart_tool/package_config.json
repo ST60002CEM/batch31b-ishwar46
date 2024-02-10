@@ -56,6 +56,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "babstrap_settings_screen",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/babstrap_settings_screen-0.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "bcrypt",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/bcrypt-1.1.3",
       "packageUri": "lib/",
@@ -1166,7 +1172,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-09T04:58:28.044995Z",
+  "generated": "2024-02-10T10:23:49.112402Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

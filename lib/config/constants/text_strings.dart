@@ -68,16 +68,7 @@ class AppTexts {
   //Appointment Page
   static const String appointmentPageTitle = 'Create Appointment';
   static const String appointmentPageSubTitle = 'All Appointments';
-  static const String addAppointment = 'Add Appointment';
-  static const String appointmentDetails = 'Appointment Details';
-  static const String appointmentDate = 'Appointment Date';
-  static const String appointmentTime = 'Appointment Time';
-  static const String appointmentType = 'Appointment Type';
-  static const String appointmentStatus = 'Appointment Status';
-  static const String appointmentNote = 'Appointment Note';
-  static const String appointmentNoteHint = 'Enter your note here';
-  static const String appointmentTypeHint = 'Select your appointment type';
-  static const String appointmentStatusHint = 'Select your appointment status';
+
   static const String appointmentDateHint = 'Select your appointment date';
   static const String appointmentTimeHint = 'Select your appointment time';
   static const String appointmentNoteError = 'Please enter your note';
@@ -91,4 +82,9 @@ class AppTexts {
   static const String search = 'Search';
   static const String serviceType = 'Service Type';
   static const String searchAppointment = 'Search Appointment';
+
+  //User Profile Page
+  static const String userProfilePageTitle = 'User Profile';
+  static const String userProfilePageSubTitle = 'Your Profile';
+  static const String editProfile = 'Edit Profile';
 }
