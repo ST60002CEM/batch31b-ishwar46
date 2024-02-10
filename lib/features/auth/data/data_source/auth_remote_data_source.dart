@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
+import '../../../../core/common/provider/secure_storage_provide.dart';
 import '../../../../core/failure/failure.dart';
 import '../../../../core/network/http_service.dart';
 import '../../domain/entity/auth_entity.dart';
@@ -13,13 +14,15 @@ import '../model/auth_api_model.dart';
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>(
   (ref) => AuthRemoteDataSource(
     ref.read(httpServiceProvider),
+    ref.read(flutterSecureStorageProvider),
   ),
 );
 
 class AuthRemoteDataSource {
   final Dio dio;
+  final FlutterSecureStorage secureStorage;
 
-  AuthRemoteDataSource(this.dio);
+  AuthRemoteDataSource(this.dio, this.secureStorage);
 
   Future<Either<Failure, bool>> registerStaff(AuthEntity staff) async {
     try {
@@ -75,15 +78,12 @@ class AuthRemoteDataSource {
         if (responseData != null && responseData.containsKey('token')) {
           final token = responseData['token'];
 
+          await secureStorage.write(key: "authToken", value: token);
+
           final decodedToken = JwtDecoder.decode(token);
           final tokenUsername = decodedToken['username'];
 
-          print('Decoded Token: $decodedToken');
-          print('Provided Username: $username');
-          print('Token Username: $tokenUsername');
-
           if (username == tokenUsername) {
-            await storeToken(token);
             return const Right(true);
           } else {
             return Left(
@@ -121,23 +121,5 @@ class AuthRemoteDataSource {
     } catch (e) {
       return Left(Failure(error: "An unexpected error occurred."));
     }
-  }
-
-  FlutterSecureStorage _storage = FlutterSecureStorage();
-
-  Future<void> storeToken(String token) async {
-    await _storage.write(key: 'token', value: token);
-  }
-
-  Future<String?> getToken() async {
-    return await _storage.read(key: 'token');
-  }
-
-  Future<bool> isTokenValid(String token) async {
-    final decodedToken = JwtDecoder.decode(token);
-    final expiryDate = DateTime.fromMillisecondsSinceEpoch(
-      decodedToken['exp'] * 1000,
-    );
-    return DateTime.now().isBefore(expiryDate);
   }
 }
