@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:age_care/config/router/app_routes.dart';
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late ShakeDetector shakeDetector;
   int shakeCount = 0;
+  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
   // late final Map<String, dynamic> userData;
   //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
@@ -177,46 +180,23 @@ class _HomePageState extends State<HomePage> {
       desc: "Are you sure you want to logout?",
       btnCancelOnPress: () {},
       btnOkOnPress: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginView(),
-          ),
-        );
+        logout(); // Call logout function here
       },
     ).show();
+  }
+
+  //Logout and Delete Token
+  Future<void> logout() async {
+    await secureStorage.delete(key: "authToken");
+
+    Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
   }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (_) async {
-        final shouldPop = await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Logout'),
-            content: Text('Do you want to logout?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginView()),
-                  );
-
-                  Navigator.of(context).pop(true);
-                },
-                child: Text('Yes'),
-              ),
-            ],
-          ),
-        );
-      },
+      onPopInvoked: (_) async {},
       child: Scaffold(
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
@@ -249,27 +229,7 @@ class _HomePageState extends State<HomePage> {
               color: AppColors.whiteText,
               icon: const Icon(Icons.logout),
               onPressed: () {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.warning,
-                  animType: AnimType.bottomSlide,
-                  title: "Logout",
-                  titleTextStyle: GoogleFonts.montserrat(
-                    color: AppColors.primaryColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  desc: "Are you sure you want to logout?",
-                  btnCancelOnPress: () {},
-                  btnOkOnPress: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginView(),
-                      ),
-                    );
-                  },
-                ).show();
+                _showLogoutDialog();
               },
             ),
           ],
