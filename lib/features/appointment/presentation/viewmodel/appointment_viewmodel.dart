@@ -19,12 +19,17 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
 
   Future<void> bookAppointment(
       AppointmentEntity entity, BuildContext context) async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true); // Set isLoading to true initially
     final result = await _bookAppointmentUseCase.bookAppointment(entity);
-    state = state.copyWith(isLoading: false);
+    state = state.copyWith(
+        isLoading: false); // Set isLoading to false after operation completes
 
     result.fold((failure) {
-      state = state.copyWith(error: failure.error);
+      state = state.copyWith(error: failure.error); // Set the error message
+      // Show error message using EasyLoading
+      EasyLoading.showError('Failed to Book Appointment');
+      // Dismiss EasyLoading
+      EasyLoading.dismiss();
     }, (success) {
       if (success) {
         // Show success message using EasyLoading
@@ -38,7 +43,10 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
           EasyLoading.dismiss();
         });
       } else {
+        // This block will execute if the appointment creation failed but didn't return an error
         EasyLoading.showError('Failed to Book Appointment');
+        // Dismiss EasyLoading
+        EasyLoading.dismiss();
       }
     });
   }

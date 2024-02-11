@@ -286,8 +286,9 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               : () async {
                                   if (_key.currentState?.validate() ?? false) {
                                     EasyLoading.show(
-                                        status: 'Booking Appointment...',
-                                        maskType: EasyLoadingMaskType.black);
+                                      status: 'Booking Appointment...',
+                                      maskType: EasyLoadingMaskType.black,
+                                    );
 
                                     final entity = AppointmentEntity(
                                       serviceType: selectedService,
@@ -298,6 +299,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                                       notes: _notesController.text,
                                     );
 
+                                    // Only trigger the booking appointment process if all fields are filled
                                     ref
                                         .read(appointmentViewModelProvider
                                             .notifier)
