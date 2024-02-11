@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:age_care/features/useprofile/presentation/widgets/profile_details_card.dart';
+import 'package:age_care/features/userprofile/presentation/widgets/profile_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

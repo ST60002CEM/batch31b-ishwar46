@@ -7,7 +7,7 @@ import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 import '../../features/staffs/presentation/view/staff_details_view.dart';
-import '../../features/useprofile/presentation/view/user_profile.dart';
+import '../../features/userprofile/presentation/view/user_profile.dart';
 import '../../views/home/home_page.dart';
 
 class MyRoutes {
