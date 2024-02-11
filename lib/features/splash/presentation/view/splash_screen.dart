@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null && !JwtDecoder.isExpired(token)) {
       Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
     } else {
-      Navigator.pushReplacementNamed(context, MyRoutes.onBoardingRoute);
+      Navigator.pushReplacementNamed(context, MyRoutes.preloginRoute);
     }
   }
 
