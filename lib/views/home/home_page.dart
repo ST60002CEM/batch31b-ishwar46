@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shake/shake.dart';
-
+import 'package:iconsax/iconsax.dart';
 import '../../config/constants/app_colors.dart';
 
 import '../../features/auth/presentation/view/login/login_view.dart';
@@ -92,6 +92,50 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  void _showBottomDrawer(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          builder: (_, controller) {
+            return Container(
+              child: Column(
+                children: [
+                  UserAccountsDrawerHeader(
+                    margin: EdgeInsets.zero,
+                    accountName: Text("Ishwar",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    accountEmail: Text("ishwar@example.com"),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundImage: AssetImage("assets/img/user.png"),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      controller: controller,
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text('Item $index'),
+                          onTap: () {},
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   void _showEmergencyBottomSheet() {
@@ -223,7 +267,9 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               color: AppColors.whiteText,
               icon: const Icon(Icons.notifications),
-              onPressed: () {},
+              onPressed: () {
+                _showBottomDrawer(context);
+              },
             ),
             IconButton(
               color: AppColors.whiteText,
