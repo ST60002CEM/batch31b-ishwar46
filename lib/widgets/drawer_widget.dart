@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         Theme.of(context).primaryColor,
-                        Theme.of(context).primaryColorDark
+                        Theme.of(context).primaryColorDark,
                       ],
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
@@ -42,16 +42,12 @@ class MyDrawer extends StatelessWidget {
                 ),
                 _createDrawerItem(
                     icon: Iconsax.home5, text: 'Home', context: context),
-                _customDivider(),
                 _createDrawerItem(
                     icon: Iconsax.user, text: 'Care Givers', context: context),
-                _customDivider(),
                 _createDrawerItem(
                     icon: Iconsax.calendar, text: 'Events', context: context),
-                _customDivider(),
                 _createDrawerItem(
                     icon: Iconsax.call, text: 'Emergency', context: context),
-                _customDivider(),
                 _createDrawerItem(
                     icon: Iconsax.setting_2,
                     text: 'Settings',
@@ -59,7 +55,6 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // Footer section
           ListTile(
             leading: Icon(Iconsax.logout),
             title: Text('Log out'),
@@ -72,26 +67,25 @@ class MyDrawer extends StatelessWidget {
     );
   }
 
-  Divider _customDivider() =>
-      Divider(indent: 16, endIndent: 16, color: Colors.grey.shade400);
-
   ListTile _createDrawerItem({
     required IconData icon,
     required String text,
     required BuildContext context,
   }) {
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(
+          horizontal: 20.0, vertical: 8.0), // Increased padding
       leading: Icon(icon, color: Theme.of(context).iconTheme.color),
       title: Text(
         text,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           color: Theme.of(context).textTheme.bodyMedium!.color,
         ),
       ),
       onTap: () {
-        // Handle navigation
         HapticFeedback.lightImpact();
+        // Handle navigation
       },
     );
   }
