@@ -113,22 +113,26 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     ),
                     title: 'Biometric Login',
                     subtitle: "Login with fingerprint or face id",
-                    trailing: Consumer(builder: (context, ref, _) {
-                      final isBiometricEnabled = ref.watch(biometricProvider);
-                      return Switch.adaptive(
-                        value: isBiometricEnabled,
-                        onChanged: (value) {
-                          ref.read(biometricProvider.notifier).state = value;
+                    trailing: Consumer(
+                      builder: (context, ref, _) {
+                        final isBiometricEnabled = ref.watch(biometricProvider);
+                        return Switch.adaptive(
+                          value: isBiometricEnabled,
+                          onChanged: (value) async {
+                            ref
+                                .read(biometricProvider.notifier)
+                                .setBiometricEnabled(value);
 
-                          EasyLoading.showSuccess(
-                            isBiometricEnabled
-                                ? "Biometric login disabled"
-                                : "Biometric login enabled",
-                            duration: const Duration(seconds: 2),
-                          );
-                        },
-                      );
-                    }),
+                            EasyLoading.showSuccess(
+                              value
+                                  ? "Biometric login enabled"
+                                  : "Biometric login disabled",
+                              duration: const Duration(seconds: 2),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
