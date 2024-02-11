@@ -8,6 +8,8 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../domain/entity/appointment_entity.dart';
+import '../../viewmodel/appointment_viewmodel.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({Key? key}) : super(key: key);
@@ -281,19 +283,26 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         child: ElevatedButton(
                           onPressed: isAnyFieldNull
                               ? null
-                              : () {
-                                  EasyLoading.show(
-                                    status: 'Booking Appointment...',
-                                    maskType: EasyLoadingMaskType.black,
-                                  );
-                                  Future.delayed(Duration(seconds: 2), () {
-                                    EasyLoading.dismiss();
-                                    EasyLoading.showSuccess(
-                                      'Appointment Booked Successfully!',
+                              : () async {
+                                  if (_key.currentState?.validate() ?? false) {
+                                    EasyLoading.show(
+                                        status: 'Booking Appointment...',
+                                        maskType: EasyLoadingMaskType.black);
+
+                                    final entity = AppointmentEntity(
+                                      serviceType: selectedService,
+                                      serviceDate: _serviceDateController.text,
+                                      startTime: _startTimeController.text,
+                                      endTime: _endTimeController.text,
+                                      location: _locationController.text,
+                                      notes: _notesController.text,
                                     );
-                                    Navigator.pushReplacementNamed(
-                                        context, '/home');
-                                  });
+
+                                    ref
+                                        .read(appointmentViewModelProvider
+                                            .notifier)
+                                        .bookAppointment(entity, context);
+                                  }
                                 },
                           child: Text('Confirm'),
                           style: ElevatedButton.styleFrom(
@@ -401,6 +410,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                   child: Column(
                     children: [
                       DropdownButtonFormField(
+                        key: ValueKey('serviceType'),
                         decoration: InputDecoration(
                           labelText: 'Service Type',
                           hintText: 'Select Service',
@@ -421,6 +431,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                       ),
                       const SizedBox(height: AppSizes.spaceBtwnInputFields),
                       TextFormField(
+                        key: ValueKey('serviceDate'),
                         controller: _serviceDateController,
                         decoration: InputDecoration(
                           labelText: 'Service Date',
@@ -435,6 +446,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         height: AppSizes.spaceBtwnInputFields,
                       ),
                       TextFormField(
+                        key: ValueKey('startTime'),
                         controller: _startTimeController,
                         decoration: InputDecoration(
                           labelText: 'Start Time',
@@ -449,6 +461,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         height: AppSizes.spaceBtwnInputFields,
                       ),
                       TextFormField(
+                        key: ValueKey('endTime'),
                         controller: _endTimeController,
                         decoration: InputDecoration(
                           labelText: 'End Time',
@@ -463,6 +476,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         height: AppSizes.spaceBtwnInputFields,
                       ),
                       TextFormField(
+                        key: ValueKey('location'),
                         controller: _locationController,
                         decoration: InputDecoration(
                           labelText: 'Location',
@@ -474,6 +488,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                         height: AppSizes.spaceBtwnInputFields,
                       ),
                       TextFormField(
+                        key: ValueKey('notes'),
                         controller: _notesController,
                         decoration: InputDecoration(
                           labelText: 'Notes',
