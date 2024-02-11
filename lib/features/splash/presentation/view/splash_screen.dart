@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:age_care/utils/size_config.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/router/app_routes.dart';
@@ -16,14 +18,23 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SizeConfig screen = SizeConfig();
+  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+
   @override
   void initState() {
-    //Wait for 2 seconds and then navigate to next page
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, MyRoutes.onBoardingRoute);
-    });
-
     super.initState();
+    checkTokenValidity();
+  }
+
+  void checkTokenValidity() async {
+    final String? token = await secureStorage.read(key: "authToken");
+
+    await Future.delayed(const Duration(seconds: 3));
+    if (token != null && !JwtDecoder.isExpired(token)) {
+      Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+    } else {
+      Navigator.pushReplacementNamed(context, MyRoutes.onBoardingRoute);
+    }
   }
 
   @override
