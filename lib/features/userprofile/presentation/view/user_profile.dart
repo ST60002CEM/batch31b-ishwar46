@@ -121,8 +121,8 @@ class _UserProfileViewState extends ConsumerState<UserProfileView> {
                   ),
                   child: InkWell(
                     onTap: () async {
-                      await requestPermissions(); // Ensure permissions before editing
-                      await _pickImage(); // Adding await here
+                      await requestPermissions();
+                      await _pickImage();
                     },
                     child: Icon(
                       Icons.edit,
