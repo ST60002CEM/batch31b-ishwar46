@@ -19,7 +19,7 @@ class UserProfileViewModel extends StateNotifier<UserProfileState> {
   Future getUserProfile() async {
     state = state.copyWith(isLoading: true, errorMessage: '');
     try {
-      final result = await getUserProfileUsecase.getUserProfile('userId');
+      final result = await getUserProfileUsecase.getUserProfile(userId);
       result.fold(
         (failure) => state =
             state.copyWith(isLoading: false, errorMessage: failure.error),

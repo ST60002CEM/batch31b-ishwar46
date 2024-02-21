@@ -3,6 +3,7 @@ import '../../features/appointment/presentation/view/view_appointment/view_appoi
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
+import '../../features/otp/sendOTP.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
@@ -26,6 +27,7 @@ class MyRoutes {
   static String settingsRoute = "/settings";
   static String viewbookedappointment = "/viewbookedappointment";
   static String userProfileRoute = "/userprofile";
+  static String sendOTP = "/sendotp";
 
   static getApplicationRoute() {
     return {
@@ -40,6 +42,7 @@ class MyRoutes {
       viewbookedappointment: (context) => ViewBookedAppointments(),
       settingsRoute: (context) => SettingsView(),
       userProfileRoute: (context) => UserProfilePage(),
+      sendOTP: (context) => SendOTPPage(),
       //smoothpage: (context) => CarouselDemo(),
       // lightpage: (context) => AppointmentsPage(),
     };

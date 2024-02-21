@@ -24,12 +24,11 @@ class UserProfileRemoteDataSource {
 
   UserProfileRemoteDataSource({required this.dio, required this.secureStorage});
 
-  Future<Either<Failure, List<UserEntity>>> getUserProfile(userId) async {
+  Future<Either<Failure, List<UserEntity>>> getUserProfile() async {
     try {
       final token = await secureStorage.read(key: "authToken");
 
       print("Token: $token");
-
       if (token == null) {
         return Left(Failure(error: "Token not found"));
       }
@@ -42,19 +41,17 @@ class UserProfileRemoteDataSource {
         return Left(Failure(error: "Token not found"));
       }
 
-      var response = await dio.get('${ApiEndpoints.profile}/$userId',
+      var response = await dio.get('${ApiEndpoints.profile}/$tokenUserId',
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
       print("Response: ${response.data}");
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.data != null) {
         GetUserProfileDTO userAddDTO =
             GetUserProfileDTO.fromJson(response.data);
-
         List<UserEntity> userList = userAddDTO.data
             .map((user) => UserProfileAPIModel.toEntity(user))
             .toList();
-
         return Right(userList);
       } else {
         return Left(Failure(
@@ -63,8 +60,12 @@ class UserProfileRemoteDataSource {
       }
     } on DioException catch (e) {
       print("DioException: $e");
-      print("Error Response: ${e.response}");
-      return Left(Failure(error: e.response?.data['message']));
+      if (e.response != null && e.response!.data != null) {
+        print("Error Response: ${e.response!.data}");
+        return Left(Failure(error: e.response!.data['message']));
+      } else {
+        return Left(Failure(error: "Unknown error occurred"));
+      }
     }
   }
 }

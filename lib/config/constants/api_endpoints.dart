@@ -12,7 +12,7 @@ class ApiEndpoints {
 
   //From WIFI or IP config
   //DishHome Fiber
-  //static const String baseUrl = "http://192.168.18.236:5000/";
+  static const String baseUrl = "http://192.168.18.236:5000/";
   //static const String baseUrl = "http://172.25.10.25:5000/";
 
   //Home 192.168.10.70
@@ -21,7 +21,7 @@ class ApiEndpoints {
   //static const String baseUrl = "http://172.20.10.2:5000/";
 
   //Rainwars
-  static const String baseUrl = "http://192.168.1.68:5000/";
+  //static const String baseUrl = "http://192.168.1.68:5000/";
 
   // Auth Routes
   static const String login = "api/users/login";
@@ -41,4 +41,8 @@ class ApiEndpoints {
   static const String profile = "api/users/profile";
 
   static const limitPage = 10;
+
+  //send OTP
+
+  static const String sendOTP = "api/send-otp";
 }
