@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -299,7 +300,6 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                                       notes: _notesController.text,
                                     );
 
-                                   
                                     ref
                                         .read(appointmentViewModelProvider
                                             .notifier)
@@ -387,8 +387,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.viewBookedAppointment.toUpperCase(),
-          style: TextStyle(
+          AppTexts.viewBookedAppointment,
+          style: GoogleFonts.montserrat(
             color: AppColors.white,
           ),
         ),
@@ -402,7 +402,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Form(

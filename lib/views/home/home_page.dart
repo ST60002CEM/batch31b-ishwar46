@@ -245,18 +245,18 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 15, 75, 125),
-          title: const Text("Age Care"),
+          title: const Text("Welcome! Dinesh"),
           titleTextStyle: GoogleFonts.montserrat(
             color: AppColors.whiteText,
             fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
           elevation: 0,
-          centerTitle: true,
+          //centerTitle: true,
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: const Icon(Icons.menu, color: AppColors.whiteText),
+                icon: const Icon(Iconsax.menu, color: AppColors.whiteText),
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
                 },

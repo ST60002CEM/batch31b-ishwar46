@@ -39,7 +39,7 @@ class MyRoutes {
       preloginRoute: (context) => PreLoginPage(),
       viewbookedappointment: (context) => ViewBookedAppointments(),
       settingsRoute: (context) => SettingsView(),
-      userProfileRoute: (context) => UserProfileView(),
+      userProfileRoute: (context) => UserProfilePage(),
       //smoothpage: (context) => CarouselDemo(),
       // lightpage: (context) => AppointmentsPage(),
     };
