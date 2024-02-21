@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../config/constants/api_endpoints.dart';
 import '../../../../core/failure/failure.dart';
@@ -27,18 +28,40 @@ class AppointmentRemoteDataSource {
   Future<Either<Failure, bool>> createAppointment(
       AppointmentEntity appointment) async {
     try {
+      // Retrieve token from secure storage
+      final token = await secureStorage.read(key: "authToken");
+      if (token == null) {
+        return Left(Failure(error: "Token not found"));
+      }
+
+      // Decode token to extract userId
+      final decodedToken = JwtDecoder.decode(token);
+      final userId = decodedToken['id'];
+      if (userId == null) {
+        return Left(Failure(error: "User ID not found in token"));
+      }
+
       AppointmentApiModel apiModel =
           AppointmentApiModel.fromEntity(appointment);
 
-      Response response = await dio.post(ApiEndpoints.bookappointment, data: {
-        "serviceType": apiModel.serviceType,
-        "serviceDate": apiModel.serviceDate,
-        "startTime": apiModel.startTime,
-        "endTime": apiModel.endTime,
-        "location": apiModel.location,
-        "notes": apiModel.notes,
-      });
-      if (response.statusCode == 200) {
+      Response response = await dio.post(
+        ApiEndpoints.bookappointment,
+        data: {
+          "userId": userId,
+          "serviceType": apiModel.serviceType,
+          "serviceDate": apiModel.serviceDate,
+          "startTime": apiModel.startTime,
+          "endTime": apiModel.endTime,
+          "location": apiModel.location,
+          "notes": apiModel.notes,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {
         return Left(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../config/constants/app_colors.dart';
@@ -10,6 +9,7 @@ import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({Key? key}) : super(key: key);
@@ -42,7 +42,9 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       lastDate: DateTime(2100),
     );
     if (selectDate != null) {
-      final formattedDate = DateFormat('yyyy-MM-dd').format(selectDate);
+      final formattedDate =
+          DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(selectDate);
+      print('Formatted Date: $formattedDate');
       controller.text = formattedDate;
     }
   }
@@ -56,9 +58,10 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       initialTime: TimeOfDay.now(),
     );
     if (selectTime != null) {
-      final formattedTime = DateFormat('HH:mm').format(
+      final formattedTime = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(
         DateTime(2024, 1, 1, selectTime.hour, selectTime.minute),
       );
+      print('Formatted Time: $formattedTime');
       controller.text = formattedTime;
     }
   }
@@ -284,12 +287,10 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                           onPressed: isAnyFieldNull
                               ? null
                               : () async {
-                                  if (_key.currentState?.validate() ?? false) {
-                                    EasyLoading.show(
-                                      status: 'Booking Appointment...',
-                                      maskType: EasyLoadingMaskType.black,
-                                    );
-
+                                  final formState = _key.currentState;
+                                  if (formState != null &&
+                                      formState.mounted &&
+                                      formState.validate()) {
                                     final entity = AppointmentEntity(
                                       serviceType: selectedService,
                                       serviceDate: _serviceDateController.text,
@@ -298,8 +299,6 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                                       location: _locationController.text,
                                       notes: _notesController.text,
                                     );
-
-                                   
                                     ref
                                         .read(appointmentViewModelProvider
                                             .notifier)
@@ -381,6 +380,13 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ref.watch(appointmentViewModelProvider).showMessage!) {
+        EasyLoading.showSuccess('Appointment Booked Successfully',
+            dismissOnTap: false);
+        ref.read(appointmentViewModelProvider.notifier).resetMessage(false);
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

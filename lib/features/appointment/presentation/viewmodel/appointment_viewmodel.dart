@@ -19,35 +19,35 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
 
   Future<void> bookAppointment(
       AppointmentEntity entity, BuildContext context) async {
-    state = state.copyWith(isLoading: true); // Set isLoading to true initially
+    state = state.copyWith(isLoading: true);
     final result = await _bookAppointmentUseCase.bookAppointment(entity);
-    state = state.copyWith(
-        isLoading: false); // Set isLoading to false after operation completes
+    state = state.copyWith(isLoading: false);
 
-    result.fold((failure) {
-      state = state.copyWith(error: failure.error); // Set the error message
-      // Show error message using EasyLoading
-      EasyLoading.showError('Failed to Book Appointment');
-      // Dismiss EasyLoading
-      EasyLoading.dismiss();
-    }, (success) {
-      if (success) {
-        // Show success message using EasyLoading
+    result.fold(
+      (failure) {
+        EasyLoading.showError('Failed to Book Appointment: ${failure.error}');
+      },
+      (success) {
         EasyLoading.showSuccess('Appointment Booked Successfully',
             dismissOnTap: false);
-        // Trigger navigation after delay
+        state = state.copyWith(showMessage: true);
         Future.delayed(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(
               context, MyRoutes.viewbookedappointment);
-          // Dismiss EasyLoading after navigation
-          EasyLoading.dismiss();
         });
-      } else {
-        // This block will execute if the appointment creation failed but didn't return an error
-        EasyLoading.showError('Failed to Book Appointment');
-        // Dismiss EasyLoading
-        EasyLoading.dismiss();
-      }
-    });
+      },
+    );
+  }
+
+  void reset() {
+    state = state.copyWith(
+      isLoading: false,
+      error: null,
+      showMessage: false,
+    );
+  }
+
+  void resetMessage(bool value) {
+    state = state.copyWith(showMessage: value);
   }
 }
