@@ -8,7 +8,8 @@ class AppointmentCard extends StatefulWidget {
   final String endTime;
   final String location;
   final String notes;
-  final int status;
+  final String? status;
+  final String? ticketnumber;
 
   AppointmentCard({
     required this.serviceType,
@@ -17,7 +18,8 @@ class AppointmentCard extends StatefulWidget {
     required this.endTime,
     required this.location,
     required this.notes,
-    required this.status,
+    this.status,
+    this.ticketnumber,
   });
 
   @override
@@ -84,11 +86,17 @@ class _AppointmentCardState extends State<AppointmentCard> {
         gap,
         _buildDetailRow('Location:', widget.location, AppColors.primaryColor),
         gap,
-        Text('Status: $statusText',
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: _getStatusColor())),
+        Text(
+          'Status: $statusText',
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: _getStatusColor()),
+        ),
+        gap,
+        if (widget.ticketnumber != null)
+          _buildDetailRow(
+              'Ticket Number:', widget.ticketnumber!, AppColors.primaryColor),
       ],
     );
   }
@@ -139,28 +147,28 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   Color _getStatusColor() {
     switch (widget.status) {
-      case 0:
+      case 'cancelled':
         return AppColors.error; // Cancelled
-      case 1:
+      case 'booked':
         return AppColors.success; // Booked
-      case 2:
+      case 'pending':
         return AppColors.warning; // Pending
-      case 3:
+      case 'completed':
         return AppColors.info; // Completed
       default:
-        return AppColors.grey;
+        return AppColors.grey; // Default color for unknown status
     }
   }
 
   String _getStatusText() {
     switch (widget.status) {
-      case 0:
+      case 'cancelled':
         return 'Cancelled';
-      case 1:
+      case 'booked':
         return 'Booked';
-      case 2:
+      case 'pending':
         return 'Pending';
-      case 3:
+      case 'completed':
         return 'Completed';
       default:
         return 'Unknown';
