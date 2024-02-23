@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class HelperFunctions {
+  static Future<String?> getUsernameFromToken() async {
+    final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+    final token = await secureStorage.read(key: "authToken");
+    if (token != null) {
+      final decodedToken = JwtDecoder.decode(token);
+      return decodedToken['username'];
+    }
+    return null;
+  }
+
+  static Future<bool> isAdmin() async {
+    final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+    final token = await secureStorage.read(key: "authToken");
+    if (token != null) {
+      try {
+        final decodedToken = JwtDecoder.decode(token);
+        if (decodedToken.containsKey('isAdmin')) {
+          final isAdmin = decodedToken['isAdmin'];
+          if (isAdmin is String && isAdmin.toLowerCase() == 'true') {
+            return true;
+          }
+        }
+      } catch (e) {
+        print('Error decoding token: $e');
+      }
+    }
+    return false;
+  }
+
   static Color? getColor(String value) {
     if (value == 'Green') {
       return Colors.green;

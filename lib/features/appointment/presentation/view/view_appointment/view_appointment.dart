@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../../../core/utils/helpers/helper_functions.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
 import '../book_appointment/appointment_book_view.dart';
@@ -98,13 +99,26 @@ class _ViewBookedAppointmentsState
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryColor,
-        splashColor: AppColors.white,
-        onPressed: () {
-          Navigator.of(context).push(_createRoute());
+      floatingActionButton: FutureBuilder<bool>(
+        future: HelperFunctions.isAdmin(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else {
+            final bool isAdmin = snapshot.data ?? false;
+
+            return isAdmin
+                ? SizedBox()
+                : FloatingActionButton(
+                    backgroundColor: AppColors.primaryColor,
+                    splashColor: AppColors.white,
+                    onPressed: () {
+                      Navigator.of(context).push(_createRoute());
+                    },
+                    child: Icon(Icons.add, color: AppColors.white),
+                  );
+          }
         },
-        child: Icon(Icons.add, color: AppColors.white),
       ),
     );
   }
