@@ -5,6 +5,7 @@ import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
+import '../book_appointment/appointment_book_view.dart';
 
 class ViewBookedAppointments extends ConsumerStatefulWidget {
   const ViewBookedAppointments({Key? key}) : super(key: key);
@@ -97,6 +98,14 @@ class _ViewBookedAppointmentsState
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
+        splashColor: AppColors.white,
+        onPressed: () {
+          Navigator.of(context).push(_createRoute());
+        },
+        child: Icon(Icons.add, color: AppColors.white),
+      ),
     );
   }
 
@@ -107,4 +116,22 @@ class _ViewBookedAppointmentsState
 
     setState(() {});
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        AppointmentView(), // Replace AppointmentsPage with your desired destination page
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(-1.0, 0.0); // Slide from left
+      var end = Offset.zero;
+      var curve = Curves.easeInOut;
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
+      return SlideTransition(
+        position: offsetAnimation,
+        child: child,
+      );
+    },
+  );
 }
