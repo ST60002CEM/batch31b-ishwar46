@@ -393,7 +393,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.viewBookedAppointment.toUpperCase(),
+          AppTexts.bookAppointment.toUpperCase(),
           style: TextStyle(
             color: AppColors.white,
           ),

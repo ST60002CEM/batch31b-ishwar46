@@ -8,7 +8,8 @@ class AppointmentCard extends StatefulWidget {
   final String endTime;
   final String location;
   final String notes;
-  final int status;
+  final String? status;
+  final String? ticketnumber;
 
   AppointmentCard({
     required this.serviceType,
@@ -17,7 +18,8 @@ class AppointmentCard extends StatefulWidget {
     required this.endTime,
     required this.location,
     required this.notes,
-    required this.status,
+    this.status,
+    this.ticketnumber,
   });
 
   @override
@@ -61,7 +63,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   Widget _buildStatusIndicator(Color statusColor) {
     return Container(
-      width: 10.0,
+      width: 5.0,
       decoration: BoxDecoration(
         color: statusColor,
         borderRadius: BorderRadius.circular(4.0),
@@ -73,22 +75,42 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          padding: EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 72, 81, 90),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Text(
+            '${widget.ticketnumber}',
+            style: TextStyle(
+              fontSize: 8,
+              fontWeight: FontWeight.normal,
+              color: AppColors.whiteText,
+            ),
+          ),
+        ),
+        gap,
         _buildDetailRow(
             'Service Type:', widget.serviceType, AppColors.primaryColor),
         gap,
         _buildDetailRow(
             'Service Date:', widget.serviceDate, AppColors.primaryColor),
         gap,
-        _buildDetailRow('Time:', '${widget.startTime} - ${widget.endTime}',
-            AppColors.primaryColor),
+        _buildDetailRow(
+            'Start Time:', widget.startTime, AppColors.primaryColor),
+        gap,
+        _buildDetailRow('End Time:', widget.endTime, AppColors.primaryColor),
         gap,
         _buildDetailRow('Location:', widget.location, AppColors.primaryColor),
         gap,
-        Text('Status: $statusText',
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: _getStatusColor())),
+        Text(
+          'Status: $statusText',
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: _getStatusColor()),
+        ),
       ],
     );
   }
@@ -97,7 +119,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Row(
       children: [
         Text(title,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         Spacer(),
         Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
       ],
@@ -139,28 +161,28 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   Color _getStatusColor() {
     switch (widget.status) {
-      case 0:
+      case 'cancelled':
         return AppColors.error; // Cancelled
-      case 1:
+      case 'booked':
         return AppColors.success; // Booked
-      case 2:
+      case 'pending':
         return AppColors.warning; // Pending
-      case 3:
+      case 'completed':
         return AppColors.info; // Completed
       default:
-        return AppColors.grey;
+        return AppColors.grey; // Default color for unknown status
     }
   }
 
   String _getStatusText() {
     switch (widget.status) {
-      case 0:
+      case 'cancelled':
         return 'Cancelled';
-      case 1:
+      case 'booked':
         return 'Booked';
-      case 2:
+      case 'pending':
         return 'Pending';
-      case 3:
+      case 'completed':
         return 'Completed';
       default:
         return 'Unknown';

@@ -1,5 +1,6 @@
 import 'package:age_care/features/appointment/domain/entity/appointment_entity.dart';
 import 'package:age_care/features/appointment/domain/use_case/book_appointment_usecase.dart';
+import 'package:age_care/features/appointment/domain/use_case/view_appointment_usecase.dart';
 import 'package:age_care/features/appointment/presentation/state/appointment_state.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,13 +10,18 @@ import '../../../../config/router/app_routes.dart';
 
 final appointmentViewModelProvider =
     StateNotifierProvider<AppointmentViewModel, AppointmentState>((ref) =>
-        AppointmentViewModel(ref.read(bookAppointmentUseCaseProvider)));
+        AppointmentViewModel(ref.read(bookAppointmentUseCaseProvider),
+            ref.read(viewAppointmentUseCaseProvider)));
 
 class AppointmentViewModel extends StateNotifier<AppointmentState> {
   final BookAppointmentUseCase _bookAppointmentUseCase;
+  final ViewAppointmentUseCase _viewAppointmentUseCase;
 
-  AppointmentViewModel(this._bookAppointmentUseCase)
-      : super(AppointmentState.initial());
+  AppointmentViewModel(
+      this._bookAppointmentUseCase, this._viewAppointmentUseCase)
+      : super(AppointmentState.initial()) {
+    getAppointments();
+  }
 
   Future<void> bookAppointment(
       AppointmentEntity entity, BuildContext context) async {
@@ -35,6 +41,21 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
           Navigator.pushReplacementNamed(
               context, MyRoutes.viewbookedappointment);
         });
+      },
+    );
+  }
+
+  Future<void> getAppointments() async {
+    state = state.copyWith(isLoading: true);
+    final result = await _viewAppointmentUseCase.getAppointments();
+    state = state.copyWith(isLoading: false);
+
+    result.fold(
+      (failure) {
+        state = state.copyWith(error: failure.error);
+      },
+      (appointments) {
+        state = state.copyWith(appointments: appointments);
       },
     );
   }

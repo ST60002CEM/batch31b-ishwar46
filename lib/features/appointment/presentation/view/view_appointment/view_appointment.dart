@@ -3,23 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
 
 class ViewBookedAppointments extends ConsumerStatefulWidget {
-  const ViewBookedAppointments({super.key});
+  const ViewBookedAppointments({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ViewBookedAppointmentsState();
+  _ViewBookedAppointmentsState createState() => _ViewBookedAppointmentsState();
 }
 
 class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
   TextEditingController searchController = TextEditingController();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appbar
       appBar: AppBar(
         centerTitle: true,
         foregroundColor: AppColors.whiteText,
@@ -38,13 +39,10 @@ class _ViewBookedAppointmentsState
           icon: Icon(Icons.arrow_back_ios_new),
         ),
       ),
-      //body
-      //column
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            //Search bar
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -60,27 +58,53 @@ class _ViewBookedAppointmentsState
                 ),
               ),
             ),
-
-            //listview
             Expanded(
-              child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return AppointmentCard(
-                    serviceType: 'Service 1',
-                    serviceDate: '2024-02-06',
-                    startTime: '11:00',
-                    endTime: '13:00',
-                    location: 'Kathmandu Nepal',
-                    notes: 'Please bring your ID card for verification',
-                    status: 2,
-                  );
-                },
+              child: RefreshIndicator(
+                key: _refreshIndicatorKey,
+                onRefresh: _refreshData,
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final state = ref.watch(appointmentViewModelProvider);
+                    if (state.isLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state.error != null) {
+                      return Center(child: Text(state.error!));
+                    } else if (state.appointments == null ||
+                        state.appointments!.isEmpty) {
+                      return Center(child: Text('No appointments found'));
+                    } else {
+                      return ListView.builder(
+                        itemCount: state.appointments!.length,
+                        itemBuilder: (context, index) {
+                          final appointment = state.appointments![index];
+                          return AppointmentCard(
+                            serviceType: appointment.serviceType,
+                            serviceDate: appointment.serviceDate,
+                            startTime: appointment.startTime,
+                            endTime: appointment.endTime,
+                            location: appointment.location,
+                            notes: appointment.notes,
+                            ticketnumber: appointment.ticketNumber,
+                            status: appointment.status,
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _refreshData() async {
+    final state = ref.read(appointmentViewModelProvider);
+
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {});
   }
 }
