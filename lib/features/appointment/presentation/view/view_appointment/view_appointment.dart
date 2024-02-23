@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../core/utils/helpers/helper_functions.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
+import '../../widgets/no_data.dart';
 import '../book_appointment/appointment_book_view.dart';
 
 class ViewBookedAppointments extends ConsumerStatefulWidget {
@@ -73,7 +76,7 @@ class _ViewBookedAppointmentsState
                       return Center(child: Text(state.error!));
                     } else if (state.appointments == null ||
                         state.appointments!.isEmpty) {
-                      return Center(child: Text('No appointments found'));
+                      return NoData();
                     } else {
                       return ListView.builder(
                         itemCount: state.appointments!.length,
@@ -124,20 +127,16 @@ class _ViewBookedAppointmentsState
   }
 
   Future<void> _refreshData() async {
-    final state = ref.read(appointmentViewModelProvider);
-
-    await Future.delayed(Duration(seconds: 2));
-
-    setState(() {});
+    await ref.refresh(appointmentViewModelProvider);
+    EasyLoading.showSuccess('Appointments Refreshed');
   }
 }
 
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        AppointmentView(), // Replace AppointmentsPage with your desired destination page
+    pageBuilder: (context, animation, secondaryAnimation) => AppointmentView(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(-1.0, 0.0); // Slide from left
+      var begin = Offset(-1.0, 0.0);
       var end = Offset.zero;
       var curve = Curves.easeInOut;
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
