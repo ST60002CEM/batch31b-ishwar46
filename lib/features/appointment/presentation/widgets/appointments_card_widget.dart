@@ -63,7 +63,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   Widget _buildStatusIndicator(Color statusColor) {
     return Container(
-      width: 10.0,
+      width: 5.0,
       decoration: BoxDecoration(
         color: statusColor,
         borderRadius: BorderRadius.circular(4.0),
@@ -75,14 +75,32 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          padding: EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 72, 81, 90),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Text(
+            '${widget.ticketnumber}',
+            style: TextStyle(
+              fontSize: 8,
+              fontWeight: FontWeight.normal,
+              color: AppColors.whiteText,
+            ),
+          ),
+        ),
+        gap,
         _buildDetailRow(
             'Service Type:', widget.serviceType, AppColors.primaryColor),
         gap,
         _buildDetailRow(
             'Service Date:', widget.serviceDate, AppColors.primaryColor),
         gap,
-        _buildDetailRow('Time:', '${widget.startTime} - ${widget.endTime}',
-            AppColors.primaryColor),
+        _buildDetailRow(
+            'Start Time:', widget.startTime, AppColors.primaryColor),
+        gap,
+        _buildDetailRow('End Time:', widget.endTime, AppColors.primaryColor),
         gap,
         _buildDetailRow('Location:', widget.location, AppColors.primaryColor),
         gap,
@@ -93,10 +111,6 @@ class _AppointmentCardState extends State<AppointmentCard> {
               fontWeight: FontWeight.bold,
               color: _getStatusColor()),
         ),
-        gap,
-        if (widget.ticketnumber != null)
-          _buildDetailRow(
-              'Ticket Number:', widget.ticketnumber!, AppColors.primaryColor),
       ],
     );
   }
@@ -105,7 +119,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Row(
       children: [
         Text(title,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         Spacer(),
         Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
       ],

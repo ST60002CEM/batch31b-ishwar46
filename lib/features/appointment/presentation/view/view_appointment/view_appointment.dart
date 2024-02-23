@@ -16,6 +16,7 @@ class ViewBookedAppointments extends ConsumerStatefulWidget {
 class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
   TextEditingController searchController = TextEditingController();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -58,40 +59,52 @@ class _ViewBookedAppointmentsState
               ),
             ),
             Expanded(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final state = ref.watch(appointmentViewModelProvider);
-                  if (state.isLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (state.error != null) {
-                    return Center(child: Text(state.error!));
-                  } else if (state.appointments == null ||
-                      state.appointments!.isEmpty) {
-                    return Center(child: Text('No appointments found'));
-                  } else {
-                    return ListView.builder(
-                      itemCount: state.appointments!.length,
-                      itemBuilder: (context, index) {
-                        final appointment = state.appointments![index];
-                        return AppointmentCard(
-                          serviceType: appointment.serviceType,
-                          serviceDate: appointment.serviceDate,
-                          startTime: appointment.startTime,
-                          endTime: appointment.endTime,
-                          location: appointment.location,
-                          notes: appointment.notes,
-                          ticketnumber: appointment.ticketNumber,
-                          status: appointment.status,
-                        );
-                      },
-                    );
-                  }
-                },
+              child: RefreshIndicator(
+                key: _refreshIndicatorKey,
+                onRefresh: _refreshData,
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final state = ref.watch(appointmentViewModelProvider);
+                    if (state.isLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state.error != null) {
+                      return Center(child: Text(state.error!));
+                    } else if (state.appointments == null ||
+                        state.appointments!.isEmpty) {
+                      return Center(child: Text('No appointments found'));
+                    } else {
+                      return ListView.builder(
+                        itemCount: state.appointments!.length,
+                        itemBuilder: (context, index) {
+                          final appointment = state.appointments![index];
+                          return AppointmentCard(
+                            serviceType: appointment.serviceType,
+                            serviceDate: appointment.serviceDate,
+                            startTime: appointment.startTime,
+                            endTime: appointment.endTime,
+                            location: appointment.location,
+                            notes: appointment.notes,
+                            ticketnumber: appointment.ticketNumber,
+                            status: appointment.status,
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _refreshData() async {
+    final state = ref.read(appointmentViewModelProvider);
+
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {});
   }
 }

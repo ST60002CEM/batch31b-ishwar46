@@ -152,7 +152,7 @@ class AppointmentRemoteDataSource {
         // Check if "appointments" key exists in the response data
         if (response.data.containsKey("appointments")) {
           var appointmentJsonList =
-              response.data["appointments"] as List<dynamic>; // Explicit cast
+              response.data["appointments"] as List<dynamic>;
           List<AppointmentEntity> appointments = appointmentJsonList
               .map((appointment) =>
                   AppointmentApiModel.fromJson(appointment).toEntity())
