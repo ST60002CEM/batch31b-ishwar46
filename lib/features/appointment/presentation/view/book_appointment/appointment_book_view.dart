@@ -1,3 +1,5 @@
+import 'package:age_care/config/router/app_routes.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +9,9 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../../../core/common/provider/secure_storage_provide.dart';
+import '../../../../../core/network/http_service.dart';
+import '../../../data/data_source/appointment_remote_data_source.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import 'package:intl/intl.dart';
@@ -544,8 +549,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, '/viewbookedappointment');
+                            Navigator.pushNamed(
+                                context, MyRoutes.viewbookedappointment);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

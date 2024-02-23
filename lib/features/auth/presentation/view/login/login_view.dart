@@ -118,7 +118,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
   @override
   void dispose() {
-    // Dispose the sensor subscription when the widget is disposed
     _subscription?.cancel();
     super.dispose();
   }
