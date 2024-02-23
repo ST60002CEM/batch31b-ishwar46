@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:age_care/config/router/app_routes.dart';
+import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shake/shake.dart';
-import 'package:iconsax/iconsax.dart';
 import '../../config/constants/app_colors.dart';
 
 import '../../features/auth/presentation/view/login/login_view.dart';
@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   late ShakeDetector shakeDetector;
   int shakeCount = 0;
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  late String? username;
 
   // late final Map<String, dynamic> userData;
   //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
@@ -63,6 +64,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getUsername();
 
     // Initialize shake detector
     shakeDetector = ShakeDetector.autoStart(
@@ -81,6 +83,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<void> getUsername() async {
+    final username = await HelperFunctions.getUsernameFromToken();
+    setState(() {
+      this.username = username ?? 'Guest';
+    });
+  }
+
   @override
   void dispose() {
     // Dispose of shake detector when the widget is disposed
@@ -92,50 +101,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  void _showBottomDrawer(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return DraggableScrollableSheet(
-          expand: false,
-          builder: (_, controller) {
-            return Container(
-              child: Column(
-                children: [
-                  UserAccountsDrawerHeader(
-                    margin: EdgeInsets.zero,
-                    accountName: Text("Ishwar",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    accountEmail: Text("ishwar@example.com"),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundImage: AssetImage("assets/img/user.png"),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      controller: controller,
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text('Item $index'),
-                          onTap: () {},
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 
   void _showEmergencyBottomSheet() {
@@ -224,7 +189,7 @@ class _HomePageState extends State<HomePage> {
       desc: "Are you sure you want to logout?",
       btnCancelOnPress: () {},
       btnOkOnPress: () {
-        logout(); // Call logout function here
+        logout();
       },
     ).show();
   }
@@ -245,14 +210,13 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 15, 75, 125),
-          title: const Text("Age Care"),
+          title: Text('Welcome! $username'),
           titleTextStyle: GoogleFonts.montserrat(
             color: AppColors.whiteText,
             fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
           elevation: 0,
-          centerTitle: true,
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
@@ -268,7 +232,7 @@ class _HomePageState extends State<HomePage> {
               color: AppColors.whiteText,
               icon: const Icon(Icons.notifications),
               onPressed: () {
-                _showBottomDrawer(context);
+                EasyLoading.showInfo("No new notifications.");
               },
             ),
             IconButton(
