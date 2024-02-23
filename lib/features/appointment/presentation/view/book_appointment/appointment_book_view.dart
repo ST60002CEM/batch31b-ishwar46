@@ -28,7 +28,13 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   final _notesController = TextEditingController();
   final _locationFocusNode = FocusNode();
 
-  List<String> services = ['Service 1', 'Service 2', 'Service 3'];
+  List<String> services = [
+    'Nursing',
+    'Personal Care',
+    'Age Care',
+    'Therapy',
+    'Dental Care'
+  ];
   String selectedService = '';
 
   Future<void> _selectDate(
@@ -352,7 +358,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _requestLocationPermission();
+      //_requestLocationPermission();
     });
   }
 
@@ -408,7 +414,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
+          padding: const EdgeInsets.all(8.0),
+          // padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
           child: Column(
             children: [
               Form(

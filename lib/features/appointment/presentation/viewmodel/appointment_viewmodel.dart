@@ -33,10 +33,11 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
       (failure) {
         EasyLoading.showError('Failed to Book Appointment: ${failure.error}');
       },
-      (success) {
+      (success) async {
         EasyLoading.showSuccess('Appointment Booked Successfully',
             dismissOnTap: false);
         state = state.copyWith(showMessage: true);
+        await getAppointments();
         Future.delayed(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(
               context, MyRoutes.viewbookedappointment);
