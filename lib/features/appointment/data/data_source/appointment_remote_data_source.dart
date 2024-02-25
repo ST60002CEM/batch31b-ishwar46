@@ -126,6 +126,8 @@ class AppointmentRemoteDataSource {
   //     );
   //   }
   // }
+
+  //get appointments
   Future<Either<Failure, List<AppointmentEntity>>> getAppointments() async {
     try {
       final token = await secureStorage.read(key: "authToken");
@@ -166,6 +168,42 @@ class AppointmentRemoteDataSource {
             ),
           );
         }
+      } else {
+        return Left(
+          Failure(
+            error: response.data["message"],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(
+          error: e.error.toString(),
+          statusCode: e.response?.statusCode.toString() ?? '0',
+        ),
+      );
+    }
+  }
+
+  //Delete appointment
+  Future<Either<Failure, bool>> deleteAppointment(String appointmentId) async {
+    try {
+      final token = await secureStorage.read(key: "authToken");
+      if (token == null) {
+        return Left(Failure(error: "Token not found"));
+      }
+
+      Response response = await dio.delete(
+        "${ApiEndpoints.deleteAppointment}/$appointmentId",
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        return const Right(true);
       } else {
         return Left(
           Failure(

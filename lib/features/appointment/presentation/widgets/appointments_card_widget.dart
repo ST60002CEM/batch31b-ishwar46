@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../config/constants/app_colors.dart';
+import '../../../../core/utils/helpers/helper_functions.dart';
 
 class AppointmentCard extends StatefulWidget {
   final String serviceType;
@@ -10,6 +11,7 @@ class AppointmentCard extends StatefulWidget {
   final String notes;
   final String? status;
   final String? ticketnumber;
+  final VoidCallback onDelete;
 
   AppointmentCard({
     required this.serviceType,
@@ -20,6 +22,7 @@ class AppointmentCard extends StatefulWidget {
     required this.notes,
     this.status,
     this.ticketnumber,
+    required this.onDelete,
   });
 
   @override
@@ -27,6 +30,14 @@ class AppointmentCard extends StatefulWidget {
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
+  late Future<bool> _isAdminFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _isAdminFuture = HelperFunctions.isAdmin();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizedBox gap = SizedBox(height: 8.0);
@@ -52,7 +63,11 @@ class _AppointmentCardState extends State<AppointmentCard> {
               children: [
                 _buildStatusIndicator(statusColor),
                 SizedBox(width: 12.0),
-                Expanded(child: _buildAppointmentDetails(gap, statusText)),
+                Expanded(
+                    child: _buildAppointmentDetails(
+                  gap,
+                  statusText,
+                )),
               ],
             ),
           ),
@@ -75,20 +90,30 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.all(5.0),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 72, 81, 90),
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Text(
-            '${widget.ticketnumber}',
-            style: TextStyle(
-              fontSize: 8,
-              fontWeight: FontWeight.normal,
-              color: AppColors.whiteText,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 72, 81, 90),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Text(
+                '${widget.ticketnumber}',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  color: AppColors.whiteText,
+                ),
+              ),
             ),
-          ),
+            if (widget.status != 'completed' && widget.status != 'cancelled')
+              IconButton(
+                onPressed: widget.onDelete,
+                icon: Icon(Icons.delete, color: AppColors.error),
+              ),
+          ],
         ),
         gap,
         _buildDetailRow(

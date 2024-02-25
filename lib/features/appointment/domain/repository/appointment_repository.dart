@@ -10,6 +10,10 @@ final appointmentRepositoryProvider = Provider<IAppointmentRepository>(
 );
 
 abstract class IAppointmentRepository {
+  //Book Appointment
   Future<Either<Failure, bool>> bookAppointment(AppointmentEntity appointment);
+  //Get Appointments
   Future<Either<Failure, List<AppointmentEntity>>> getAppointments();
+  //Delete Appointment
+  Future<Either<Failure, bool>> deleteAppointment(String appointmentId);
 }
