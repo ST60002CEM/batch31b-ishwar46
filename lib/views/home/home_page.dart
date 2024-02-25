@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:age_care/config/router/app_routes.dart';
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
+import 'package:age_care/views/home/widgets/service_text.dart';
 import 'package:age_care/widgets/list_tile_widget.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,6 +19,8 @@ import '../../config/constants/app_colors.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../widgets/card_widget.dart';
 import '../../widgets/drawer_widget.dart';
+import 'widgets/service_row.dart';
+import 'widgets/service_row_two.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,32 +38,6 @@ class _HomePageState extends State<HomePage> {
 
   // late final Map<String, dynamic> userData;
   //bool isTokenExpired = _isTokenExpired(); // Check if the token is expired
-
-  List<ListTileData> tileDataList = [
-    ListTileData(
-        iconData: Icons.calendar_today,
-        title: "Medication for Diabetes",
-        subtitle: "Wed, Oct 2\n12:00 PM"),
-    ListTileData(
-        iconData: Icons.calendar_today,
-        title: "Short Walk",
-        subtitle: "Wed, Oct 2\n12:00 PM"),
-    ListTileData(
-        iconData: Icons.calendar_today,
-        title: "Short Walk",
-        subtitle: "Wed, Oct 2\n12:00 PM"),
-    ListTileData(
-        iconData: Icons.calendar_today,
-        title: "Short Walk",
-        subtitle: "Wed, Oct 2\n12:00 PM"),
-  ];
-
-  final List<Widget> _pages = [
-    HomePage(),
-    //AppointmentsPage(),
-    //EventsPage(),
-    //ProfilePage(),
-  ];
 
   @override
   void initState() {
@@ -287,187 +264,12 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Our Services",
-                          style: GoogleFonts.montserrat(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: TextButton(
-                          onPressed: () {
-                            EasyLoading.showInfo(
-                                "This feature is coming soon.");
-                          },
-                          child: Text(
-                            "View All",
-                            style: GoogleFonts.montserrat(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Appointment",
-                        routeName: "/appointmentspage",
-                        imagePath: "assets/img/appointment.png",
-                      ),
-                    ),
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Health Care",
-                        routeName: "/settings",
-                        imagePath: "assets/img/doctor.png",
-                      ),
-                    ),
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Staffs",
-                        routeName: "/staffdetails",
-                        imagePath: "assets/img/medicalteam.png",
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Emergency",
-                        routeName: "/hospital",
-                        imagePath: "assets/img/emergency.png",
-                      ),
-                    ),
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Hospital",
-                        routeName: "",
-                        imagePath: "assets/img/hospital.png",
-                      ),
-                    ),
-                    Container(
-                      width: 120,
-                      height: 140,
-                      padding: const EdgeInsets.all(10),
-                      child: const CardWidget(
-                        title: "Schedules",
-                        routeName: "",
-                        imagePath: "assets/img/grandma.png",
-                      ),
-                    ),
-                  ],
-                ),
-
-                // Container(
-                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Container(
-                //         padding: const EdgeInsets.all(10),
-                //         child: Text(
-                //           "Reminders",
-                //           style: GoogleFonts.montserrat(
-                //             color: Theme.of(context).primaryColor,
-                //             fontSize: 15,
-                //             fontWeight: FontWeight.w600,
-                //           ),
-                //         ),
-                //       ),
-                //       Container(
-                //         padding: const EdgeInsets.all(10),
-                //         child: TextButton(
-                //           onPressed: () {
-                //             EasyLoading.showInfo(
-                //                 "This feature is coming soon.");
-                //           },
-                //           child: Text(
-                //             "View All",
-                //             style: GoogleFonts.montserrat(
-                //               color: Theme.of(context).primaryColor,
-                //               fontSize: 12,
-                //               fontWeight: FontWeight.w600,
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                //For Reminders
-                //CustomListTileWidget(tileDataList: tileDataList),
-
-                // Container(
-                //   child: Text(
-                //     'First Name: ${userData['firstName']}',
-                //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                //   ),
-                // )
+                ServiceText(),
+                ServiceRow(),
+                ServiceRowTwo(),
               ],
             ),
           ),
-        ),
-        bottomNavigationBar: SalomonBottomBar(
-          unselectedItemColor: AppColors.primaryColor,
-          currentIndex: _currentIndex,
-          onTap: _onItemTapped,
-          items: [
-            SalomonBottomBarItem(
-                icon: const Icon(Icons.home),
-                title: const Text("Home"),
-                selectedColor: AppColors.secondaryColor),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.favorite_border),
-              title: const Text("Likes"),
-              selectedColor: AppColors.secondaryColor,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.calendar_month_sharp),
-              title: const Text("Events"),
-              selectedColor: AppColors.secondaryColor,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.person),
-              title: const Text("Settings"),
-              selectedColor: AppColors.secondaryColor,
-            ),
-          ],
         ),
       ),
     );
