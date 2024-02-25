@@ -4,6 +4,8 @@ import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
+import '../../features/sensors/gyro.dart';
+import '../../features/sensors/proximity.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 import '../../features/staffs/presentation/view/staff_details_view.dart';
@@ -26,6 +28,8 @@ class MyRoutes {
   static String settingsRoute = "/settings";
   static String viewbookedappointment = "/viewbookedappointment";
   static String userProfileRoute = "/userprofile";
+  static String gyroRoute = "/gyroRoute";
+  static String jokesRoute = "/jokesRoute";
 
   static getApplicationRoute() {
     return {
@@ -40,6 +44,8 @@ class MyRoutes {
       viewbookedappointment: (context) => ViewBookedAppointments(),
       settingsRoute: (context) => SettingsView(),
       userProfileRoute: (context) => UserProfileView(),
+      gyroRoute: (context) => GyroscopeScreen(),
+      jokesRoute: (context) => ProximityScreen(),
       //smoothpage: (context) => CarouselDemo(),
       // lightpage: (context) => AppointmentsPage(),
     };

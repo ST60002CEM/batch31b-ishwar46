@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shake/shake.dart';
@@ -220,7 +221,7 @@ class _HomePageState extends State<HomePage> {
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: const Icon(Icons.menu, color: AppColors.whiteText),
+                icon: const Icon(Iconsax.menu, color: AppColors.whiteText),
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
                 },
@@ -376,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       child: const CardWidget(
                         title: "Hospital",
-                        routeName: "/appointment",
+                        routeName: "",
                         imagePath: "assets/img/hospital.png",
                       ),
                     ),
@@ -386,7 +387,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       child: const CardWidget(
                         title: "Schedules",
-                        routeName: "/appointment",
+                        routeName: "",
                         imagePath: "assets/img/grandma.png",
                       ),
                     ),
