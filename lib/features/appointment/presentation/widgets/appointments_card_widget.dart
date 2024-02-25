@@ -10,6 +10,7 @@ class AppointmentCard extends StatefulWidget {
   final String notes;
   final String? status;
   final String? ticketnumber;
+  final VoidCallback onDelete;
 
   AppointmentCard({
     required this.serviceType,
@@ -20,6 +21,7 @@ class AppointmentCard extends StatefulWidget {
     required this.notes,
     this.status,
     this.ticketnumber,
+    required this.onDelete,
   });
 
   @override
@@ -52,7 +54,11 @@ class _AppointmentCardState extends State<AppointmentCard> {
               children: [
                 _buildStatusIndicator(statusColor),
                 SizedBox(width: 12.0),
-                Expanded(child: _buildAppointmentDetails(gap, statusText)),
+                Expanded(
+                    child: _buildAppointmentDetails(
+                  gap,
+                  statusText,
+                )),
               ],
             ),
           ),
@@ -90,7 +96,12 @@ class _AppointmentCardState extends State<AppointmentCard> {
             ),
           ),
         ),
-        gap,
+        if (widget.status != 'completed' && widget.status != 'cancelled')
+          IconButton(
+            onPressed: widget.onDelete,
+            icon: Icon(Icons.delete, color: AppColors.error),
+          ),
+        gap, // Remove the redundant gap here
         _buildDetailRow(
             'Service Type:', widget.serviceType, AppColors.primaryColor),
         gap,

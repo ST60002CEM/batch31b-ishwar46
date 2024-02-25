@@ -91,6 +91,12 @@ class _ViewBookedAppointmentsState
                             notes: appointment.notes,
                             ticketnumber: appointment.ticketNumber,
                             status: appointment.status,
+                            onDelete: () async {
+                              await ref
+                                  .read(appointmentViewModelProvider.notifier)
+                                  .deleteAppointment(
+                                      appointment.appointmentId!);
+                            },
                           );
                         },
                       );

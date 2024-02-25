@@ -7,18 +7,22 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../config/router/app_routes.dart';
+import '../../domain/use_case/delete_appointment_usecase.dart';
 
 final appointmentViewModelProvider =
     StateNotifierProvider<AppointmentViewModel, AppointmentState>((ref) =>
-        AppointmentViewModel(ref.read(bookAppointmentUseCaseProvider),
-            ref.read(viewAppointmentUseCaseProvider)));
+        AppointmentViewModel(
+            ref.read(bookAppointmentUseCaseProvider),
+            ref.read(viewAppointmentUseCaseProvider),
+            ref.read(deleteAppointmentUseCaseProvider)));
 
 class AppointmentViewModel extends StateNotifier<AppointmentState> {
   final BookAppointmentUseCase _bookAppointmentUseCase;
   final ViewAppointmentUseCase _viewAppointmentUseCase;
+  final DeleteAppointmentUseCase _deleteAppointmentUseCase;
 
-  AppointmentViewModel(
-      this._bookAppointmentUseCase, this._viewAppointmentUseCase)
+  AppointmentViewModel(this._bookAppointmentUseCase,
+      this._viewAppointmentUseCase, this._deleteAppointmentUseCase)
       : super(AppointmentState.initial()) {
     getAppointments();
   }
@@ -59,6 +63,21 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
         state = state.copyWith(appointments: appointments);
       },
     );
+  }
+
+  //DELETE APPOINTMENT
+  Future<void> deleteAppointment(String appointmentId) async {
+    state = state.copyWith(isLoading: true);
+    try {
+      await _deleteAppointmentUseCase.deleteAppointment(appointmentId);
+      state = state.copyWith(isLoading: false, showMessage: false);
+      EasyLoading.showSuccess('Appointment Deleted Successfully',
+          dismissOnTap: false);
+      await getAppointments();
+    } catch (error) {
+      EasyLoading.showError('Failed to Delete Appointment: $error');
+      state = state.copyWith(isLoading: false);
+    }
   }
 
   void reset() {
