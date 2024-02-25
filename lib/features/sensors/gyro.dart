@@ -19,6 +19,7 @@ class _GyroscopeScreenState extends State<GyroscopeScreen> {
   late DateTime _lastUpdate;
   late Color _circleColor;
   late Timer _colorChangeTimer;
+  late StreamSubscription<GyroscopeEvent> _gyroscopeSubscription;
 
   @override
   void initState() {
@@ -30,7 +31,7 @@ class _GyroscopeScreenState extends State<GyroscopeScreen> {
       _changeCircleColor();
     });
 
-    gyroscopeEvents.listen((GyroscopeEvent event) {
+    _gyroscopeSubscription = gyroscopeEvents.listen((GyroscopeEvent event) {
       _updatePosition(event);
     });
   }
@@ -64,6 +65,7 @@ class _GyroscopeScreenState extends State<GyroscopeScreen> {
 
   @override
   void dispose() {
+    _gyroscopeSubscription.cancel();
     _colorChangeTimer.cancel();
     super.dispose();
   }
