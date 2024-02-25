@@ -114,7 +114,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     icon: Iconsax.calendar,
                     text: 'Events',
                     context: context,
-                    routeName: "/"),
+                    routeName: "/eventRoute"),
                 _createDrawerItem(
                     icon: Iconsax.call,
                     text: 'Emergency',
