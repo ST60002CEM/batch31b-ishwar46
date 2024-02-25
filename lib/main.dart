@@ -13,6 +13,12 @@ void main() async {
     statusBarColor: AppColors.primaryColor,
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
   await HiveService().init();
 
   runApp(
