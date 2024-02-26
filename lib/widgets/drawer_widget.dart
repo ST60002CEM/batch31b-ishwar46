@@ -101,26 +101,42 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
                 _createDrawerItem(
-                    icon: Iconsax.home5, text: 'Home', context: context),
+                    icon: Iconsax.home5,
+                    text: 'Home',
+                    context: context,
+                    routeName: "/"),
                 _createDrawerItem(
-                    icon: Iconsax.user, text: 'Care Givers', context: context),
+                    icon: Iconsax.user,
+                    text: 'Care Givers',
+                    context: context,
+                    routeName: "/"),
                 _createDrawerItem(
-                    icon: Iconsax.calendar, text: 'Events', context: context),
+                    icon: Iconsax.calendar,
+                    text: 'Events',
+                    context: context,
+                    routeName: "/eventRoute"),
                 _createDrawerItem(
-                    icon: Iconsax.call, text: 'Emergency', context: context),
+                    icon: Iconsax.call,
+                    text: 'Emergency',
+                    context: context,
+                    routeName: "/"),
+                _createDrawerItem(
+                    icon: Iconsax.smileys,
+                    text: 'Random Joke',
+                    context: context,
+                    routeName: "/jokesRoute"),
                 _createDrawerItem(
                     icon: Iconsax.setting_2,
                     text: 'Settings',
-                    context: context),
+                    context: context,
+                    routeName: "/"),
+                _createDrawerItem(
+                    icon: Iconsax.devices,
+                    text: 'Sensors',
+                    context: context,
+                    routeName: "/gyroRoute"),
               ],
             ),
-          ),
-          ListTile(
-            leading: Icon(Iconsax.logout),
-            title: Text('Log out'),
-            onTap: () {
-              // Implement log out functionality
-            },
           ),
         ],
       ),
@@ -130,6 +146,7 @@ class _MyDrawerState extends State<MyDrawer> {
   ListTile _createDrawerItem({
     required IconData icon,
     required String text,
+    required String routeName,
     required BuildContext context,
   }) {
     return ListTile(
@@ -141,7 +158,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Theme.of(context).textTheme.bodyMedium!.color)),
       onTap: () {
         HapticFeedback.lightImpact();
-        // Implement navigation functionality
+        Navigator.pushNamed(context, routeName);
       },
     );
   }

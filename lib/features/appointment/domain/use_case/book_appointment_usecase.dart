@@ -11,12 +11,12 @@ final bookAppointmentUseCaseProvider =
 );
 
 class BookAppointmentUseCase {
-  final IAppointmentRepository appointmentRepository;
+  final IAppointmentRepository _appointmentRepository;
 
-  BookAppointmentUseCase(this.appointmentRepository);
+  BookAppointmentUseCase(this._appointmentRepository);
 
   Future<Either<Failure, bool>> bookAppointment(
       AppointmentEntity appointment) async {
-    return await appointmentRepository.createAppointment(appointment);
+    return await _appointmentRepository.bookAppointment(appointment);
   }
 }

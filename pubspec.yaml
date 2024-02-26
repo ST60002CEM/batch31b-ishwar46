@@ -87,6 +87,9 @@ dependencies:
   lottie: ^3.0.0
   chip_list: ^2.4.4+8
   babstrap_settings_screen: ^0.1.6
+  all_sensors2: ^1.0.1
+  table_calendar: ^3.0.9
+  sensors_plus: ^1.4.1
 
 dev_dependencies:
   flutter_test:

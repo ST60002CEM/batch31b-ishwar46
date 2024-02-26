@@ -87,4 +87,7 @@ class AppTexts {
   static const String userProfilePageTitle = 'User Profile';
   static const String userProfilePageSubTitle = 'Your Profile';
   static const String editProfile = 'Edit Profile';
+
+  //Sensors Joke Page
+  static const String sensorJokePageTitle = 'Random Joke';
 }

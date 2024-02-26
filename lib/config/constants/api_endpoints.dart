@@ -12,17 +12,16 @@ class ApiEndpoints {
 
   //From WIFI or IP config
   //DishHome Fiber
-  static const String baseUrl = "http://192.168.18.236:5000/";
+  //static const String baseUrl = "http://192.168.18.236:5000/";
   //static const String baseUrl = "http://172.25.10.25:5000/";
 
   //Home 192.168.10.70
-  //static const String baseUrl = "http://192.168.10.70:5000/";
+  static const String baseUrl = "http://192.168.10.70:5000/";
   //My Phone IP
   //static const String baseUrl = "http://172.20.10.2:5000/";
 
-  //Rainwars
-  //static const String baseUrl = "http://192.168.1.68:5000/";
-
+//College
+  //static const String baseUrl = "http://172.26.0.38:5000/";
   // Auth Routes
   static const String login = "api/users/login";
   static const String register = "api/users/create";
@@ -31,8 +30,10 @@ class ApiEndpoints {
   static const String allstaff = "api/users/getallusers";
   static const String deletestaff = "/api/users/delete";
 
-  //Booking Appointment
-  static const String bookappointment = "api/appointments/create";
+  //Appointment Routes
+  static const String bookappointment = "api/appointment/create_appointment";
+  static const String getallappoitments = "api/appointment/get_appointment";
+  static const String deleteAppointment = "api/appointment/delete_appointment";
 
   //Services
   static const String allservices = "api/services";

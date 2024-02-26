@@ -1,16 +1,21 @@
+import 'package:age_care/config/router/app_routes.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../../../core/common/provider/secure_storage_provide.dart';
+import '../../../../../core/network/http_service.dart';
+import '../../../data/data_source/appointment_remote_data_source.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({Key? key}) : super(key: key);
@@ -29,7 +34,13 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   final _notesController = TextEditingController();
   final _locationFocusNode = FocusNode();
 
-  List<String> services = ['Service 1', 'Service 2', 'Service 3'];
+  List<String> services = [
+    'Nursing',
+    'Personal Care',
+    'Age Care',
+    'Therapy',
+    'Dental Care'
+  ];
   String selectedService = '';
 
   Future<void> _selectDate(
@@ -43,7 +54,9 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       lastDate: DateTime(2100),
     );
     if (selectDate != null) {
-      final formattedDate = DateFormat('yyyy-MM-dd').format(selectDate);
+      final formattedDate =
+          DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(selectDate);
+      print('Formatted Date: $formattedDate');
       controller.text = formattedDate;
     }
   }
@@ -57,9 +70,10 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       initialTime: TimeOfDay.now(),
     );
     if (selectTime != null) {
-      final formattedTime = DateFormat('HH:mm').format(
+      final formattedTime = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(
         DateTime(2024, 1, 1, selectTime.hour, selectTime.minute),
       );
+      print('Formatted Time: $formattedTime');
       controller.text = formattedTime;
     }
   }
@@ -285,12 +299,10 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                           onPressed: isAnyFieldNull
                               ? null
                               : () async {
-                                  if (_key.currentState?.validate() ?? false) {
-                                    EasyLoading.show(
-                                      status: 'Booking Appointment...',
-                                      maskType: EasyLoadingMaskType.black,
-                                    );
-
+                                  final formState = _key.currentState;
+                                  if (formState != null &&
+                                      formState.mounted &&
+                                      formState.validate()) {
                                     final entity = AppointmentEntity(
                                       serviceType: selectedService,
                                       serviceDate: _serviceDateController.text,
@@ -299,7 +311,6 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                                       location: _locationController.text,
                                       notes: _notesController.text,
                                     );
-
                                     ref
                                         .read(appointmentViewModelProvider
                                             .notifier)
@@ -353,7 +364,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _requestLocationPermission();
+      //_requestLocationPermission();
     });
   }
 
@@ -381,14 +392,21 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ref.watch(appointmentViewModelProvider).showMessage!) {
+        EasyLoading.showSuccess('Appointment Booked Successfully',
+            dismissOnTap: false);
+        ref.read(appointmentViewModelProvider.notifier).resetMessage(false);
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.viewBookedAppointment,
-          style: GoogleFonts.montserrat(
+          AppTexts.bookAppointment.toUpperCase(),
+          style: TextStyle(
             color: AppColors.white,
           ),
         ),
@@ -403,6 +421,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
+          // padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
           child: Column(
             children: [
               Form(
@@ -531,8 +550,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, '/viewbookedappointment');
+                            Navigator.pushNamed(
+                                context, MyRoutes.viewbookedappointment);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
