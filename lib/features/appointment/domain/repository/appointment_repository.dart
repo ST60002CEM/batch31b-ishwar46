@@ -16,4 +16,7 @@ abstract class IAppointmentRepository {
   Future<Either<Failure, List<AppointmentEntity>>> getAppointments();
   //Delete Appointment
   Future<Either<Failure, bool>> deleteAppointment(String appointmentId);
+  //Edit Appointment
+  Future<Either<Failure, bool>> editAppointment(
+      String appointmentId, AppointmentEntity updatedAppointment);
 }

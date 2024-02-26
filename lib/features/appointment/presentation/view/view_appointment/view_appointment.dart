@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
-import '../../../../../core/utils/helpers/helper_functions.dart';
+import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
 import '../../widgets/no_data.dart';
@@ -22,6 +23,58 @@ class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
   TextEditingController searchController = TextEditingController();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
+  bool isAdmin = false;
+
+  void _showEditModal(BuildContext context, AppointmentEntity appointment) {
+    TextEditingController serviceTypeController =
+        TextEditingController(text: appointment.serviceType);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Appointment'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: serviceTypeController,
+                  decoration: InputDecoration(labelText: 'Service Type'),
+                  onChanged: (value) {
+                    appointment.serviceType = value;
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                await ref
+                    .read(appointmentViewModelProvider.notifier)
+                    .editAppointment(appointment.appointmentId!, appointment);
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAdminStatus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +142,7 @@ class _ViewBookedAppointmentsState
                             endTime: appointment.endTime,
                             location: appointment.location,
                             notes: appointment.notes,
+                            isAdmin: isAdmin,
                             ticketnumber: appointment.ticketNumber,
                             status: appointment.status,
                             onDelete: () async {
@@ -96,6 +150,11 @@ class _ViewBookedAppointmentsState
                                   .read(appointmentViewModelProvider.notifier)
                                   .deleteAppointment(
                                       appointment.appointmentId!);
+                            },
+                            onEdit: () {
+                              EasyLoading.showInfo(
+                                  'Edit feature is coming soon');
+                              // _showEditModal(context, appointment);
                             },
                           );
                         },
@@ -109,27 +168,40 @@ class _ViewBookedAppointmentsState
         ),
       ),
       floatingActionButton: FutureBuilder<bool>(
-        future: HelperFunctions.isAdmin(),
+        future: checkAdminStatus(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+          if (snapshot.connectionState == ConnectionState.done) {
+            isAdmin = snapshot.data ?? false;
+            return Visibility(
+              visible: !isAdmin,
+              child: FloatingActionButton(
+                backgroundColor: AppColors.primaryColor,
+                onPressed: () {
+                  Navigator.of(context).push(_createRoute());
+                },
+                child: Icon(
+                  Icons.add,
+                  color: AppColors.white,
+                ),
+              ),
+            );
           } else {
-            final bool isAdmin = snapshot.data ?? false;
-
-            return isAdmin
-                ? SizedBox()
-                : FloatingActionButton(
-                    backgroundColor: AppColors.primaryColor,
-                    splashColor: AppColors.white,
-                    onPressed: () {
-                      Navigator.of(context).push(_createRoute());
-                    },
-                    child: Icon(Icons.add, color: AppColors.white),
-                  );
+            return Container();
           }
         },
       ),
     );
+  }
+
+  Future<bool> checkAdminStatus() async {
+    final secureStorage = FlutterSecureStorage();
+    final token = await secureStorage.read(key: "authToken");
+    if (token != null) {
+      final decodedToken = JwtDecoder.decode(token);
+      final isAdminValue = decodedToken['isAdmin'] ?? false;
+      return isAdminValue;
+    }
+    return false;
   }
 
   Future<void> _refreshData() async {

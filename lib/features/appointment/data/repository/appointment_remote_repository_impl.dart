@@ -30,4 +30,11 @@ class AppointmentRemoteRepository implements IAppointmentRepository {
   Future<Either<Failure, bool>> deleteAppointment(String appointmentId) {
     return _appointmentRemoteDataSource.deleteAppointment(appointmentId);
   }
+
+  @override
+  Future<Either<Failure, bool>> editAppointment(
+      String appointmentId, AppointmentEntity updatedAppointment) {
+    return _appointmentRemoteDataSource.editAppointment(
+        appointmentId, updatedAppointment);
+  }
 }

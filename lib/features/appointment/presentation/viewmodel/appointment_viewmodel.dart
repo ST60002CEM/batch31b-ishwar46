@@ -8,21 +8,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../config/router/app_routes.dart';
 import '../../domain/use_case/delete_appointment_usecase.dart';
+import '../../domain/use_case/edit_appointment_use_case.dart';
 
 final appointmentViewModelProvider =
     StateNotifierProvider<AppointmentViewModel, AppointmentState>((ref) =>
         AppointmentViewModel(
             ref.read(bookAppointmentUseCaseProvider),
             ref.read(viewAppointmentUseCaseProvider),
-            ref.read(deleteAppointmentUseCaseProvider)));
+            ref.read(deleteAppointmentUseCaseProvider),
+            ref.read(editAppointmentUseCaseProvider)));
 
 class AppointmentViewModel extends StateNotifier<AppointmentState> {
   final BookAppointmentUseCase _bookAppointmentUseCase;
   final ViewAppointmentUseCase _viewAppointmentUseCase;
   final DeleteAppointmentUseCase _deleteAppointmentUseCase;
+  final EditAppointmentUseCase _editAppointmentUseCase;
 
-  AppointmentViewModel(this._bookAppointmentUseCase,
-      this._viewAppointmentUseCase, this._deleteAppointmentUseCase)
+  AppointmentViewModel(
+      this._bookAppointmentUseCase,
+      this._viewAppointmentUseCase,
+      this._deleteAppointmentUseCase,
+      this._editAppointmentUseCase)
       : super(AppointmentState.initial()) {
     getAppointments();
   }
@@ -76,6 +82,23 @@ class AppointmentViewModel extends StateNotifier<AppointmentState> {
       await getAppointments();
     } catch (error) {
       EasyLoading.showError('Failed to Delete Appointment: $error');
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
+  // EDIT APPOINTMENT
+  Future<void> editAppointment(
+      String appointmentId, AppointmentEntity updatedAppointment) async {
+    state = state.copyWith(isLoading: true);
+    try {
+      await _editAppointmentUseCase.editAppointment(
+          appointmentId, updatedAppointment);
+      state = state.copyWith(isLoading: false, showMessage: true);
+      EasyLoading.showSuccess('Appointment Edited Successfully',
+          dismissOnTap: false);
+      await getAppointments();
+    } catch (failure) {
+      EasyLoading.showError('Failed to Edit Appointment: $failure');
       state = state.copyWith(isLoading: false);
     }
   }

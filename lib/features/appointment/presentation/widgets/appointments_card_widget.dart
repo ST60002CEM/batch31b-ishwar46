@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../config/constants/app_colors.dart';
-import '../../../../core/utils/helpers/helper_functions.dart';
 
 class AppointmentCard extends StatefulWidget {
   final String serviceType;
@@ -12,6 +11,8 @@ class AppointmentCard extends StatefulWidget {
   final String? status;
   final String? ticketnumber;
   final VoidCallback onDelete;
+  final VoidCallback? onEdit;
+  final bool isAdmin;
 
   AppointmentCard({
     required this.serviceType,
@@ -23,6 +24,8 @@ class AppointmentCard extends StatefulWidget {
     this.status,
     this.ticketnumber,
     required this.onDelete,
+    this.onEdit,
+    required this.isAdmin,
   });
 
   @override
@@ -30,12 +33,9 @@ class AppointmentCard extends StatefulWidget {
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
-  late Future<bool> _isAdminFuture;
-
   @override
   void initState() {
     super.initState();
-    _isAdminFuture = HelperFunctions.isAdmin();
   }
 
   @override
@@ -64,10 +64,14 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 _buildStatusIndicator(statusColor),
                 SizedBox(width: 12.0),
                 Expanded(
-                    child: _buildAppointmentDetails(
-                  gap,
-                  statusText,
-                )),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildAppointmentDetails(gap, statusText),
+                      if (widget.isAdmin) _buildEditButton(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -108,7 +112,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 ),
               ),
             ),
-            if (widget.status != 'completed' && widget.status != 'cancelled')
+            if (widget.isAdmin)
               IconButton(
                 onPressed: widget.onDelete,
                 icon: Icon(Icons.delete, color: AppColors.error),
@@ -147,6 +151,18 @@ class _AppointmentCardState extends State<AppointmentCard> {
             style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         Spacer(),
         Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
+      ],
+    );
+  }
+
+  Widget _buildEditButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: widget.onEdit,
+          child: Icon(Icons.edit),
+        ),
       ],
     );
   }
