@@ -34,6 +34,7 @@ class ApiEndpoints {
   static const String bookappointment = "api/appointment/create_appointment";
   static const String getallappoitments = "api/appointment/get_appointment";
   static const String deleteAppointment = "api/appointment/delete_appointment";
+  static const String editAppointment = "api/appointment/edit_appointment";
 
   //Services
   static const String allservices = "api/services";
