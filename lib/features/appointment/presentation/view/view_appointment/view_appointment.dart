@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
@@ -25,7 +24,6 @@ class _ViewBookedAppointmentsState
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
 
   void _showEditModal(BuildContext context, AppointmentEntity appointment) {
-    // Create TextEditingController for each field
     TextEditingController serviceTypeController =
         TextEditingController(text: appointment.serviceType);
 
@@ -38,16 +36,13 @@ class _ViewBookedAppointmentsState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // TextField for editing service type
                 TextField(
                   controller: serviceTypeController,
                   decoration: InputDecoration(labelText: 'Service Type'),
                   onChanged: (value) {
-                    // Update service type in appointment entity
                     appointment.serviceType = value;
                   },
                 ),
-                // Repeat the above for other fields like service date, start time, etc.
               ],
             ),
           ),
