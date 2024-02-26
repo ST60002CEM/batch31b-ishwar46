@@ -142,6 +142,7 @@ class _ViewBookedAppointmentsState
                             endTime: appointment.endTime,
                             location: appointment.location,
                             notes: appointment.notes,
+                            isAdmin: isAdmin,
                             ticketnumber: appointment.ticketNumber,
                             status: appointment.status,
                             onDelete: () async {

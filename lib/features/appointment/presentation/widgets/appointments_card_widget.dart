@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../config/constants/app_colors.dart';
-import '../../../../core/utils/helpers/helper_functions.dart';
 
 class AppointmentCard extends StatefulWidget {
   final String serviceType;
@@ -13,6 +12,7 @@ class AppointmentCard extends StatefulWidget {
   final String? ticketnumber;
   final VoidCallback onDelete;
   final VoidCallback? onEdit;
+  final bool isAdmin;
 
   AppointmentCard({
     required this.serviceType,
@@ -25,6 +25,7 @@ class AppointmentCard extends StatefulWidget {
     this.ticketnumber,
     required this.onDelete,
     this.onEdit,
+    required this.isAdmin,
   });
 
   @override
@@ -32,12 +33,9 @@ class AppointmentCard extends StatefulWidget {
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
-  late Future<bool> _isAdminFuture;
-
   @override
   void initState() {
     super.initState();
-    _isAdminFuture = HelperFunctions.isAdmin();
   }
 
   @override
@@ -70,7 +68,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildAppointmentDetails(gap, statusText),
-                      if (widget.onEdit != null) _buildEditButton(),
+                      if (widget.isAdmin) _buildEditButton(),
                     ],
                   ),
                 ),
@@ -114,7 +112,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 ),
               ),
             ),
-            if (widget.status != 'completed' && widget.status != 'cancelled')
+            if (widget.isAdmin)
               IconButton(
                 onPressed: widget.onDelete,
                 icon: Icon(Icons.delete, color: AppColors.error),
