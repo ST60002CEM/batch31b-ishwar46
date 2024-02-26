@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
 import '../../../../../core/utils/helpers/helper_functions.dart';
+import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
 import '../../widgets/no_data.dart';
@@ -22,6 +23,55 @@ class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
   TextEditingController searchController = TextEditingController();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
+
+  void _showEditModal(BuildContext context, AppointmentEntity appointment) {
+    // Create TextEditingController for each field
+    TextEditingController serviceTypeController =
+        TextEditingController(text: appointment.serviceType);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Appointment'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // TextField for editing service type
+                TextField(
+                  controller: serviceTypeController,
+                  decoration: InputDecoration(labelText: 'Service Type'),
+                  onChanged: (value) {
+                    // Update service type in appointment entity
+                    appointment.serviceType = value;
+                  },
+                ),
+                // Repeat the above for other fields like service date, start time, etc.
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                await ref
+                    .read(appointmentViewModelProvider.notifier)
+                    .editAppointment(appointment.appointmentId!, appointment);
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +146,11 @@ class _ViewBookedAppointmentsState
                                   .read(appointmentViewModelProvider.notifier)
                                   .deleteAppointment(
                                       appointment.appointmentId!);
+                            },
+                            onEdit: () {
+                              EasyLoading.showInfo(
+                                  'Edit feature is coming soon');
+                              // _showEditModal(context, appointment);
                             },
                           );
                         },

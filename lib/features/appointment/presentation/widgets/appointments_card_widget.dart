@@ -12,6 +12,7 @@ class AppointmentCard extends StatefulWidget {
   final String? status;
   final String? ticketnumber;
   final VoidCallback onDelete;
+  final VoidCallback? onEdit;
 
   AppointmentCard({
     required this.serviceType,
@@ -23,6 +24,7 @@ class AppointmentCard extends StatefulWidget {
     this.status,
     this.ticketnumber,
     required this.onDelete,
+    this.onEdit,
   });
 
   @override
@@ -64,10 +66,14 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 _buildStatusIndicator(statusColor),
                 SizedBox(width: 12.0),
                 Expanded(
-                    child: _buildAppointmentDetails(
-                  gap,
-                  statusText,
-                )),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildAppointmentDetails(gap, statusText),
+                      if (widget.onEdit != null) _buildEditButton(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -147,6 +153,18 @@ class _AppointmentCardState extends State<AppointmentCard> {
             style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         Spacer(),
         Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
+      ],
+    );
+  }
+
+  Widget _buildEditButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: widget.onEdit,
+          child: Icon(Icons.edit),
+        ),
       ],
     );
   }
