@@ -90,4 +90,7 @@ class AppTexts {
 
   //Sensors Joke Page
   static const String sensorJokePageTitle = 'Random Joke';
+
+  //Notification Page
+  static const String notificationPageTitle = 'Notifications';
 }
