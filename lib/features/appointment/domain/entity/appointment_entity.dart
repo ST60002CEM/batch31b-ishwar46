@@ -1,6 +1,6 @@
 class AppointmentEntity {
   final String? appointmentId;
-  final String serviceType;
+  String serviceType;
   final String serviceDate;
   final String startTime;
   final String endTime;
