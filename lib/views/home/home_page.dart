@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
         color: AppColors.whiteText,
         icon: const Icon(Icons.notifications),
         onPressed: () {
-          EasyLoading.showInfo("No new notifications.");
+          Navigator.pushNamed(context, MyRoutes.viewNotificationRoute);
         },
       ),
       IconButton(
