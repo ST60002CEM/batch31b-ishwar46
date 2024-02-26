@@ -221,4 +221,59 @@ class AppointmentRemoteDataSource {
       );
     }
   }
+
+  //Edit appointment
+  Future<Either<Failure, bool>> editAppointment(
+      String appointmentId, AppointmentEntity updatedAppointment) async {
+    try {
+      final token = await secureStorage.read(key: "authToken");
+      if (token == null) {
+        return Left(Failure(error: "Token not found"));
+      }
+
+      final decodedToken = JwtDecoder.decode(token);
+      final userId = decodedToken['id'];
+      if (userId == null) {
+        return Left(Failure(error: "User ID not found in token"));
+      }
+
+      AppointmentApiModel apiModel =
+          AppointmentApiModel.fromEntity(updatedAppointment);
+
+      Response response = await dio.put(
+        "${ApiEndpoints.editAppointment}/$appointmentId",
+        data: {
+          "userId": userId,
+          "serviceType": apiModel.serviceType,
+          "serviceDate": apiModel.serviceDate,
+          "startTime": apiModel.startTime,
+          "endTime": apiModel.endTime,
+          "location": apiModel.location,
+          "notes": apiModel.notes,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return const Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data["message"],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(
+          error: e.error.toString(),
+          statusCode: e.response?.statusCode.toString() ?? '0',
+        ),
+      );
+    }
+  }
 }
