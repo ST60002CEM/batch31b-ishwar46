@@ -5,21 +5,19 @@ part 'notification_api_model.g.dart';
 
 @JsonSerializable()
 class NotificationApiModel {
-  @JsonKey(name: 'id')
-  final String? notificationId;
+  @JsonKey(name: '_id')
+  final String notificationId;
   @JsonKey(name: 'recipient')
-  final String? recipient;
+  final String recipient;
   final String message;
-  final String date;
-  final String? read;
+  final bool read;
   final String? createdAt;
 
   NotificationApiModel({
-    this.notificationId,
-    this.recipient,
+    required this.notificationId,
+    required this.recipient,
     required this.message,
-    required this.date,
-    this.read,
+    required this.read,
     this.createdAt,
   });
 
@@ -32,11 +30,11 @@ class NotificationApiModel {
 
   NotificationEntity toEntity() {
     return NotificationEntity(
-      notificationId: notificationId ?? '',
-      recipient: recipient ?? '',
+      notificationId: notificationId,
+      recipient: recipient,
       message: message,
-      createdAt: DateTime.parse(createdAt!),
-      read: read == 'true',
+      createdAt: createdAt,
+      read: read,
     );
   }
 
@@ -46,9 +44,8 @@ class NotificationApiModel {
       notificationId: entity.notificationId,
       recipient: entity.recipient,
       message: entity.message,
-      date: entity.createdAt.toIso8601String(),
-      read: entity.read ? 'true' : 'false',
-      createdAt: entity.createdAt.toIso8601String(),
+      createdAt: entity.createdAt,
+      read: entity.read,
     );
   }
 }

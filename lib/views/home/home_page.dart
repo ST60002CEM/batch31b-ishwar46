@@ -5,7 +5,6 @@ import 'package:shake/shake.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:age_care/config/router/app_routes.dart';
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/widgets/drawer_widget.dart';
