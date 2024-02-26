@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
-import '../../../../../core/utils/helpers/helper_functions.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
@@ -22,6 +23,7 @@ class _ViewBookedAppointmentsState
     extends ConsumerState<ViewBookedAppointments> {
   TextEditingController searchController = TextEditingController();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey();
+  bool isAdmin = false;
 
   void _showEditModal(BuildContext context, AppointmentEntity appointment) {
     TextEditingController serviceTypeController =
@@ -66,6 +68,12 @@ class _ViewBookedAppointmentsState
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAdminStatus();
   }
 
   @override
@@ -159,27 +167,40 @@ class _ViewBookedAppointmentsState
         ),
       ),
       floatingActionButton: FutureBuilder<bool>(
-        future: HelperFunctions.isAdmin(),
+        future: checkAdminStatus(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+          if (snapshot.connectionState == ConnectionState.done) {
+            isAdmin = snapshot.data ?? false;
+            return Visibility(
+              visible: !isAdmin,
+              child: FloatingActionButton(
+                backgroundColor: AppColors.primaryColor,
+                onPressed: () {
+                  Navigator.of(context).push(_createRoute());
+                },
+                child: Icon(
+                  Icons.add,
+                  color: AppColors.white,
+                ),
+              ),
+            );
           } else {
-            final bool isAdmin = snapshot.data ?? false;
-
-            return isAdmin
-                ? SizedBox()
-                : FloatingActionButton(
-                    backgroundColor: AppColors.primaryColor,
-                    splashColor: AppColors.white,
-                    onPressed: () {
-                      Navigator.of(context).push(_createRoute());
-                    },
-                    child: Icon(Icons.add, color: AppColors.white),
-                  );
+            return Container();
           }
         },
       ),
     );
+  }
+
+  Future<bool> checkAdminStatus() async {
+    final secureStorage = FlutterSecureStorage();
+    final token = await secureStorage.read(key: "authToken");
+    if (token != null) {
+      final decodedToken = JwtDecoder.decode(token);
+      final isAdminValue = decodedToken['isAdmin'] ?? false;
+      return isAdminValue;
+    }
+    return false;
   }
 
   Future<void> _refreshData() async {
