@@ -79,11 +79,13 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   itemCount: state.notifications!.length,
                   itemBuilder: (context, index) {
-                    final notification = state.notifications![index];
+                    final notification = state.notifications![
+                        state.notifications!.length - 1 - index];
                     if (removedNotifications
                         .contains(notification.notificationId)) {
                       return Container();
                     }
+
                     return Dismissible(
                       key: ValueKey(notification.notificationId),
                       onDismissed: (_) {
