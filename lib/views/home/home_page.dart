@@ -140,7 +140,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               notificationViewModelProvider.select((state) =>
                   state.notifications
                       ?.where((notification) => !notification.read)
-                      ?.length ??
+                      .length ??
                   0));
           return IconButton(
             color: AppColors.whiteText,

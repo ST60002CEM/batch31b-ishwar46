@@ -9,7 +9,7 @@ class ShimmerLoadingEffect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        8,
+        5,
         (index) => Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
