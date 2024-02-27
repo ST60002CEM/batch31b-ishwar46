@@ -28,4 +28,8 @@ class NotificationViewModel extends StateNotifier<NotificationState> {
       state = state.copyWith(notifications: notifications);
     });
   }
+
+  void resetState() {
+    state = NotificationState.initial();
+  }
 }
