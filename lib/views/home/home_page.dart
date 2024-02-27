@@ -134,11 +134,48 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   List<Widget> _buildAppBarActions() {
     return [
-      IconButton(
-        color: AppColors.whiteText,
-        icon: const Icon(Icons.notifications),
-        onPressed: () {
-          Navigator.pushNamed(context, MyRoutes.viewNotificationRoute);
+      Consumer(
+        builder: (context, ref, child) {
+          final notificationCount = ref.watch(
+              notificationViewModelProvider.select((state) =>
+                  state.notifications
+                      ?.where((notification) => !notification.read)
+                      ?.length ??
+                  0));
+          return IconButton(
+            color: AppColors.whiteText,
+            icon: Stack(
+              children: [
+                const Icon(Icons.notifications),
+                if (notificationCount > 0)
+                  Positioned(
+                    top: 1,
+                    right: 1,
+                    child: Container(
+                      width: 14,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text(
+                          notificationCount.toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.viewNotificationRoute);
+            },
+          );
         },
       ),
       IconButton(
