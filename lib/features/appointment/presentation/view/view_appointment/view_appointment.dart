@@ -139,7 +139,8 @@ class _ViewBookedAppointmentsState
                       return ListView.builder(
                         itemCount: state.appointments!.length,
                         itemBuilder: (context, index) {
-                          final appointment = state.appointments![index];
+                          final appointment = state.appointments![
+                              state.appointments!.length - 1 - index];
                           return AppointmentCard(
                             serviceType: appointment.serviceType,
                             serviceDate: appointment.serviceDate,
