@@ -3,6 +3,7 @@ import '../../features/appointment/presentation/view/view_appointment/view_appoi
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/events/presentation/view/events.dart';
+import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/sensors/gyro.dart';
@@ -32,6 +33,7 @@ class MyRoutes {
   static String gyroRoute = "/gyroRoute";
   static String jokesRoute = "/jokesRoute";
   static String eventRoute = "/eventRoute";
+  static String viewNotificationRoute = "/viewNotificationRoute";
 
   static getApplicationRoute() {
     return {
@@ -49,6 +51,7 @@ class MyRoutes {
       gyroRoute: (context) => GyroscopeScreen(),
       jokesRoute: (context) => ProximityScreen(),
       eventRoute: (context) => EventView(),
+      viewNotificationRoute: (context) => NotificationView(),
     };
   }
 }

@@ -2,6 +2,10 @@ _fe_analyzer_shared
 3.0
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0/
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0/lib/
+all_sensors2
+2.12
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/all_sensors2-1.0.1/
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/all_sensors2-1.0.1/lib/
 analyzer
 3.0
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/analyzer-6.2.0/
@@ -614,6 +618,10 @@ shimmer
 2.17
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shimmer-3.0.0/
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shimmer-3.0.0/lib/
+simple_gesture_detector
+2.12
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/simple_gesture_detector-0.2.1/
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/simple_gesture_detector-0.2.1/lib/
 smooth_page_indicator
 2.12
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/smooth_page_indicator-1.1.0/
@@ -654,6 +662,10 @@ string_scanner
 2.18
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/lib/
+table_calendar
+2.12
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/table_calendar-3.0.9/
+file:///Users/macbookpro/.pub-cache/hosted/pub.dev/table_calendar-3.0.9/lib/
 term_glyph
 2.12
 file:///Users/macbookpro/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/

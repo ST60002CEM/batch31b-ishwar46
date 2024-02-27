@@ -1,4 +1,6 @@
 PODS:
+  - all_sensors2 (1.0.1):
+    - Flutter
   - babstrap_settings_screen (0.0.1):
     - Flutter
   - connectivity_plus (0.0.1):
@@ -40,6 +42,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - all_sensors2 (from `.symlinks/plugins/all_sensors2/ios`)
   - babstrap_settings_screen (from `.symlinks/plugins/babstrap_settings_screen/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
@@ -62,6 +65,8 @@ SPEC REPOS:
     - ReachabilitySwift
 
 EXTERNAL SOURCES:
+  all_sensors2:
+    :path: ".symlinks/plugins/all_sensors2/ios"
   babstrap_settings_screen:
     :path: ".symlinks/plugins/babstrap_settings_screen/ios"
   connectivity_plus:
@@ -94,6 +99,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  all_sensors2: 5e204ae87a72b554b2df6c4de741c09031b8e64e
   babstrap_settings_screen: 535097da0fa521a47fef6f6678ff2b464ee15937
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854

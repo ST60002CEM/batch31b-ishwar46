@@ -36,6 +36,9 @@ class ApiEndpoints {
   static const String deleteAppointment = "api/appointment/delete_appointment";
   static const String editAppointment = "api/appointment/edit_appointment";
 
+  //Notification Routes
+  static const String allnotifications = "api/notifications/user/";
+
   //Services
   static const String allservices = "api/services";
 
