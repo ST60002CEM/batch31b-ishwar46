@@ -14,6 +14,7 @@ NotificationApiModel _$NotificationApiModelFromJson(
       message: json['message'] as String,
       read: json['read'] as bool,
       createdAt: json['createdAt'] as String?,
+      createdAtFormatted: json['createdAtFormatted'] as String,
     );
 
 Map<String, dynamic> _$NotificationApiModelToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$NotificationApiModelToJson(
       'message': instance.message,
       'read': instance.read,
       'createdAt': instance.createdAt,
+      'createdAtFormatted': instance.createdAtFormatted,
     };

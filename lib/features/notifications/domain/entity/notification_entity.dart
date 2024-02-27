@@ -4,6 +4,7 @@ class NotificationEntity {
   final String message;
   final String? createdAt;
   final bool read;
+  final String createdAtFormatted;
 
   NotificationEntity({
     required this.notificationId,
@@ -11,6 +12,7 @@ class NotificationEntity {
     required this.message,
     this.createdAt,
     required this.read,
+    required this.createdAtFormatted,
   });
 
   @override
@@ -20,5 +22,6 @@ class NotificationEntity {
         message,
         createdAt,
         read,
+        createdAtFormatted,
       ];
 }

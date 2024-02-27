@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/text_strings.dart';
@@ -81,11 +82,12 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                   itemBuilder: (context, index) {
                     final notification = state.notifications![
                         state.notifications!.length - 1 - index];
+                    final formattedDate = notification.createdAtFormatted;
+
                     if (removedNotifications
                         .contains(notification.notificationId)) {
                       return Container();
                     }
-
                     return Dismissible(
                       key: ValueKey(notification.notificationId),
                       onDismissed: (_) {
@@ -93,27 +95,77 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 5,
+                          vertical: 4,
                         ),
                         child: ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          tileColor: Colors.grey[200],
-                          leading:
-                              Icon(Icons.notifications, color: Colors.blue),
-                          title: Text(notification.message,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 14)),
-                          subtitle: Text(notification.createdAt.toString(),
-                              style: TextStyle(fontSize: 10)),
-                          trailing: IconButton(
-                            icon: Icon(Icons.remove_circle, color: Colors.red),
-                            onPressed: () {
-                              removedNotifications
-                                  .add(notification.notificationId);
-                            },
+                          tileColor: notification.read
+                              ? Colors.white
+                              : Colors.grey[200],
+                          leading: Stack(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: AppColors.primaryColor,
+                                child: Icon(
+                                  Icons.notifications,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: CircleAvatar(
+                                  backgroundColor: AppColors.error,
+                                  radius: 8,
+                                  child: Text(
+                                    'H',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                          title: Text(
+                            notification.message,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_rounded,
+                                color: Colors.grey[500],
+                                size: 12,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                formattedDate,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey[500],
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                            ],
+                          ),
+                          trailing: notification.read
+                              ? null
+                              : IconButton(
+                                  icon: Icon(Icons.remove_circle,
+                                      color: Colors.red),
+                                  onPressed: () {
+                                    removedNotifications
+                                        .add(notification.notificationId);
+                                  },
+                                ),
                         ),
                       ),
                     );
