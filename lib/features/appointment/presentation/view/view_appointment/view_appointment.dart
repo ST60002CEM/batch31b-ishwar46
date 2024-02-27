@@ -74,6 +74,10 @@ class _ViewBookedAppointmentsState
   void initState() {
     super.initState();
     checkAdminStatus();
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(appointmentViewModelProvider.notifier).getAppointments();
+    });
   }
 
   @override

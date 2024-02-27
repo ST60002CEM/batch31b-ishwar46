@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/text_strings.dart';
@@ -15,8 +14,17 @@ class NotificationView extends ConsumerStatefulWidget {
 }
 
 class _NotificationViewState extends ConsumerState<NotificationView> {
-  final List<String> removedNotifications =
-      []; // Track removed notifications locally
+  final List<String> removedNotifications = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref
+          .watch(notificationViewModelProvider.notifier)
+          .getNotifications();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +66,7 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Center content
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset('assets/lottie/no_notification.json'),
                       Text(
@@ -123,7 +130,7 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                                     'H',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 8,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
