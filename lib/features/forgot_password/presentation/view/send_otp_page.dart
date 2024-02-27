@@ -153,6 +153,7 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
                               vertical: 10.0, horizontal: 20.0),
                           child: ElevatedButton(
                             onPressed: () {
+                              Navigator.pushNamed(context, '/verifyOTPRoute');
                               // if (_formKey.currentState.validate()) {
                               //   EasyLoading.show(status: 'Sending OTP...');
                               //   ref
