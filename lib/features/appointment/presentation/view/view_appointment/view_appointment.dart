@@ -6,6 +6,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../../../core/common/widgets/shimmer_loading_widget.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import '../../widgets/appointments_card_widget.dart';
@@ -76,7 +77,7 @@ class _ViewBookedAppointmentsState
     checkAdminStatus();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.watch(appointmentViewModelProvider.notifier).getAppointments();
+      await ref.read(appointmentViewModelProvider.notifier).getAppointments();
     });
   }
 
@@ -128,7 +129,7 @@ class _ViewBookedAppointmentsState
                   builder: (context, ref, child) {
                     final state = ref.watch(appointmentViewModelProvider);
                     if (state.isLoading) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(child: ShimmerLoadingEffect());
                     } else if (state.error != null) {
                       return Center(child: Text(state.error!));
                     } else if (state.appointments == null ||

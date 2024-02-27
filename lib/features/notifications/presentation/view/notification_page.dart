@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/text_strings.dart';
+import '../../../../core/common/widgets/shimmer_loading_widget.dart';
 import '../notification_view_model/notification_view_model.dart';
 
 class NotificationView extends ConsumerStatefulWidget {
@@ -57,7 +58,7 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
           builder: (context, watch, child) {
             final state = ref.watch(notificationViewModelProvider);
             if (state.isLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: ShimmerLoadingEffect());
             } else if (state.error != null) {
               return Center(child: Text(state.error!));
             } else if (state.notifications == null ||
