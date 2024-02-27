@@ -1,5 +1,6 @@
 import 'package:age_care/features/notifications/domain/entity/notification_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'notification_api_model.g.dart';
 
@@ -12,6 +13,8 @@ class NotificationApiModel {
   final String message;
   final bool read;
   final String? createdAt;
+  @JsonKey(name: 'createdAtFormatted')
+  final String createdAtFormatted;
 
   NotificationApiModel({
     required this.notificationId,
@@ -19,6 +22,7 @@ class NotificationApiModel {
     required this.message,
     required this.read,
     this.createdAt,
+    required this.createdAtFormatted,
   });
 
   factory NotificationApiModel.fromJson(Map<String, dynamic> json) =>
@@ -30,22 +34,22 @@ class NotificationApiModel {
 
   NotificationEntity toEntity() {
     return NotificationEntity(
-      notificationId: notificationId,
-      recipient: recipient,
-      message: message,
-      createdAt: createdAt,
-      read: read,
-    );
+        notificationId: notificationId,
+        recipient: recipient,
+        message: message,
+        createdAt: createdAt,
+        read: read,
+        createdAtFormatted: createdAtFormatted);
   }
 
   //Create API Model from domain Entity
   factory NotificationApiModel.fromEntity(NotificationEntity entity) {
     return NotificationApiModel(
-      notificationId: entity.notificationId,
-      recipient: entity.recipient,
-      message: entity.message,
-      createdAt: entity.createdAt,
-      read: entity.read,
-    );
+        notificationId: entity.notificationId,
+        recipient: entity.recipient,
+        message: entity.message,
+        createdAt: entity.createdAt,
+        read: entity.read,
+        createdAtFormatted: entity.createdAtFormatted);
   }
 }
