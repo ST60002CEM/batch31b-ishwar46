@@ -40,7 +40,11 @@ class OTPRemoteDataSource {
           e.type == DioExceptionType.receiveTimeout) {
         return Left(Failure(error: "Connection timeout. Please try again."));
       } else if (e.type == DioExceptionType.badResponse) {
-        return Left(Failure(error: "Server error. Please try again later."));
+        if (e.response?.data['message'] == "User not found.") {
+          return Left(Failure(error: "User not found."));
+        } else {
+          return Left(Failure(error: "Server error. Please try again later."));
+        }
       } else {
         return Left(Failure(error: "An unexpected error occurred."));
       }

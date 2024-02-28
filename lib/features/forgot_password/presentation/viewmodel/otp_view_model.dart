@@ -11,11 +11,10 @@ final otpViewModelProvider = StateNotifierProvider<OTPViewModel, OTPState>(
 class OTPViewModel extends StateNotifier<OTPState> {
   final SendOTPUseCase _sendOTPUseCase;
 
-  OTPViewModel(this._sendOTPUseCase) : super(OTPState.initial()) {
-    print(_sendOTPUseCase);
-  }
+  OTPViewModel(this._sendOTPUseCase) : super(OTPState.initial()) {}
 
   Future<void> sendOTP(String email, BuildContext context) async {
+    EasyLoading.show(status: 'Sending OTP...');
     state = state.copyWith(isLoading: true);
     final result = await _sendOTPUseCase.sendOTP(email);
     result.fold(
@@ -24,11 +23,15 @@ class OTPViewModel extends StateNotifier<OTPState> {
           isLoading: false,
           error: failure.error,
         );
-        EasyLoading.showError(failure.error);
+        if (failure.error == "User not found.") {
+          EasyLoading.showError(failure.error);
+        } else {
+          EasyLoading.showError("Failed to send OTP");
+        }
       },
       (success) {
         if (success) {
-          EasyLoading.showSuccess('OTP sent successfully!');
+          EasyLoading.showSuccess('OTP sent to your registered email.');
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.pushNamed(context, MyRoutes.verifyOTPRoute);
             EasyLoading.dismiss();
