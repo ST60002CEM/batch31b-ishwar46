@@ -1,12 +1,12 @@
 import 'package:age_care/config/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
+import '../viewmodel/otp_view_model.dart';
+
 class SendOTPView extends ConsumerStatefulWidget {
-  const SendOTPView({super.key});
+  const SendOTPView({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SendOTPViewState();
@@ -16,7 +16,9 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
 
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -95,24 +97,8 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
                       const SizedBox(
                         height: 30.0,
                       ),
-                      Visibility(
-                        visible: false,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20.0),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 0),
-                          decoration: BoxDecoration(
-                            color: Colors.black12,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          alignment: Alignment.center,
-                        ),
-                      ),
                       Form(
                         key: _formKey,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: Container(
                           margin: const EdgeInsets.symmetric(
                               vertical: 5.0, horizontal: 20.0),
@@ -149,17 +135,18 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
                       SizedBox(
                         width: double.infinity,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(
+                          margin: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/verifyOTPRoute');
-                              // if (_formKey.currentState.validate()) {
-                              //   EasyLoading.show(status: 'Sending OTP...');
-                              //   ref
-                              //       .read(forgotPasswordViewModelProvider.notifier)
-                              //       .sendOTP(emailController.text);
-                              // }
+                            onPressed: () async {
+                              final formState = _formKey.currentState;
+                              if (formState != null &&
+                                  formState.mounted &&
+                                  formState.validate()) {
+                                await ref
+                                    .read(otpViewModelProvider.notifier)
+                                    .sendOTP(emailController.text, context);
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryColor,

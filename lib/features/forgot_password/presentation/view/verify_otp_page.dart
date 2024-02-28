@@ -121,8 +121,7 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
                           ),
                         ),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5), // Adjust vertical padding
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Center(
                             child: Text(
                               'Verify OTP',
