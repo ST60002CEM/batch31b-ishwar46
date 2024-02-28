@@ -2,7 +2,7 @@ class ApiEndpoints {
   ApiEndpoints._();
 
   static const Duration connectionTimeout = Duration(seconds: 1);
-  static const Duration receiveTimeout = Duration(seconds: 1);
+  static const Duration receiveTimeout = Duration(seconds: 5);
 
   // For Android Emulator Device
   //static const String baseUrl = "http://10.0.2.2:5000/";
@@ -41,6 +41,9 @@ class ApiEndpoints {
 
   //Services
   static const String allservices = "api/services";
+
+  //OTP Routes
+  static const String sendOTP = "api/send-otp";
 
   static const limitPage = 10;
 }
