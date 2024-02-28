@@ -11,6 +11,7 @@ class OTPApiModel {
   final String? otp;
   final String? createdAt;
   final String? expiryTime;
+  final bool isUsed;
 
   OTPApiModel({
     this.otpId,
@@ -18,6 +19,7 @@ class OTPApiModel {
     this.otp,
     this.createdAt,
     this.expiryTime,
+    this.isUsed = false,
   });
 
   factory OTPApiModel.fromJson(Map<String, dynamic> json) =>
@@ -27,6 +29,6 @@ class OTPApiModel {
 
   @override
   String toString() {
-    return 'OTPApiModel(otpId: $otpId, userId: $userId, otp: $otp, createdAt: $createdAt, expiryTime: $expiryTime)';
+    return 'OTPApiModel(otpId: $otpId, userId: $userId, otp: $otp, createdAt: $createdAt, expiryTime: $expiryTime, isUsed: $isUsed)';
   }
 }

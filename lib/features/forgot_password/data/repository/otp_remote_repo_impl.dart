@@ -22,7 +22,6 @@ class OTPRemoteRepository implements IOTPRepository {
   @override
   Future<Either<Failure, bool>> verifyandUpdateOTP(
       String email, String otp, String newPassword) {
-    // TODO: implement verifyandUpdateOTP
-    throw UnimplementedError();
+    return _otpRemoteDataSource.verifyandUpdateOTP(email, otp, newPassword);
   }
 }

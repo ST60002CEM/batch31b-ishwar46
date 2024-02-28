@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:age_care/features/forgot_password/presentation/viewmodel/otp_view_model.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,6 +61,19 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: confettiController,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  shouldLoop: true,
+                  maxBlastForce: 5,
+                  minBlastForce: 2,
+                  emissionFrequency: 0.05,
+                  numberOfParticles: 20,
+                  gravity: 1,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
@@ -76,19 +90,6 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
                 'assets/lottie/verify.json',
                 height: 200,
                 width: 200,
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: ConfettiWidget(
-                  confettiController: confettiController,
-                  blastDirection: pi / 2,
-                  shouldLoop: true,
-                  maxBlastForce: 5,
-                  minBlastForce: 2,
-                  emissionFrequency: 0.05,
-                  numberOfParticles: 50,
-                  gravity: 1,
-                ),
               ),
               Form(
                 key: _key,
@@ -141,8 +142,20 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
                                 borderRadius: BorderRadius.circular(10),
                               )),
                               onPressed: () async {
-                                confettiController
-                                    .play(); // Play confetti animation
+                                final formState = _key.currentState;
+                                if (formState != null &&
+                                    formState.mounted &&
+                                    formState.validate()) {
+                                  await ref
+                                      .read(otpViewModelProvider.notifier)
+                                      .verifyOTPandUpdatePassword(
+                                          _emailController.text,
+                                          _otpcontroller.text,
+                                          _newPasswordController.text,
+                                          context);
+                                }
+                                // // confettiController
+                                //     .play(); // Play confetti animation
                               },
                               child:
                                   Text(AppTexts.verifyandUpdate.toUpperCase()),
