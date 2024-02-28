@@ -1,8 +1,15 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:numeric_keyboard/numeric_keyboard.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../config/constants/app_colors.dart';
+import '../../../../config/constants/app_sizes.dart';
+import '../../../../config/constants/text_strings.dart';
 
 class VerifyOTPPage extends ConsumerStatefulWidget {
   const VerifyOTPPage({super.key});
@@ -12,37 +19,13 @@ class VerifyOTPPage extends ConsumerStatefulWidget {
 }
 
 class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
-  String text = '';
-
-  void _onKeyboardTap(String value) {
-    setState(() {
-      text = text + value;
-    });
-  }
-
-  Widget otpNumberWidget(int position) {
-    try {
-      return Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.green, width: 0),
-            borderRadius: const BorderRadius.all(Radius.circular(8))),
-        child: Center(
-            child: Text(
-          text[position],
-        )),
-      );
-    } catch (e) {
-      return Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-            border: Border.all(color: AppColors.primaryColor, width: 0),
-            borderRadius: const BorderRadius.all(Radius.circular(8))),
-      );
-    }
-  }
+  String text = "";
+  GlobalKey<FormState> _key = GlobalKey<FormState>();
+  TextEditingController _otpcontroller = TextEditingController();
+  TextEditingController _newPasswordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  final confettiController =
+      ConfettiController(duration: const Duration(seconds: 2));
 
   @override
   void dispose() {
@@ -56,107 +39,128 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            'Enter the OTP sent to your email address',
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontFamily: 'productSansBold',
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Container(
-                          constraints: const BoxConstraints(maxWidth: 500),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              otpNumberWidget(0),
-                              otpNumberWidget(1),
-                              otpNumberWidget(2),
-                              otpNumberWidget(3),
-                              otpNumberWidget(4),
-                              otpNumberWidget(5),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          //await verifyOTP();
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            AppColors.primaryColor,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14)),
-                            ),
-                          ),
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Center(
-                            child: Text(
-                              'Verify OTP',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'productSansBold',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  NumericKeyboard(
-                    onKeyboardTap: _onKeyboardTap,
-                    textColor: AppColors.primaryColor,
-                    rightIcon: const Icon(
-                      Icons.backspace,
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: AppColors.whiteText,
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.primaryColor,
+        title: Text("Verify OTP and Reset Password",
+            style: GoogleFonts.raleway(
+              textStyle: TextStyle(
+                fontSize: 18,
+                color: AppColors.whiteText,
+              ),
+            )),
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Enter the OTP sent to your registered email and reset your password.',
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      fontSize: 16,
                       color: AppColors.primaryColor,
                     ),
-                    rightButtonFn: () {
-                      setState(() {
-                        if (text.length > 0) {
-                          text = text.substring(0, text.length - 1);
-                        }
-                      });
-                    },
-                  )
-                ],
+                  ),
+                ),
               ),
-            )
-          ],
+              Lottie.asset(
+                'assets/lottie/verify.json',
+                height: 200,
+                width: 200,
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: confettiController,
+                  blastDirection: pi / 2,
+                  shouldLoop: true,
+                  maxBlastForce: 5,
+                  minBlastForce: 2,
+                  emissionFrequency: 0.05,
+                  numberOfParticles: 50,
+                  gravity: 1,
+                ),
+              ),
+              Form(
+                key: _key,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: AppSizes.spaceBtwSections),
+                  child: Column(
+                    children: [
+                      //OTP
+                      TextFormField(
+                        key: const ValueKey('otp'),
+                        controller: _otpcontroller,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.password),
+                          labelText: AppTexts.otp,
+                          hintText: AppTexts.otp,
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwnInputFields),
+                      //newPassword
+                      TextFormField(
+                        key: const ValueKey('newPassword'),
+                        controller: _newPasswordController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Iconsax.password_check),
+                          labelText: AppTexts.newPassword,
+                          hintText: AppTexts.newPasswordHint,
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwnInputFields),
+                      //email confirmation
+                      TextFormField(
+                        key: const ValueKey('email'),
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email),
+                          labelText: AppTexts.confrimemail,
+                          hintText: AppTexts.confrimemail,
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
+
+                      Stack(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                              onPressed: () async {
+                                confettiController
+                                    .play(); // Play confetti animation
+                              },
+                              child:
+                                  Text(AppTexts.verifyandUpdate.toUpperCase()),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppSizes.spaceBtwSections,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
