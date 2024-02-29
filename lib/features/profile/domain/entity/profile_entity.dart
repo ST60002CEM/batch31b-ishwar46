@@ -1,4 +1,4 @@
-class UserEntity {
+class ProfileEntity {
   final String? userId;
   final String firstName;
   final String lastName;
@@ -7,9 +7,9 @@ class UserEntity {
   final String address;
   final String phone;
   final bool isAdmin;
-  String image;
+  String? image;
 
-  UserEntity({
+  ProfileEntity({
     this.userId,
     required this.firstName,
     required this.lastName,
@@ -18,7 +18,7 @@ class UserEntity {
     required this.address,
     required this.phone,
     required this.isAdmin,
-    this.image = '',
+    this.image,
   });
 
   @override

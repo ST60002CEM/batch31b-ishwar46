@@ -18,6 +18,6 @@ class UserRemoteRepoImpl implements IUserProfileRepository {
 
   @override
   Future<Either<Failure, List<UserEntity>>> getUserProfile(String userId) {
-    return userProfileRemoteDataSource.getUserProfile();
+    return userProfileRemoteDataSource.getUserProfile(userId);
   }
 }

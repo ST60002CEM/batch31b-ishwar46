@@ -4,19 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userProfileViewModelProvider =
     StateNotifierProvider.autoDispose<UserProfileViewModel, UserProfileState>(
-        (ref) => UserProfileViewModel(ref.read(GetUserProfileUsecaseProvider),
-            userId: 'userId'));
+        (ref) => UserProfileViewModel(
+              ref.read(GetUserProfileUsecaseProvider),
+            ));
 
 class UserProfileViewModel extends StateNotifier<UserProfileState> {
   final GetUserProfileUsecase getUserProfileUsecase;
-  final String userId;
 
-  UserProfileViewModel(this.getUserProfileUsecase, {required this.userId})
-      : super(UserProfileState.initialState()) {
-    getUserProfile();
-  }
+  UserProfileViewModel(this.getUserProfileUsecase)
+      : super(UserProfileState.initialState()) {}
 
-  Future getUserProfile() async {
+  Future getUserProfile(String userId) async {
     state = state.copyWith(isLoading: true, errorMessage: '');
     try {
       final result = await getUserProfileUsecase.getUserProfile(userId);

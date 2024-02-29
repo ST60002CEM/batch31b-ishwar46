@@ -7,8 +7,8 @@ import '../../features/forgot_password/presentation/view/send_otp_page.dart';
 import '../../features/forgot_password/presentation/view/verify_otp_page.dart';
 import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
-import '../../features/otp/sendOTP.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
+import '../../features/profile/presentation/view/user_profile_view.dart';
 import '../../features/sensors/gyro.dart';
 import '../../features/sensors/proximity.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
@@ -52,7 +52,7 @@ class MyRoutes {
       preloginRoute: (context) => PreLoginPage(),
       viewbookedappointment: (context) => ViewBookedAppointments(),
       settingsRoute: (context) => SettingsView(),
-      //userProfileRoute: (context) => UserProfileView(),
+      userProfileRoute: (context) => UserProfilePage(),
       gyroRoute: (context) => GyroscopeScreen(),
       jokesRoute: (context) => ProximityScreen(),
       eventRoute: (context) => EventView(),

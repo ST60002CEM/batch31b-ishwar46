@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_profile_api_model.dart';
+part of 'profile_api_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserProfileAPIModel _$UserProfileAPIModelFromJson(Map<String, dynamic> json) =>
-    UserProfileAPIModel(
+ProfileApiModel _$ProfileApiModelFromJson(Map<String, dynamic> json) =>
+    ProfileApiModel(
       userId: json['_id'] as String?,
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
@@ -19,8 +19,7 @@ UserProfileAPIModel _$UserProfileAPIModelFromJson(Map<String, dynamic> json) =>
       image: json['image'] as String?,
     );
 
-Map<String, dynamic> _$UserProfileAPIModelToJson(
-        UserProfileAPIModel instance) =>
+Map<String, dynamic> _$ProfileApiModelToJson(ProfileApiModel instance) =>
     <String, dynamic>{
       '_id': instance.userId,
       'firstName': instance.firstName,

@@ -24,7 +24,8 @@ class UserProfileRemoteDataSource {
 
   UserProfileRemoteDataSource({required this.dio, required this.secureStorage});
 
-  Future<Either<Failure, List<UserEntity>>> getUserProfile() async {
+  Future<Either<Failure, List<UserEntity>>> getUserProfile(
+      String userId) async {
     try {
       final token = await secureStorage.read(key: "authToken");
 
@@ -33,26 +34,23 @@ class UserProfileRemoteDataSource {
         return Left(Failure(error: "Token not found"));
       }
 
-      final decodedToken = JwtDecoder.decode(token);
-      print("Decoded Token: $decodedToken");
-      final tokenUserId = decodedToken['id'];
-
-      if (tokenUserId == null) {
-        return Left(Failure(error: "Token not found"));
-      }
-
-      var response = await dio.get('${ApiEndpoints.profile}/$tokenUserId',
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
+      var response = await dio.get('${ApiEndpoints.profile}/$userId',
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
 
       print("Response: ${response.data}");
 
-      if (response.statusCode == 200 && response.data != null) {
-        GetUserProfileDTO userAddDTO =
-            GetUserProfileDTO.fromJson(response.data);
-        List<UserEntity> userList = userAddDTO.data
-            .map((user) => UserProfileAPIModel.toEntity(user))
-            .toList();
-        return Right(userList);
+      if (response.statusCode == 200) {
+        if (response.data.containsKey("userProfile")) {
+          var userJsonList = response.data["userProfile"] as List<dynamic>;
+          List<UserEntity> user = userJsonList
+              .map((users) => UserProfileAPIModel.fromJson(users).toEntity())
+              .toList();
+          return Right(user);
+        } else {
+          return Left(Failure(error: "User not found"));
+        }
       } else {
         return Left(Failure(
             error: response.statusMessage.toString(),

@@ -1,10 +1,11 @@
-import 'package:age_care/features/userprofile/domain/entity/user_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_profile_api_model.g.dart';
+import '../../domain/entity/profile_entity.dart';
+
+part 'profile_api_model.g.dart';
 
 @JsonSerializable()
-class UserProfileAPIModel {
+class ProfileApiModel {
   @JsonKey(name: '_id')
   final String? userId;
   final String firstName;
@@ -16,7 +17,7 @@ class UserProfileAPIModel {
   final bool isAdmin;
   String? image;
 
-  UserProfileAPIModel({
+  ProfileApiModel({
     this.userId,
     required this.firstName,
     required this.lastName,
@@ -28,14 +29,14 @@ class UserProfileAPIModel {
     this.image,
   });
 
-  factory UserProfileAPIModel.fromJson(Map<String, dynamic> json) =>
-      _$UserProfileAPIModelFromJson(json);
+  factory ProfileApiModel.fromJson(Map<String, dynamic> json) =>
+      _$ProfileApiModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserProfileAPIModelToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileApiModelToJson(this);
 
   //to entity
-  UserEntity toEntity() {
-    return UserEntity(
+  ProfileEntity toEntity() {
+    return ProfileEntity(
       userId: userId,
       firstName: firstName,
       lastName: lastName,
@@ -49,8 +50,8 @@ class UserProfileAPIModel {
   }
 
   //from entity
-  factory UserProfileAPIModel.fromEntity(UserEntity entity) {
-    return UserProfileAPIModel(
+  factory ProfileApiModel.fromEntity(ProfileEntity entity) {
+    return ProfileApiModel(
       userId: entity.userId,
       firstName: entity.firstName,
       lastName: entity.lastName,
