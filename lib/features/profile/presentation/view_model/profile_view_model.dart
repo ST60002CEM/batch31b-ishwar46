@@ -9,19 +9,20 @@ final profileViewModelProvider =
 class ProfileViewModel extends StateNotifier<ProfileState> {
   final GetProfileUseCase _getProfileUseCase;
 
-  ProfileViewModel(this._getProfileUseCase) : super(ProfileState.initial());
+  ProfileViewModel(this._getProfileUseCase) : super(ProfileState.initial()) {
+    getProfile();
+  }
 
-  Future<void> getProfile(String userId) async {
-    state = state.copyWith(isLoading: true, error: '');
+  Future<void> getProfile() async {
+    state = state.copyWith(isLoading: true);
 
     try {
-      final result = await _getProfileUseCase.getProfile(userId);
+      final result = await _getProfileUseCase.getProfile();
 
       result.fold(
         (failure) =>
             state = state.copyWith(isLoading: false, error: failure.error),
-        (profileList) =>
-            state = state.copyWith(isLoading: false, profile: profileList),
+        (users) => state = state.copyWith(isLoading: false, users: users),
       );
     } catch (e) {
       state = state.copyWith(

@@ -15,7 +15,7 @@ class ProfileRemoteRepostitory implements IProfileRepository {
   ProfileRemoteRepostitory(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, List<ProfileEntity>>> getProfile(String userId) {
-    return remoteDataSource.getProfile(userId);
+  Future<Either<Failure, List<ProfileEntity>>> getProfile() {
+    return remoteDataSource.getProfile();
   }
 }

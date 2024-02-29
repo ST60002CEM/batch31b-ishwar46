@@ -14,7 +14,6 @@ import '../../features/sensors/proximity.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 import '../../features/staffs/presentation/view/staff_details_view.dart';
-import '../../features/userprofile/presentation/view/user_profile.dart';
 import '../../views/home/home_page.dart';
 
 class MyRoutes {

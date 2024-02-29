@@ -17,7 +17,7 @@ class GetProfileUseCase {
   //   return _profileRepostiory.getProfile(userId);
   // }
 
-  Future<Either<Failure, List<ProfileEntity>>> getProfile(String userId) async {
-    return _profileRepostiory.getProfile(userId);
+  Future<Either<Failure, List<ProfileEntity>>> getProfile() async {
+    return _profileRepostiory.getProfile();
   }
 }

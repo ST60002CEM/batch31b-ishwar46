@@ -9,5 +9,5 @@ final profileRepositoryProvider = Provider<IProfileRepository>(
     ((ref) => ref.read(profileRemoteRepositoryProvider)));
 
 abstract class IProfileRepository {
-  Future<Either<Failure, List<ProfileEntity>>> getProfile(String userId);
+  Future<Either<Failure, List<ProfileEntity>>> getProfile();
 }

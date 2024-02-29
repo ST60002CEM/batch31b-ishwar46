@@ -2,54 +2,40 @@ import '../../domain/entity/profile_entity.dart';
 
 class ProfileState {
   final bool isLoading;
-  final bool isSubmitting;
-  final bool isSuccess;
-  final bool isFailure;
   final String? error;
-  final String info;
-  final List<ProfileEntity>? profile;
+  final bool? showMessage;
+  final List<ProfileEntity>? users;
 
   ProfileState(
       {required this.isLoading,
-      required this.isSubmitting,
-      required this.isSuccess,
-      required this.isFailure,
-      this.error,
-      required this.info,
-      this.profile});
+      required this.error,
+      required this.showMessage,
+      this.users});
 
   factory ProfileState.initial() {
     return ProfileState(
-        isLoading: false,
-        isSubmitting: false,
-        isSuccess: false,
-        isFailure: false,
-        error: null,
-        profile: null,
-        info: '');
+      isLoading: false,
+      error: null,
+      showMessage: false,
+      users: null,
+    );
   }
 
   ProfileState copyWith({
     bool? isLoading,
-    bool? isSubmitting,
-    bool? isSuccess,
-    bool? isFailure,
     String? error,
-    String? info,
-    List<ProfileEntity>? profile,
+    bool? showMessage,
+    List<ProfileEntity>? users,
   }) {
     return ProfileState(
         isLoading: isLoading ?? this.isLoading,
-        isSubmitting: isSubmitting ?? this.isSubmitting,
-        isSuccess: isSuccess ?? this.isSuccess,
-        isFailure: isFailure ?? this.isFailure,
         error: error ?? this.error,
-        info: info ?? this.info,
-        profile: profile ?? this.profile);
+        showMessage: showMessage ?? this.showMessage,
+        users: users ?? this.users);
   }
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isSubmitting: $isSubmitting, isSuccess: $isSuccess, isFailure: $isFailure, error: $error, info: $info, profile: $profile)';
+    return 'ProfileState(isLoading: $isLoading, error: $error, showMessage: $showMessage, users: $users)';
   }
 }

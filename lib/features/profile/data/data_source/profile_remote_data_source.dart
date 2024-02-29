@@ -26,7 +26,7 @@ class ProfileRemoteDataSource {
 
   //Get User Profile by userId
 
-  Future<Either<Failure, List<ProfileEntity>>> getProfile(String userId) async {
+  Future<Either<Failure, List<ProfileEntity>>> getProfile() async {
     try {
       final token = await secureStorage.read(key: "authToken");
       if (token == null) {
@@ -50,14 +50,11 @@ class ProfileRemoteDataSource {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData = response.data;
-        if (responseData.containsKey("userProfile")) {
-          var userJsonList = responseData["userProfile"] as List<dynamic>;
-          List<ProfileEntity> user = userJsonList
-              .map((users) => ProfileApiModel.fromJson(users).toEntity())
-              .toList();
-          return Right(user);
-        } else {
-          return Left(Failure(error: "User profile not found in response"));
+        if (responseData is Map<String, dynamic> &&
+            responseData.containsKey("userProfile")) {
+          var userJson = responseData["userProfile"] as Map<String, dynamic>;
+          ProfileEntity user = ProfileApiModel.fromJson(userJson).toEntity();
+          return Right([user]);
         }
       } else {
         return Left(
@@ -68,15 +65,20 @@ class ProfileRemoteDataSource {
         );
       }
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionTimeout ||
+      if (e.type == DioExceptionType.connectionError ||
           e.type == DioExceptionType.receiveTimeout) {
         return Left(Failure(error: "Connection timeout. Please try again."));
       } else if (e.type == DioExceptionType.badResponse) {
+        // Handle other Dio errors here if needed
+        return Left(
+            Failure(error: "Error occurred: ${e.response?.statusCode}"));
       } else {
-        return Left(Failure(error: "Server error. Please try again later."));
+        return Left(Failure(error: "An unexpected error occurred."));
       }
-      Left(Failure(error: "An unexpected error occurred."));
+    } catch (e) {
+      print("Caught exception: $e");
+      return Left(Failure(error: "An unexpected error occurred: $e"));
     }
-    throw Exception("An unexpected error occurred in getProfile");
+    throw UnimplementedError();
   }
 }
