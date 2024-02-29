@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../../config/constants/app_colors.dart';
@@ -89,8 +90,8 @@ class _ViewBookedAppointmentsState
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.viewBookedAppointment.toUpperCase(),
-          style: TextStyle(
+          AppTexts.viewBookedAppointment,
+          style: GoogleFonts.montserrat(
             color: AppColors.white,
           ),
         ),
