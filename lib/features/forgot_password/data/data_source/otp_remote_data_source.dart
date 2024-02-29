@@ -40,7 +40,48 @@ class OTPRemoteDataSource {
           e.type == DioExceptionType.receiveTimeout) {
         return Left(Failure(error: "Connection timeout. Please try again."));
       } else if (e.type == DioExceptionType.badResponse) {
-        return Left(Failure(error: "Server error. Please try again later."));
+        if (e.response?.data['message'] == "User not found.") {
+          return Left(Failure(error: "User not found."));
+        } else {
+          return Left(Failure(error: "Server error. Please try again later."));
+        }
+      } else {
+        return Left(Failure(error: "An unexpected error occurred."));
+      }
+    } catch (e) {
+      return Left(Failure(error: "An unexpected error occurred."));
+    }
+  }
+
+  //Verify and Update newPassword
+  Future<Either<Failure, bool>> verifyandUpdateOTP(
+      String email, String otp, String newPassword) async {
+    try {
+      Response response = await dio.put(
+        ApiEndpoints.verifyandUpdatePassword,
+        data: {"email": email, "otp": otp, "newPassword": newPassword},
+      );
+
+      if (response.statusCode == 200) {
+        return Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data['message'],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        return Left(Failure(error: "Connection timeout. Please try again."));
+      } else if (e.type == DioExceptionType.badResponse) {
+        if (e.response?.data['message'] == "User not found.") {
+          return Left(Failure(error: "User not found."));
+        } else {
+          return Left(Failure(error: "Server error. Please try again later."));
+        }
       } else {
         return Left(Failure(error: "An unexpected error occurred."));
       }

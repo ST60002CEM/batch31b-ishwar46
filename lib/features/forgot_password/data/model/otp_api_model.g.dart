@@ -12,6 +12,7 @@ OTPApiModel _$OTPApiModelFromJson(Map<String, dynamic> json) => OTPApiModel(
       otp: json['otp'] as String?,
       createdAt: json['createdAt'] as String?,
       expiryTime: json['expiryTime'] as String?,
+      isUsed: json['isUsed'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$OTPApiModelToJson(OTPApiModel instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$OTPApiModelToJson(OTPApiModel instance) =>
       'otp': instance.otp,
       'createdAt': instance.createdAt,
       'expiryTime': instance.expiryTime,
+      'isUsed': instance.isUsed,
     };
