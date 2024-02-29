@@ -25,7 +25,6 @@ class ProfileRemoteDataSource {
   ProfileRemoteDataSource({required this.dio, required this.secureStorage});
 
   //Get User Profile by userId
-
   Future<Either<Failure, List<ProfileEntity>>> getProfile() async {
     try {
       final token = await secureStorage.read(key: "authToken");
@@ -69,7 +68,6 @@ class ProfileRemoteDataSource {
           e.type == DioExceptionType.receiveTimeout) {
         return Left(Failure(error: "Connection timeout. Please try again."));
       } else if (e.type == DioExceptionType.badResponse) {
-        // Handle other Dio errors here if needed
         return Left(
             Failure(error: "Error occurred: ${e.response?.statusCode}"));
       } else {
