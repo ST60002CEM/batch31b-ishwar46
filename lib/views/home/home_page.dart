@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shake/shake.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:age_care/config/router/app_routes.dart';
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/widgets/drawer_widget.dart';
@@ -13,17 +13,18 @@ import 'package:age_care/config/constants/app_colors.dart';
 import 'package:age_care/views/home/widgets/service_text.dart';
 import 'package:age_care/views/home/widgets/service_row.dart';
 import 'package:age_care/views/home/widgets/service_row_two.dart';
+import '../../features/notifications/presentation/notification_view_model/notification_view_model.dart';
 import 'widgets/emergency_bottom_sheet.dart';
 import 'widgets/slider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   late ShakeDetector shakeDetector;
   int shakeCount = 0;
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
@@ -89,6 +90,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> logout() async {
     await secureStorage.delete(key: "authToken");
+    ref.read(notificationViewModelProvider.notifier).resetState();
     Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
   }
 
@@ -132,11 +134,48 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildAppBarActions() {
     return [
-      IconButton(
-        color: AppColors.whiteText,
-        icon: const Icon(Icons.notifications),
-        onPressed: () {
-          EasyLoading.showInfo("No new notifications.");
+      Consumer(
+        builder: (context, ref, child) {
+          final notificationCount = ref.watch(
+              notificationViewModelProvider.select((state) =>
+                  state.notifications
+                      ?.where((notification) => !notification.read)
+                      .length ??
+                  0));
+          return IconButton(
+            color: AppColors.whiteText,
+            icon: Stack(
+              children: [
+                const Icon(Icons.notifications),
+                if (notificationCount > 0)
+                  Positioned(
+                    top: 1,
+                    right: 1,
+                    child: Container(
+                      width: 14,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text(
+                          notificationCount.toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.viewNotificationRoute);
+            },
+          );
         },
       ),
       IconButton(

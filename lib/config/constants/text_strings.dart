@@ -22,8 +22,11 @@ class AppTexts {
   static const String loginPageSubTitle = 'Please enter your credentials';
   static const String email = 'Email';
   static const String emailHint = 'Enter your email';
+  static const String confrimemail = 'Confirm Email';
   static const String password = 'Password';
   static const String passwordHint = 'Enter your password';
+  static const String newPassword = 'New Password';
+  static const String newPasswordHint = 'Enter your new password';
   static const String login = 'Login';
   static const String forgotPassword = 'Forgot Password?';
   static const String remeberme = 'Remember Me';
@@ -90,4 +93,13 @@ class AppTexts {
 
   //Sensors Joke Page
   static const String sensorJokePageTitle = 'Random Joke';
+
+  //Notification Page
+  static const String notificationPageTitle = 'Notifications';
+
+  //OTP Page
+  static const String sendOTPPageTitle = 'Send OTP';
+  static const String sendOTPPageSubTitle = 'Please enter your email';
+  static const String verifyandUpdate = 'Verify and Update';
+  static const String otp = 'OTP';
 }
