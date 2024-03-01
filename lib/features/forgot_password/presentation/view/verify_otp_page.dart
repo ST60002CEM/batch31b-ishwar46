@@ -31,6 +31,7 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
   @override
   void dispose() {
     super.dispose();
+    confettiController.dispose();
   }
 
   @override
