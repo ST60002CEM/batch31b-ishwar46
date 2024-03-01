@@ -103,7 +103,9 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                       style: GoogleFonts.montserrat(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.whiteText : AppColors.black,
+                        color: isDark
+                            ? AppColors.whiteText
+                            : AppColors.primaryColor,
                       ),
                     ),
                   ),
@@ -119,7 +121,9 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                         fontSize: 10,
                         letterSpacing: 1.2,
                         fontWeight: FontWeight.normal,
-                        color: isDark ? AppColors.whiteText : AppColors.black,
+                        color: isDark
+                            ? AppColors.whiteText
+                            : AppColors.primaryColor,
                       ),
                     ),
                   ),

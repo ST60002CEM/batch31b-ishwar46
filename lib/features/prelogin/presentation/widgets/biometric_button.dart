@@ -31,7 +31,7 @@ class Biometric extends StatelessWidget {
           elevation: 2,
           splashFactory: InkRipple.splashFactory,
           backgroundColor:
-              isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
+              isDarkMode ? AppColors.darkModeOnPrimary : AppColors.primaryColor,
         ),
       ),
     );

@@ -37,7 +37,7 @@ class PreLoginButton extends StatelessWidget {
               splashFactory: InkRipple.splashFactory,
               backgroundColor: isDarkMode
                   ? AppColors.darkModeOnPrimary
-                  : AppColors.whiteText),
+                  : AppColors.primaryColor),
         ),
       ),
     );

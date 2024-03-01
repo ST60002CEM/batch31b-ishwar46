@@ -65,6 +65,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       }
     });
     return Scaffold(
+      backgroundColor: dark ? AppColors.dark : AppColors.whiteText,
       body: SingleChildScrollView(
         child: Padding(
           padding: AppSpacingStyle.paddingWithAppBarHeight,
@@ -227,6 +228,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            primary: dark
+                                ? AppColors.darkModeOnPrimary
+                                : AppColors.primaryColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -267,7 +271,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           AppTexts.alreadyuser,
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    color: AppColors.primaryColor,
+                                    color: dark
+                                        ? AppColors.whiteText
+                                        : AppColors.primaryColor,
                                   ),
                         ),
                       ),
