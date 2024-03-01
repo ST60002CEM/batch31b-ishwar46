@@ -96,21 +96,22 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return PopScope(
       canPop: false,
       onPopInvoked: (_) async {},
       child: Scaffold(
-        backgroundColor: Colors.white.withOpacity(.94),
-        appBar: _buildAppBar(),
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
+        appBar: _buildAppBar(isDarkMode),
         drawer: MyDrawer(),
-        body: _buildBody(),
+        body: _buildBody(isDarkMode),
       ),
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(bool isDarkMode) {
     return AppBar(
-      backgroundColor: const Color.fromARGB(255, 15, 75, 125),
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
       title: Text('Welcome! $username'),
       titleTextStyle: GoogleFonts.montserrat(
         color: AppColors.whiteText,
@@ -186,7 +187,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     ];
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(bool isDarkMode) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -194,9 +195,9 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             MyCarouselSlider(),
             const SizedBox(height: 10.0),
-            ServiceText(),
-            ServiceRow(),
-            ServiceRowTwo(),
+            ServiceText(isDarkMode: isDarkMode),
+            ServiceRow(isDarkMode: isDarkMode),
+            ServiceRowTwo(isDarkMode: isDarkMode),
           ],
         ),
       ),

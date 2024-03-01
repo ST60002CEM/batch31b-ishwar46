@@ -42,11 +42,9 @@ class _MyDrawerState extends State<MyDrawer> {
         setState(() {
           userName = payloadMap['username'] ?? "No name";
           userEmail = payloadMap['email'] ?? "No email";
-          userImage = payloadMap['picture'] ?? "assets/img/user.png";
+          userImage = payloadMap['image'] ?? "N/A";
         });
       }
-    } else {
-      // Handle user not logged in or token not available
     }
   }
 
@@ -86,7 +84,9 @@ class _MyDrawerState extends State<MyDrawer> {
                       Navigator.pushNamed(context, '/userprofile');
                     },
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(userImage),
+                      backgroundImage: NetworkImage(userImage),
+
+                      // errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                   decoration: BoxDecoration(

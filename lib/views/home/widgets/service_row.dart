@@ -1,11 +1,14 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../../../widgets/card_widget.dart';
 
 class ServiceRow extends StatelessWidget {
   const ServiceRow({
-    super.key,
-  });
+    Key? key,
+    required this.isDarkMode,
+  }) : super(key: key);
+
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +19,33 @@ class ServiceRow extends StatelessWidget {
           width: 120,
           height: 140,
           padding: const EdgeInsets.all(10),
-          child: const CardWidget(
+          child: CardWidget(
             title: "Appointment",
             routeName: "/appointmentspage",
             imagePath: "assets/img/appointment.png",
+            isDarkMode: isDarkMode,
           ),
         ),
         Container(
           width: 120,
           height: 140,
           padding: const EdgeInsets.all(10),
-          child: const CardWidget(
+          child: CardWidget(
             title: "Health Care",
             routeName: "/settings",
             imagePath: "assets/img/doctor.png",
+            isDarkMode: isDarkMode,
           ),
         ),
         Container(
           width: 120,
           height: 140,
           padding: const EdgeInsets.all(10),
-          child: const CardWidget(
+          child: CardWidget(
             title: "Staffs",
             routeName: "/staffdetails",
             imagePath: "assets/img/medicalteam.png",
+            isDarkMode: isDarkMode,
           ),
         ),
       ],

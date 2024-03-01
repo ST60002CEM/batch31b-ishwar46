@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../../../config/constants/app_colors.dart';
 import '../../../../../config/constants/app_sizes.dart';
 import '../../../../../config/constants/text_strings.dart';
+import '../../../../../core/utils/helpers/helper_functions.dart';
 import '../../../domain/entity/appointment_entity.dart';
 import '../../viewmodel/appointment_viewmodel.dart';
 import 'package:intl/intl.dart';
@@ -79,6 +80,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   //Bottom Modal Sheet for Confirmation
   void _showConfirmationModal(BuildContext context) {
     bool isAnyFieldNull = false;
+    bool isDarkMode = HelperFunctions.isDarkMode(context);
 
     //check if any field is empty
     if (selectedService.isEmpty ||
@@ -100,7 +102,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         return SingleChildScrollView(
           child: Container(
             height: 500,
-            color: AppColors.white,
+            color: isDarkMode ? AppColors.dark : AppColors.white,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -397,11 +399,13 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
         ref.read(appointmentViewModelProvider.notifier).resetMessage(false);
       }
     });
+
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return Scaffold(
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
       appBar: AppBar(
         centerTitle: true,
-        foregroundColor: AppColors.whiteText,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
         title: Text(
           AppTexts.bookAppointment.toUpperCase(),
           style: TextStyle(
@@ -544,7 +548,9 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             side: BorderSide(
-                              color: AppColors.primaryColor,
+                              color: isDarkMode
+                                  ? AppColors.white
+                                  : AppColors.primaryColor,
                             ),
                           ),
                           onPressed: () {
@@ -557,12 +563,16 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                               Text(
                                 "View All Appointments",
                                 style: TextStyle(
-                                  color: AppColors.primaryColor,
+                                  color: isDarkMode
+                                      ? AppColors.white
+                                      : AppColors.primaryColor,
                                 ),
                               ),
                               Icon(
                                 Icons.file_copy,
-                                color: AppColors.primaryColor,
+                                color: isDarkMode
+                                    ? AppColors.white
+                                    : AppColors.primaryColor,
                               )
                             ],
                           ),

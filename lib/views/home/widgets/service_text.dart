@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ServiceText extends StatelessWidget {
-  const ServiceText({
-    super.key,
-  });
+  const ServiceText({Key? key, required this.isDarkMode}) : super(key: key);
+
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,8 @@ class ServiceText extends StatelessWidget {
             child: Text(
               "Our Services",
               style: GoogleFonts.montserrat(
-                color: Theme.of(context).primaryColor,
+                color:
+                    isDarkMode ? Colors.white : Theme.of(context).primaryColor,
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -35,7 +35,9 @@ class ServiceText extends StatelessWidget {
               child: Text(
                 "View All",
                 style: GoogleFonts.montserrat(
-                  color: Theme.of(context).primaryColor,
+                  color: isDarkMode
+                      ? Colors.white
+                      : Theme.of(context).primaryColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
