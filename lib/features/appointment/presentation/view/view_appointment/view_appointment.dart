@@ -90,8 +90,8 @@ class _ViewBookedAppointmentsState
         foregroundColor: AppColors.whiteText,
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          AppTexts.viewBookedAppointment,
-          style: GoogleFonts.montserrat(
+          AppTexts.viewBookedAppointment.toUpperCase(),
+          style: TextStyle(
             color: AppColors.white,
           ),
         ),

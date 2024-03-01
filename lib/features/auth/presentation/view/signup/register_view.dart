@@ -1,3 +1,4 @@
+import 'package:age_care/config/constants/app_colors.dart';
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -43,7 +44,8 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       if (ref.watch(connectivityStatusProvider) ==
           ConnectivityStatus.isDisconnected) {
         showSnackBar(
-            message: 'No Internet Connection',
+            message:
+                'No Internet Connection, Please connect to a working network',
             context: context,
             color: Colors.red);
       } else if (ref.watch(connectivityStatusProvider) ==
@@ -151,7 +153,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         key: const ValueKey('email'),
                         controller: _emailController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(LineIcons.mailchimp),
+                          prefixIcon: Icon(LineIcons.envelopeAlt),
                           labelText: AppTexts.email,
                           hintText: AppTexts.emailHint,
                         ),
@@ -261,7 +263,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         onTap: () {
                           Navigator.pushNamed(context, MyRoutes.loginRoute);
                         },
-                        child: Text(AppTexts.alreadyuser),
+                        child: Text(
+                          AppTexts.alreadyuser,
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: AppColors.primaryColor,
+                                  ),
+                        ),
                       ),
                     ],
                   ),

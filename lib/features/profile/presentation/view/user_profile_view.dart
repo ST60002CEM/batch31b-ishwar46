@@ -44,12 +44,10 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          "Profile",
-          style: GoogleFonts.raleway(
-            textStyle: TextStyle(
-              fontSize: 18,
-              color: AppColors.whiteText,
-            ),
+          "Profile".toUpperCase(),
+          style: TextStyle(
+            fontSize: 18,
+            color: AppColors.whiteText,
           ),
         ),
         centerTitle: true,

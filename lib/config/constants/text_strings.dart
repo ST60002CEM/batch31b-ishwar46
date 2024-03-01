@@ -54,6 +54,9 @@ class AppTexts {
   static const String lastName = 'Last Name';
   static const String lastNameHint = 'Enter your last name';
 
+  static const String donthaveanaccount =
+      'Don\'t have an account? Register Here';
+
   //Staff Page
   static const String staffPageTitle = 'Staffs';
   static const String staffPageSubTitle = 'All Staffs';

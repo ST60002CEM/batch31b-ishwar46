@@ -167,7 +167,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       height: AppSizes.spaceBtwItems,
                     ),
                     Text(AppTexts.loginPageTitle,
-                        style: Theme.of(context).textTheme.headlineMedium),
+                        style: Theme.of(context).textTheme.headlineLarge),
                     SizedBox(height: AppSizes.sm),
                     Text(AppTexts.loginPageSubTitle,
                         style: Theme.of(context).textTheme.bodyMedium),
@@ -235,14 +235,20 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 _onRememberMeChanged(value!);
                               },
                             ),
-                            Text(AppTexts.remeberme),
+                            Text(
+                              AppTexts.remeberme,
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
                             Spacer(),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(
                                     context, MyRoutes.sendOTPRoute);
                               },
-                              child: Text(AppTexts.forgetPassword),
+                              child: Text(
+                                AppTexts.forgetPassword,
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                             )
                           ],
                         ),
@@ -279,7 +285,15 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           onTap: () {
                             Navigator.pushNamed(context, MyRoutes.signupRoute);
                           },
-                          child: Text(AppTexts.register),
+                          child: Text(
+                            AppTexts.donthaveanaccount,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: AppColors.primaryColor,
+                                ),
+                          ),
                         ),
                       ],
                     ),
