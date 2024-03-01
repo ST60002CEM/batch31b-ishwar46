@@ -24,15 +24,16 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final dark = HelperFunctions.isDarkMode(context);
+    final isDark = HelperFunctions.isDarkMode(context);
     final isBiometricVisible = ref.watch(biometricProvider);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.primaryColor,
+      value: SystemUiOverlayStyle(
+        statusBarColor: isDark ? AppColors.dark : AppColors.primaryColor,
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
+        backgroundColor: isDark ? AppColors.dark : AppColors.whiteText,
         appBar: AppBar(
           toolbarHeight: 70,
           leadingWidth: 100,
@@ -41,7 +42,7 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
             child: Image(
               height: 180,
               image: AssetImage(
-                  dark ? AppImages.darkAppLogo : AppImages.lightAppLogo),
+                  isDark ? AppImages.darkAppLogo : AppImages.lightAppLogo),
             ),
           ),
           actions: [
@@ -86,9 +87,9 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                     child: Text(
                       "Services",
                       style: GoogleFonts.montserrat(
-                        color: Theme.of(context).primaryColor,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
+                        color: isDark ? AppColors.whiteText : AppColors.black,
                       ),
                     ),
                   ),
@@ -100,9 +101,9 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                     child: Text(
                       "News and Offers",
                       style: GoogleFonts.montserrat(
-                        color: Theme.of(context).primaryColor,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
+                        color: isDark ? AppColors.whiteText : AppColors.black,
                       ),
                     ),
                   ),
@@ -110,7 +111,7 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                   SizedBox(height: 200, child: NewsSlider()),
                   const SizedBox(height: 20),
                   // Version and Copyright
-                  const Align(
+                  Align(
                     alignment: Alignment.topCenter,
                     child: Text(
                       "Version 1.0.0",
@@ -118,7 +119,7 @@ class _PreLoginPageState extends ConsumerState<PreLoginPage> {
                         fontSize: 10,
                         letterSpacing: 1.2,
                         fontWeight: FontWeight.normal,
-                        color: AppColors.primaryColor,
+                        color: isDark ? AppColors.whiteText : AppColors.black,
                       ),
                     ),
                   ),

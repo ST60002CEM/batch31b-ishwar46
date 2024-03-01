@@ -1,11 +1,15 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/app_sizes.dart';
+import '../../../../core/common/widgets/user_profile_shimmer.dart';
+import '../../../../core/utils/helpers/helper_functions.dart';
 import '../view_model/profile_view_model.dart';
 
 class UserProfilePage extends ConsumerStatefulWidget {
@@ -40,9 +44,12 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
+
     return Scaffold(
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
         title: Text(
           "Profile".toUpperCase(),
           style: TextStyle(
@@ -63,7 +70,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
         builder: (context, watch, child) {
           final state = ref.watch(profileViewModelProvider);
           if (state.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: UserProfileShimmer());
           } else if (state.error != null) {
             return Center(child: Text(state.error!));
           } else if (state.users == null || state.users!.isEmpty) {
@@ -89,22 +96,42 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                     ),
                   ),
                   Center(
-                    child: CircleAvatar(
-                      radius: 60.0,
-                      backgroundImage:
-                          NetworkImage(user.image ?? 'assets/img/user.png'),
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 60.0,
+                          backgroundImage:
+                              NetworkImage(user.image ?? 'assets/img/user.png'),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () {
+                              _showImagePickerModal(context);
+                            },
+                            child: CircleAvatar(
+                              radius: 20.0,
+                              backgroundColor: isDarkMode
+                                  ? AppColors.darkModeOnPrimary
+                                  : AppColors.primaryColor,
+                              child: Icon(Icons.edit, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                   const SizedBox(height: AppSizes.spaceBtwItems),
                   Center(
                     child: Text(
                       '${user.firstName} ${user.lastName}',
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.black,
-                        ),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color:
+                            isDarkMode ? AppColors.whiteText : AppColors.black,
                       ),
                     ),
                   ),
@@ -114,27 +141,30 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                       child: Center(
                         child: Icon(
                           Icons.verified_user,
-                          color: Colors.blue,
+                          color: AppColors.accentColor,
                           size: 24.0,
                         ),
                       ),
                     ),
                   const SizedBox(height: 24.0),
-                  _buildDetailRow(Icons.email, 'Email', user.email),
-                  _buildDivider(),
-                  _buildDetailRow(Icons.location_on, 'Address', user.address),
-                  _buildDivider(),
-                  _buildDetailRow(Icons.phone, 'Phone', user.phone),
+                  _buildDetailRow(Icons.email, 'Email', user.email, isDarkMode),
                   _buildDivider(),
                   _buildDetailRow(
-                      Icons.verified_user_rounded, 'Username', user.username),
+                      Icons.location_on, 'Address', user.address, isDarkMode),
+                  _buildDivider(),
+                  _buildDetailRow(Icons.phone, 'Phone', user.phone, isDarkMode),
+                  _buildDivider(),
+                  _buildDetailRow(Icons.verified_user_rounded, 'Username',
+                      user.username, isDarkMode),
                   const SizedBox(height: 32.0),
                   Center(
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
+                          backgroundColor: isDarkMode
+                              ? AppColors.darkModeOnPrimary
+                              : AppColors.primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -154,7 +184,14 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
     );
   }
 
-  Widget _buildDetailRow(IconData icon, String title, String text) {
+  Widget _buildDetailRow(
+      IconData icon, String title, String text, bool isDarkMode) {
+    Color textColor = isDarkMode
+        ? AppColors.whiteText
+        : HelperFunctions.isDarkMode(context)
+            ? AppColors.primaryColor
+            : AppColors.black;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -162,16 +199,12 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
           children: [
             Icon(icon, size: 20.0),
             const SizedBox(width: 12.0),
-            Text(
-              title,
-              style: GoogleFonts.raleway(
-                textStyle: TextStyle(
-                  fontSize: 15,
+            Text(title,
+                style: TextStyle(
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
+                  color: textColor,
+                )),
           ],
         ),
         const SizedBox(height: 4.0),
@@ -180,7 +213,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
           style: GoogleFonts.raleway(
             textStyle: TextStyle(
               fontSize: 15,
-              color: AppColors.black,
+              color: textColor,
             ),
           ),
         ),
@@ -193,6 +226,42 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       height: 1.0,
       color: AppColors.grey,
+    );
+  }
+
+  void _showImagePickerModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Camera'),
+              onTap: () async {
+                Navigator.of(context).pop();
+                final pickedFile =
+                    await ImagePicker().pickImage(source: ImageSource.camera);
+                pickedFile != null
+                    ? EasyLoading.showSuccess('Image selected')
+                    : EasyLoading.showError('No image selected');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Gallery'),
+              onTap: () async {
+                Navigator.of(context).pop();
+                final pickedFile =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                pickedFile != null
+                    ? EasyLoading.showSuccess('Image selected')
+                    : EasyLoading.showError('No image selected');
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

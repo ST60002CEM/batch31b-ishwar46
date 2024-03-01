@@ -20,8 +20,9 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      surfaceTintColor: isDarkMode ? AppColors.black : AppColors.whiteText,
-      color: isDarkMode ? AppColors.black : AppColors.whiteText,
+      surfaceTintColor:
+          isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
+      color: isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

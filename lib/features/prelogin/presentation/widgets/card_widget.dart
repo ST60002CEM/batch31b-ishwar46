@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/utils/helpers/helper_functions.dart';
+
 class CardWidgetPre extends StatelessWidget {
   final String title;
   final String routeName;
@@ -17,9 +19,11 @@ class CardWidgetPre extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return Card(
-      surfaceTintColor: AppColors.whiteText,
-      color: AppColors.whiteText,
+      surfaceTintColor:
+          isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
+      color: isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

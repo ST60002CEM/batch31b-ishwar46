@@ -49,9 +49,12 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return GestureDetector(
       onTap: _showModalSheet,
       child: Card(
-        color: widget.isDarkMode ? AppColors.black : AppColors.whiteText,
-        surfaceTintColor:
-            widget.isDarkMode ? AppColors.black : AppColors.whiteText,
+        color: widget.isDarkMode
+            ? AppColors.darkModeOnPrimary
+            : AppColors.whiteText,
+        surfaceTintColor: widget.isDarkMode
+            ? AppColors.darkModeOnPrimary
+            : AppColors.whiteText,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: statusColor, width: 2.0),
