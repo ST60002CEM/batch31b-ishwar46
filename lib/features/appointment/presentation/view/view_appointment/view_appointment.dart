@@ -1,8 +1,8 @@
+import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../../../config/constants/app_colors.dart';
@@ -84,11 +84,13 @@ class _ViewBookedAppointmentsState
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
+
     return Scaffold(
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
       appBar: AppBar(
         centerTitle: true,
-        foregroundColor: AppColors.whiteText,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
         title: Text(
           AppTexts.viewBookedAppointment.toUpperCase(),
           style: TextStyle(
@@ -143,6 +145,7 @@ class _ViewBookedAppointmentsState
                           final appointment = state.appointments![
                               state.appointments!.length - 1 - index];
                           return AppointmentCard(
+                            isDarkMode: isDarkMode,
                             serviceType: appointment.serviceType,
                             serviceDate: appointment.serviceDate,
                             startTime: appointment.startTime,

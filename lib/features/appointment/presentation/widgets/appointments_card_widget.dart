@@ -13,6 +13,7 @@ class AppointmentCard extends StatefulWidget {
   final VoidCallback onDelete;
   final VoidCallback? onEdit;
   final bool isAdmin;
+  final bool isDarkMode;
 
   AppointmentCard({
     required this.serviceType,
@@ -26,6 +27,7 @@ class AppointmentCard extends StatefulWidget {
     required this.onDelete,
     this.onEdit,
     required this.isAdmin,
+    required this.isDarkMode,
   });
 
   @override
@@ -47,8 +49,9 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return GestureDetector(
       onTap: _showModalSheet,
       child: Card(
-        surfaceTintColor: AppColors.whiteText,
-        color: AppColors.whiteText,
+        color: widget.isDarkMode ? AppColors.black : AppColors.whiteText,
+        surfaceTintColor:
+            widget.isDarkMode ? AppColors.black : AppColors.whiteText,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: statusColor, width: 2.0),
@@ -91,6 +94,11 @@ class _AppointmentCardState extends State<AppointmentCard> {
   }
 
   Widget _buildAppointmentDetails(SizedBox gap, String statusText) {
+    Color ticketNumberBackgroundColor =
+        widget.isDarkMode ? AppColors.whiteText : AppColors.black;
+    Color ticketNumberTextColor =
+        widget.isDarkMode ? AppColors.black : AppColors.whiteText;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -100,7 +108,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
             Container(
               padding: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 72, 81, 90),
+                color: ticketNumberBackgroundColor,
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Text(
@@ -108,7 +116,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.normal,
-                  color: AppColors.whiteText,
+                  color: ticketNumberTextColor,
                 ),
               ),
             ),
@@ -136,21 +144,24 @@ class _AppointmentCardState extends State<AppointmentCard> {
         Text(
           'Status: $statusText',
           style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: _getStatusColor()),
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: _getStatusColor(),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildDetailRow(String title, String value, Color valueColor) {
+    Color textColor = widget.isDarkMode ? AppColors.whiteText : AppColors.black;
+
     return Row(
       children: [
         Text(title,
             style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         Spacer(),
-        Text(value, style: TextStyle(fontSize: 12, color: valueColor)),
+        Text(value, style: TextStyle(fontSize: 12, color: textColor)),
       ],
     );
   }
@@ -211,7 +222,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
       case 'completed':
         return AppColors.info; // Completed
       default:
-        return AppColors.grey; // Default color for unknown status
+        return AppColors.grey;
     }
   }
 

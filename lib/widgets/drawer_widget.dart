@@ -85,8 +85,6 @@ class _MyDrawerState extends State<MyDrawer> {
                     },
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(userImage),
-
-                      // errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                   decoration: BoxDecoration(

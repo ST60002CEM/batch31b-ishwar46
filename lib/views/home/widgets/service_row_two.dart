@@ -23,7 +23,7 @@ class ServiceRowTwo extends StatelessWidget {
             title: "Emergency",
             routeName: "/hospital",
             imagePath: "assets/img/emergency.png",
-            isDarkMode: isDarkMode, // Pass isDarkMode to CardWidget
+            isDarkMode: isDarkMode,
           ),
         ),
         Container(
@@ -34,7 +34,7 @@ class ServiceRowTwo extends StatelessWidget {
             title: "Hospital",
             routeName: "",
             imagePath: "assets/img/hospital.png",
-            isDarkMode: isDarkMode, // Pass isDarkMode to CardWidget
+            isDarkMode: isDarkMode,
           ),
         ),
         Container(
@@ -45,7 +45,7 @@ class ServiceRowTwo extends StatelessWidget {
             title: "Schedules",
             routeName: "",
             imagePath: "assets/img/grandma.png",
-            isDarkMode: isDarkMode, // Pass isDarkMode to CardWidget
+            isDarkMode: isDarkMode,
           ),
         ),
       ],
