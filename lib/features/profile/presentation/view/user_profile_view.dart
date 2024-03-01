@@ -1,3 +1,4 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,12 +16,26 @@ class UserProfilePage extends ConsumerStatefulWidget {
 }
 
 class _UserProfilePageState extends ConsumerState<UserProfilePage> {
+  final confettiController =
+      ConfettiController(duration: const Duration(seconds: 2));
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.watch(profileViewModelProvider.notifier).getProfile();
+      await ref.read(profileViewModelProvider.notifier).getProfile();
+      confettiController.play();
+
+      Future.delayed(const Duration(seconds: 1), () {
+        confettiController.stop();
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    confettiController.dispose();
   }
 
   @override
@@ -62,6 +77,19 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: ConfettiWidget(
+                      confettiController: confettiController,
+                      blastDirectionality: BlastDirectionality.explosive,
+                      shouldLoop: false,
+                      maxBlastForce: 10,
+                      minBlastForce: 2,
+                      emissionFrequency: 0.05,
+                      numberOfParticles: 10,
+                      gravity: 1,
+                    ),
+                  ),
                   Center(
                     child: CircleAvatar(
                       radius: 60.0,
