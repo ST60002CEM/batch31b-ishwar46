@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 import 'config/constants/app_colors.dart';
 import 'core/network/hive_service.dart';
@@ -22,8 +23,16 @@ void main() async {
   await HiveService().init();
 
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    KhaltiScope(
+      publicKey: 'test_public_key_005831aa5f40442c9be2f742da9735b8',
+      enabledDebugging: true,
+      builder: (context, navKey) {
+        return ProviderScope(
+          child: MyApp(
+            navigatorKey: navKey,
+          ),
+        );
+      },
     ),
   );
   configLoading();

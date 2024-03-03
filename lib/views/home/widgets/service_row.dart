@@ -32,7 +32,7 @@ class ServiceRow extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: CardWidget(
             title: "Payments",
-            routeName: "",
+            routeName: "/paymentRoute",
             imagePath: "assets/img/payment.png",
             isDarkMode: isDarkMode,
           ),
