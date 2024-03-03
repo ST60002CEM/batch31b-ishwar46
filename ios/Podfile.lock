@@ -6,6 +6,8 @@ PODS:
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
+  - device_info_plus (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
@@ -28,7 +30,9 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - permission_handler_apple (9.1.1):
+  - pdfx (1.0.0):
+    - Flutter
+  - permission_handler_apple (9.3.0):
     - Flutter
   - ReachabilitySwift (5.0.0)
   - rive_common (0.0.1):
@@ -45,6 +49,7 @@ DEPENDENCIES:
   - all_sensors2 (from `.symlinks/plugins/all_sensors2/ios`)
   - babstrap_settings_screen (from `.symlinks/plugins/babstrap_settings_screen/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
@@ -53,6 +58,7 @@ DEPENDENCIES:
   - light (from `.symlinks/plugins/light/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - pdfx (from `.symlinks/plugins/pdfx/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
@@ -71,6 +77,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/babstrap_settings_screen/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
   flutter_native_splash:
@@ -87,6 +95,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  pdfx:
+    :path: ".symlinks/plugins/pdfx/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   rive_common:
@@ -102,21 +112,23 @@ SPEC CHECKSUMS:
   all_sensors2: 5e204ae87a72b554b2df6c4de741c09031b8e64e
   babstrap_settings_screen: 535097da0fa521a47fef6f6678ff2b464ee15937
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
+  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   google_maps_flutter_ios: d1318b4ff711612cab16862d7a87e31a7403d458
   GoogleMaps: 20d7b12be49a14287f797e88e0e31bc4156aaeb4
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
   light: 86af7a847d218a9a2376bc1c1ae40c3410441135
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
-  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
-  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  pdfx: 7b876b09de8b7a0bf444a4f82b439ffcff4ee1ec
+  permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  rive_common: 8a159d68033a8b073e5853acc50f03aa486a2888
+  rive_common: 3a4c254c6e4db7e4b9e05daeb3d1f47ae4f7bf76
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
-  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
-  url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
+  shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  url_launcher_ios: bbd758c6e7f9fd7b5b1d4cde34d2b95fcce5e812
 
 PODFILE CHECKSUM: 8f1db33402e1415253e8d939c40db72447b2d8d6
 

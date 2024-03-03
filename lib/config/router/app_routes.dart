@@ -8,6 +8,7 @@ import '../../features/forgot_password/presentation/view/verify_otp_page.dart';
 import '../../features/home/home_page.dart';
 import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
+import '../../features/payment/presentation/view/payment_view.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/profile/presentation/view/user_profile_view.dart';
 import '../../features/qr_code/qr_code.dart';
@@ -42,6 +43,7 @@ class MyRoutes {
   static String verifyOTPRoute = "/verifyOTPRoute";
   static String dahboardRoute = "/dashboardRoute";
   static String qrCodeRoute = "/qrCodeRoute";
+  static String paymentRoute = "/paymentRoute";
 
   static getApplicationRoute() {
     return {
@@ -64,6 +66,7 @@ class MyRoutes {
       verifyOTPRoute: (context) => VerifyOTPPage(),
       dahboardRoute: (context) => HomePageNew(),
       qrCodeRoute: (context) => QRCodeView(),
+      paymentRoute: (context) => Payment(),
     };
   }
 }
