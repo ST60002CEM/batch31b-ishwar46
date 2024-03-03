@@ -10,7 +10,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/themes/apptheme.dart';
 import '../../../../core/common/provider/biometric_provider.dart';
-import '../../../../core/common/provider/theme_provider.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../../../auth/presentation/view/login/login_view.dart';
 
@@ -46,15 +45,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   AppBar _buildAppBar(bool isDarkMode, ThemeData theme) {
     return AppBar(
       backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios_new,
-          color: AppColors.whiteText,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
       title: Text(
         "Settings".toUpperCase(),
         style: TextStyle(
@@ -105,7 +95,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             value: HelperFunctions.isDarkMode(context),
             onChanged: (value) {
               ref.read(appThemeProvider.notifier).toggleDarkMode();
-              ThemePreferences.setDarkMode(value);
 
               EasyLoading.showSuccess(
                 value ? "Dark mode enabled" : "Dark mode disabled",

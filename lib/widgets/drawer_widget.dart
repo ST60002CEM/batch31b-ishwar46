@@ -127,7 +127,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     icon: Iconsax.setting_2,
                     text: 'Settings',
                     context: context,
-                    routeName: "/"),
+                    routeName: "/settings"),
                 _createDrawerItem(
                     icon: Iconsax.devices,
                     text: 'Sensors',

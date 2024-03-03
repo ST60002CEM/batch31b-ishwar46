@@ -5,6 +5,7 @@ import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/events/presentation/view/events.dart';
 import '../../features/forgot_password/presentation/view/send_otp_page.dart';
 import '../../features/forgot_password/presentation/view/verify_otp_page.dart';
+import '../../features/home/home_page.dart';
 import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
@@ -38,6 +39,7 @@ class MyRoutes {
   static String viewNotificationRoute = "/viewNotificationRoute";
   static String sendOTPRoute = "/sendOTPRoute";
   static String verifyOTPRoute = "/verifyOTPRoute";
+  static String dahboardRoute = "/dashboardRoute";
 
   static getApplicationRoute() {
     return {
@@ -58,6 +60,7 @@ class MyRoutes {
       viewNotificationRoute: (context) => NotificationView(),
       sendOTPRoute: (context) => SendOTPView(),
       verifyOTPRoute: (context) => VerifyOTPPage(),
+      dahboardRoute: (context) => HomePageNew(),
     };
   }
 }

@@ -32,7 +32,7 @@ class ServiceRow extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: CardWidget(
             title: "Health Care",
-            routeName: "/settings",
+            routeName: "",
             imagePath: "assets/img/doctor.png",
             isDarkMode: isDarkMode,
           ),

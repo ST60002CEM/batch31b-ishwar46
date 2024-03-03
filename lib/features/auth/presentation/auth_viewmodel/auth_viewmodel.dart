@@ -69,7 +69,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
             maskType: EasyLoadingMaskType.black,
           );
           Future.delayed(const Duration(seconds: 2), () {
-            Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+            Navigator.pushReplacementNamed(context, MyRoutes.dahboardRoute);
             EasyLoading.dismiss();
           });
         } else {

@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     await Future.delayed(const Duration(seconds: 3));
     if (token != null && !JwtDecoder.isExpired(token)) {
-      Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+      Navigator.pushReplacementNamed(context, MyRoutes.dahboardRoute);
     } else {
       Navigator.pushReplacementNamed(context, MyRoutes.preloginRoute);
     }

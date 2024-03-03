@@ -58,13 +58,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: AppColors.whiteText,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
       ),
       body: Consumer(
         builder: (context, watch, child) {
