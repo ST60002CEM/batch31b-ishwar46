@@ -5,10 +5,12 @@ import '../../features/auth/presentation/view/signup/register_view.dart';
 import '../../features/events/presentation/view/events.dart';
 import '../../features/forgot_password/presentation/view/send_otp_page.dart';
 import '../../features/forgot_password/presentation/view/verify_otp_page.dart';
+import '../../features/home/home_page.dart';
 import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/prelogin/presentation/view/pre_login_view.dart';
 import '../../features/profile/presentation/view/user_profile_view.dart';
+import '../../features/qr_code/qr_code.dart';
 import '../../features/sensors/gyro.dart';
 import '../../features/sensors/proximity.dart';
 import '../../features/settings/presentation/view/settings_view.dart';
@@ -38,6 +40,8 @@ class MyRoutes {
   static String viewNotificationRoute = "/viewNotificationRoute";
   static String sendOTPRoute = "/sendOTPRoute";
   static String verifyOTPRoute = "/verifyOTPRoute";
+  static String dahboardRoute = "/dashboardRoute";
+  static String qrCodeRoute = "/qrCodeRoute";
 
   static getApplicationRoute() {
     return {
@@ -58,6 +62,8 @@ class MyRoutes {
       viewNotificationRoute: (context) => NotificationView(),
       sendOTPRoute: (context) => SendOTPView(),
       verifyOTPRoute: (context) => VerifyOTPPage(),
+      dahboardRoute: (context) => HomePageNew(),
+      qrCodeRoute: (context) => QRCodeView(),
     };
   }
 }

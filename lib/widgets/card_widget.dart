@@ -1,30 +1,33 @@
-import 'package:age_care/config/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../config/constants/app_colors.dart';
 
 class CardWidget extends StatelessWidget {
   final String title;
   final String routeName;
-  final String imagePath; // Add imagePath for image
+  final String imagePath;
+  final bool isDarkMode;
 
   const CardWidget({
     Key? key,
     required this.title,
     required this.routeName,
     required this.imagePath,
+    required this.isDarkMode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      surfaceTintColor: AppColors.whiteText,
-      color: AppColors.whiteText,
+      surfaceTintColor:
+          isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
+      color: isDarkMode ? AppColors.darkModeOnPrimary : AppColors.whiteText,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       elevation: 1.0,
       child: InkWell(
-        enableFeedback: true,
         onTap: () {
           Navigator.pushNamed(context, routeName);
         },
@@ -43,7 +46,7 @@ class CardWidget extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 12.0,
-                color: Theme.of(context).textTheme.bodyMedium!.color,
+                color: isDarkMode ? Colors.white : Colors.black,
                 fontFamily: GoogleFonts.montserrat().fontFamily,
               ),
               textAlign: TextAlign.center,

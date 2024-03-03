@@ -20,7 +20,7 @@ class ServicesCard extends StatelessWidget {
               height: 110,
               //padding: const EdgeInsets.all(5),
               child: const CardWidgetPre(
-                title: "Service 1",
+                title: "Personal Care",
                 routeName: "/hospital",
                 imagePath: AppImages.cardImage1,
               ),
@@ -31,7 +31,7 @@ class ServicesCard extends StatelessWidget {
               height: 110,
               //padding: const EdgeInsets.all(10),
               child: const CardWidgetPre(
-                title: "Service 2",
+                title: "Therapy",
                 routeName: "/appointment",
                 imagePath: AppImages.cardImage2,
               ),
@@ -42,7 +42,7 @@ class ServicesCard extends StatelessWidget {
               height: 110,
               //padding: const EdgeInsets.all(10),
               child: const CardWidgetPre(
-                title: "Service 3",
+                title: "Disablity Care",
                 routeName: "/appointment",
                 imagePath: AppImages.cardImage3,
               ),
@@ -53,7 +53,7 @@ class ServicesCard extends StatelessWidget {
               height: 110,
               //padding: const EdgeInsets.all(10),
               child: const CardWidgetPre(
-                title: "Service 4",
+                title: "Transportation",
                 routeName: "/appointment",
                 imagePath: AppImages.cardImage4,
               ),

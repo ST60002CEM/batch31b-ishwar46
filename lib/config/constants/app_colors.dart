@@ -48,7 +48,6 @@ class AppColors {
   static const Color info = Colors.blue;
 
   //Neutral Shades
-
   static const Color black = Colors.black;
   static const Color darkerGrey = Color(0xFF4F4F4F);
   static const Color darkGrey = Color(0xFF939393);
@@ -56,4 +55,12 @@ class AppColors {
   static const Color softGrey = Color(0XFFF4F4F4);
   static const Color lightGrey = Color(0xFFF9F9F9);
   static const Color white = Color(0xFFFFFFFF);
+
+  //Dark Mode Colors
+  static const Color darkModeBackground = Color(0xFF121212);
+  static const Color darkModeSurface = Color(0xFF1E1E1E);
+  static const Color darkModePrimary = Color(0xFFBB86FC);
+  static const Color darkModeSecondary = Color(0xFF03DAC6);
+  static const Color darkModeOnSurface = Color(0xFFBB86FC);
+  static const Color darkModeOnPrimary = Color.fromARGB(180, 15, 11, 30);
 }

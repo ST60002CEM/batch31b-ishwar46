@@ -127,23 +127,22 @@ class _LoginViewState extends ConsumerState<LoginView> {
     final dark = HelperFunctions.isDarkMode(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: AppColors.primaryColor,
-        statusBarIconBrightness: Brightness.light,
+        statusBarColor: dark ? Colors.black : Colors.white,
       ),
       child: Scaffold(
+        backgroundColor: dark ? AppColors.dark : AppColors.whiteText,
         appBar: AppBar(
           toolbarHeight: 40,
           leading: IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
-              color: AppColors.primaryColor,
+              color: dark ? AppColors.whiteText : AppColors.primaryColor,
             ),
             onPressed: () {
               Navigator.pushNamed(context, MyRoutes.preloginRoute);
             },
           ),
         ),
-        backgroundColor: Colors.white.withOpacity(.94),
         body: SingleChildScrollView(
           child: Padding(
             padding: AppSpacingStyle.paddingWithAppBarHeight,
@@ -167,7 +166,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       height: AppSizes.spaceBtwItems,
                     ),
                     Text(AppTexts.loginPageTitle,
-                        style: Theme.of(context).textTheme.headlineMedium),
+                        style: Theme.of(context).textTheme.headlineLarge),
                     SizedBox(height: AppSizes.sm),
                     Text(AppTexts.loginPageSubTitle,
                         style: Theme.of(context).textTheme.bodyMedium),
@@ -235,14 +234,20 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 _onRememberMeChanged(value!);
                               },
                             ),
-                            Text(AppTexts.remeberme),
+                            Text(
+                              AppTexts.remeberme,
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
                             Spacer(),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(
                                     context, MyRoutes.sendOTPRoute);
                               },
-                              child: Text(AppTexts.forgetPassword),
+                              child: Text(
+                                AppTexts.forgetPassword,
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                             )
                           ],
                         ),
@@ -255,9 +260,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
+                                  backgroundColor: dark
+                                      ? AppColors.darkModeOnPrimary
+                                      : AppColors.primaryColor,
                                   shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )),
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
                               onPressed: () async {
                                 if (_key.currentState!.validate()) {
                                   await ref
@@ -279,7 +287,17 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           onTap: () {
                             Navigator.pushNamed(context, MyRoutes.signupRoute);
                           },
-                          child: Text(AppTexts.register),
+                          child: Text(
+                            AppTexts.donthaveanaccount,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: dark
+                                      ? AppColors.whiteText
+                                      : AppColors.primaryColor,
+                                ),
+                          ),
                         ),
                       ],
                     ),

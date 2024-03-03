@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/text_strings.dart';
 import '../../../../core/common/widgets/shimmer_loading_widget.dart';
+import '../../../../core/utils/helpers/helper_functions.dart';
 import '../notification_view_model/notification_view_model.dart';
 
 class NotificationView extends ConsumerStatefulWidget {
@@ -29,11 +30,11 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        foregroundColor: AppColors.whiteText,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
         title: Text(
           AppTexts.notificationPageTitle.toUpperCase(),
           style: TextStyle(
@@ -110,8 +111,12 @@ class _NotificationViewState extends ConsumerState<NotificationView> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           tileColor: notification.read
-                              ? Colors.white
-                              : Colors.grey[200],
+                              ? isDarkMode
+                                  ? Colors.grey[900]
+                                  : Colors.white
+                              : isDarkMode
+                                  ? Colors.grey[800]
+                                  : Colors.grey[200],
                           leading: Stack(
                             children: [
                               CircleAvatar(
