@@ -228,7 +228,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: dark
+                            backgroundColor: dark
                                 ? AppColors.darkModeOnPrimary
                                 : AppColors.primaryColor,
                             shape: RoundedRectangleBorder(

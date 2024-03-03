@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:age_care/features/forgot_password/presentation/viewmodel/otp_view_model.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -41,11 +42,12 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return Scaffold(
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
       appBar: AppBar(
-        foregroundColor: AppColors.whiteText,
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
         title: Text("Verify OTP and Reset Password",
             style: GoogleFonts.raleway(
               textStyle: TextStyle(
@@ -82,7 +84,9 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                       fontSize: 16,
-                      color: AppColors.primaryColor,
+                      color: isDarkMode
+                          ? AppColors.whiteText
+                          : AppColors.primaryColor,
                     ),
                   ),
                 ),
@@ -139,9 +143,12 @@ class _VerifyOTPPageState extends ConsumerState<VerifyOTPPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
+                                  backgroundColor: isDarkMode
+                                      ? AppColors.darkModeOnPrimary
+                                      : AppColors.primaryColor,
                                   shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )),
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
                               onPressed: () async {
                                 final formState = _key.currentState;
                                 if (formState != null &&
