@@ -7,6 +7,7 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../config/constants/app_colors.dart';
 import '../../views/home/home_page.dart';
 import '../profile/presentation/view/user_profile_view.dart';
+import '../qr_code/qr_code.dart';
 import '../settings/presentation/view/settings_view.dart';
 
 class HomePageNew extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomePageNewState extends State<HomePageNew>
   int _currentIndex = 0;
   final List _children = [
     const HomePage(),
-    const UserProfilePage(),
+    const QRCodeView(),
     const SettingsView(),
     const UserProfilePage(),
   ];
