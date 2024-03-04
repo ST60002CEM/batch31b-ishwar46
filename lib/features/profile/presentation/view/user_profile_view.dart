@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/app_sizes.dart';
+import '../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../../core/common/widgets/user_profile_shimmer.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../view_model/profile_view_model.dart';
@@ -37,6 +38,13 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
 
       Future.delayed(const Duration(seconds: 1), () {
         confettiController.stop();
+      });
+
+      Future.delayed(Duration(milliseconds: 500), () {
+        EasyLoading.showInfo(
+          "You can update your profile by clicking the 'Update Profile' button below."
+          "Please fill up all the fields before updating your profile.",
+        );
       });
     });
   }
