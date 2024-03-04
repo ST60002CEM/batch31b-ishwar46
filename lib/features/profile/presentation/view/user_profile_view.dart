@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/app_sizes.dart';
+import '../../../../core/common/provider/connection.dart';
 import '../../../../core/common/widgets/custom_snackbar.dart';
 import '../../../../core/common/widgets/user_profile_shimmer.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
@@ -29,23 +30,15 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
+  bool _profileLoaded = false;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.read(profileViewModelProvider.notifier).getProfile();
-      confettiController.play();
-
-      Future.delayed(const Duration(seconds: 1), () {
-        confettiController.stop();
-      });
-
-      Future.delayed(Duration(milliseconds: 500), () {
-        EasyLoading.showInfo(
-          "You can update your profile by clicking the 'Update Profile' button below."
-          "Please fill up all the fields before updating your profile.",
-        );
-      });
+      if (!_profileLoaded) {
+        await _loadProfile();
+      }
     });
   }
 
@@ -129,18 +122,19 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                               : null,
                         ),
                         Positioned(
-                          bottom: 0,
-                          right: 0,
+                          bottom: 10.0,
+                          right: 0.0,
                           child: GestureDetector(
                             onTap: () {
                               _showImagePickerModal(context);
                             },
                             child: CircleAvatar(
-                              radius: 20.0,
+                              radius: 10.0,
                               backgroundColor: isDarkMode
                                   ? AppColors.whiteText
                                   : AppColors.secondaryColor,
                               child: Icon(Icons.edit,
+                                  size: 8.0,
                                   color: isDarkMode
                                       ? AppColors.dark
                                       : AppColors.whiteText),
@@ -352,5 +346,45 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
         );
       },
     );
+  }
+
+  Future<void> _loadProfile() async {
+    _profileLoaded = true;
+
+    await ref.read(profileViewModelProvider.notifier).getProfile();
+    confettiController.play();
+    bool internetStatusShown = false;
+
+    // Connectivity Status
+    final connectivityStatus = ref.watch(connectivityStatusProvider);
+    if (connectivityStatus == ConnectivityStatus.isDisconnected) {
+      internetStatusShown = true;
+      showSnackBar(
+          message:
+              'No Internet Connection, Please connect to a working network',
+          context: context,
+          color: Colors.red);
+    } else if (connectivityStatus == ConnectivityStatus.isConnecting) {
+      internetStatusShown = true;
+      showSnackBar(
+          message: 'Connecting...', context: context, color: Colors.yellow);
+    } else if (connectivityStatus == ConnectivityStatus.isConnected) {
+      internetStatusShown = true;
+      showSnackBar(
+          message: 'Connected', context: context, color: AppColors.success);
+    }
+
+    Future.delayed(const Duration(seconds: 1), () {
+      confettiController.stop();
+    });
+
+    if (!internetStatusShown) {
+      Future.delayed(Duration(milliseconds: 500), () {
+        EasyLoading.showInfo(
+          "You can update your profile by clicking the 'Update Profile' button below."
+          "Please fill up all the fields before updating your profile.",
+        );
+      });
+    }
   }
 }
