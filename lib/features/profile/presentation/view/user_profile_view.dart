@@ -109,9 +109,24 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                     child: Stack(
                       children: [
                         CircleAvatar(
+                          backgroundColor: isDarkMode
+                              ? AppColors.darkModeOnPrimary
+                              : AppColors.primaryColor,
                           radius: 60.0,
                           backgroundImage:
-                              NetworkImage(user.image ?? 'assets/img/user.png'),
+                              user.image != null && user.image!.isNotEmpty
+                                  ? NetworkImage(user.image!)
+                                  : null,
+                          child: user.image == null || user.image!.isEmpty
+                              ? Text(
+                                  '${user.firstName.substring(0, 1)}${user.lastName.substring(0, 1)}',
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : null,
                         ),
                         Positioned(
                           bottom: 0,
@@ -123,9 +138,12 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                             child: CircleAvatar(
                               radius: 20.0,
                               backgroundColor: isDarkMode
-                                  ? AppColors.darkModeOnPrimary
-                                  : AppColors.primaryColor,
-                              child: Icon(Icons.edit, color: Colors.white),
+                                  ? AppColors.whiteText
+                                  : AppColors.secondaryColor,
+                              child: Icon(Icons.edit,
+                                  color: isDarkMode
+                                      ? AppColors.dark
+                                      : AppColors.whiteText),
                             ),
                           ),
                         ),
@@ -166,7 +184,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                   SizedBox(height: AppSizes.spaceBtwnInputFields),
                   _buildDetailRow(Icons.verified_user_rounded, 'Username',
                       user.username, isDarkMode),
-                  const SizedBox(height: 32.0),
+                  const SizedBox(height: AppSizes.buttonHeight),
                   Center(
                     child: SizedBox(
                       width: double.infinity,
@@ -189,7 +207,6 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                             address: _addressController.text,
                             phone: _phoneController.text,
                             isAdmin: user.isAdmin,
-                            image: user.image,
                           );
                           await ref
                               .read(profileViewModelProvider.notifier)
@@ -198,6 +215,23 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                         icon: Icon(Iconsax.edit, size: 20.0),
                         label: Text('Update Profile'),
                       ),
+                    ),
+                  ),
+                  SizedBox(height: AppSizes.spaceBtwnInputFields),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Please contact administration to change any other details. Thank you!",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color:
+                                isDarkMode ? AppColors.error : AppColors.error,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -239,7 +273,6 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
         const SizedBox(height: 4.0),
         if (title.toLowerCase() != 'username')
           TextFormField(
-            // Only include a TextFormField for editable fields
             initialValue: text,
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(
