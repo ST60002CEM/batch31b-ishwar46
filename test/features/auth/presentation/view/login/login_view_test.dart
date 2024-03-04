@@ -45,4 +45,53 @@ void main() {
     // Step 4: Wait for the widget to render
     await tester.pumpAndSettle();
   });
+
+//Find the Logo on the login page
+  testWidgets(
+    'find logo on login page',
+    (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: LoginView(),
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Image), findsOneWidget);
+    },
+  );
+
+  //Find the Remember Me checkbox on the login page
+  testWidgets(
+    'find remember me checkbox on login page',
+    (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: LoginView(),
+      ));
+      await tester.pumpAndSettle();
+
+      // Find the Remember Me checkbox
+      expect(find.byType(Checkbox), findsOneWidget);
+    },
+  );
 }
+
+// testWidgets(
+  //     'navigate to registration page when tapping "Don\'t have an account" text',
+  //     (tester) async {
+  //   await tester.pumpWidget(MaterialApp(
+  //     home: LoginView(),
+  //   ));
+  //   await tester.pumpAndSettle();
+
+  //   // Print the widget tree
+  //   debugDumpApp();
+
+  //   // Step 1: Tap the "Don't have an account" text
+  //   await tester.tap(find.byKey(const ValueKey('registerButton')));
+  //   await tester.pumpAndSettle();
+
+  //   // Print the widget tree again after the tap
+  //   debugDumpApp();
+
+  //   // Step 2: Verify navigation to registration page
+  //   expect(find.text('RegisterGarrarahaiiii'), 'RegisterGarrarahaiiii');
+  // });

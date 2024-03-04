@@ -280,12 +280,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             ),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, MyRoutes.homeRoute);
-                          },
-                          child: Text('Logging In'),
-                        ),
+                        //For testing Only
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+                        //   },
+                        //   child: Text('Logging In'),
+                        // ),
                         SizedBox(
                           height: AppSizes.spaceBtwSections,
                         ),
