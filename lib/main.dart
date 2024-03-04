@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 
 import 'config/constants/app_colors.dart';
-import 'core/network/hive_service.dart';
+import 'core/network/local/hive_service.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

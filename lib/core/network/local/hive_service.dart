@@ -1,9 +1,11 @@
+import 'package:age_care/features/profile/data/model/profile_hive_model.dart';
+import 'package:age_care/features/profile/domain/entity/profile_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../config/constants/hive_table.dart';
-import '../../features/auth/data/model/auth_hive_model.dart';
+import '../../../config/constants/hive_table.dart';
+import '../../../features/auth/data/model/auth_hive_model.dart';
 
 // Create object using a provider
 final hiveServiceProvider = Provider<HiveService>(
@@ -43,9 +45,14 @@ class HiveService {
     return auths;
   }
 
-  Future<void> deleteStaff(String staffId) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.staffBox);
-    await box.delete(staffId);
+  // ======================== Profile Queries ========================
+
+  Future<List<ProfileHiveModel>> getProfile() async {
+    var box =
+        await Hive.openBox<ProfileHiveModel>(HiveTableConstant.profileBox);
+    var profile = box.values.toList();
+    box.close();
+    return profile;
   }
 
   // Delete hive
