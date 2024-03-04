@@ -1,3 +1,4 @@
+import 'package:age_care/features/profile/domain/entity/profile_entity.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -23,6 +24,10 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
   final confettiController =
       ConfettiController(duration: const Duration(seconds: 2));
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +45,9 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
   void dispose() {
     super.dispose();
     confettiController.dispose();
+    _emailController.dispose();
+    _addressController.dispose();
+    _phoneController.dispose();
   }
 
   @override
@@ -142,12 +150,12 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                     ),
                   const SizedBox(height: 24.0),
                   _buildDetailRow(Icons.email, 'Email', user.email, isDarkMode),
-                  _buildDivider(),
+                  SizedBox(height: AppSizes.spaceBtwnInputFields),
                   _buildDetailRow(
                       Icons.location_on, 'Address', user.address, isDarkMode),
-                  _buildDivider(),
+                  SizedBox(height: AppSizes.spaceBtwnInputFields),
                   _buildDetailRow(Icons.phone, 'Phone', user.phone, isDarkMode),
-                  _buildDivider(),
+                  SizedBox(height: AppSizes.spaceBtwnInputFields),
                   _buildDetailRow(Icons.verified_user_rounded, 'Username',
                       user.username, isDarkMode),
                   const SizedBox(height: 32.0),
@@ -163,9 +171,24 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          final updatedProfile = ProfileEntity(
+                            userId: user.userId,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: _emailController.text,
+                            username: user.username,
+                            address: _addressController.text,
+                            phone: _phoneController.text,
+                            isAdmin: user.isAdmin,
+                            image: user.image,
+                          );
+                          await ref
+                              .read(profileViewModelProvider.notifier)
+                              .editProfile(updatedProfile);
+                        },
                         icon: Icon(Iconsax.edit, size: 20.0),
-                        label: Text('Edit Profile'),
+                        label: Text('Update Profile'),
                       ),
                     ),
                   ),
@@ -179,7 +202,11 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
   }
 
   Widget _buildDetailRow(
-      IconData icon, String title, String text, bool isDarkMode) {
+    IconData icon,
+    String title,
+    String text,
+    bool isDarkMode,
+  ) {
     Color textColor = isDarkMode
         ? AppColors.whiteText
         : HelperFunctions.isDarkMode(context)
@@ -202,24 +229,51 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage> {
           ],
         ),
         const SizedBox(height: 4.0),
-        Text(
-          text,
-          style: GoogleFonts.raleway(
-            textStyle: TextStyle(
-              fontSize: 15,
-              color: textColor,
+        if (title.toLowerCase() != 'username')
+          TextFormField(
+            // Only include a TextFormField for editable fields
+            initialValue: text,
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                fontSize: 15,
+                color: textColor,
+              ),
             ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Enter new $title',
+            ),
+            onChanged: (value) {
+              switch (title.toLowerCase()) {
+                case 'email':
+                  _emailController.text = value;
+                  break;
+                case 'address':
+                  _addressController.text = value;
+                  break;
+                case 'phone':
+                  _phoneController.text = value;
+                  break;
+                default:
+                  break;
+              }
+            },
+          )
+        else
+          Row(
+            children: [
+              const SizedBox(width: 5.0),
+              Text(text,
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontSize: 15,
+                      color: textColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  )),
+            ],
           ),
-        ),
       ],
-    );
-  }
-
-  Widget _buildDivider() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
-      height: 1.0,
-      color: AppColors.grey,
     );
   }
 

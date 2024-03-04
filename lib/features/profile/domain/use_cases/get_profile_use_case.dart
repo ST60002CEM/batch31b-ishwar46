@@ -13,10 +13,6 @@ class GetProfileUseCase {
 
   GetProfileUseCase(this._profileRepostiory);
 
-  // Future<void> getProfile(String userId) {
-  //   return _profileRepostiory.getProfile(userId);
-  // }
-
   Future<Either<Failure, List<ProfileEntity>>> getProfile() async {
     return _profileRepostiory.getProfile();
   }

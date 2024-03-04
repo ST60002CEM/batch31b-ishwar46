@@ -79,4 +79,54 @@ class ProfileRemoteDataSource {
     }
     throw UnimplementedError();
   }
+
+  //Edit User Profile
+
+  Future<Either<Failure, ProfileEntity>> editProfile(
+      ProfileEntity users) async {
+    try {
+      final token = await secureStorage.read(key: "authToken");
+      if (token == null) {
+        return Left(Failure(error: "Token not found"));
+      }
+
+      final decodedToken = JwtDecoder.decode(token);
+      final userId = decodedToken['id'];
+      if (userId == null) {
+        return Left(Failure(error: "User ID not found"));
+      }
+
+      Response response = await dio.put(
+        '${ApiEndpoints.editProfile}/$userId',
+        data: users.toJson(),
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = response.data;
+        if (responseData is Map<String, dynamic> &&
+            responseData.containsKey("updatedUserProfile")) {
+          var updatedUserJson =
+              responseData["updatedUserProfile"] as Map<String, dynamic>;
+          ProfileEntity updatedUser =
+              ProfileApiModel.fromJson(updatedUserJson).toEntity();
+          return Right(updatedUser);
+        }
+      } else {
+        return Left(
+          Failure(
+            error: response.statusMessage ?? "Failed to update profile",
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Caught exception: $e");
+      return Left(Failure(error: "An unexpected error occurred: $e"));
+    }
+    throw UnimplementedError();
+  }
 }

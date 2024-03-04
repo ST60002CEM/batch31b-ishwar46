@@ -49,6 +49,7 @@ class ApiEndpoints {
 
   //Profile Routes
   static const String profile = "api/users/profile";
+  static const String editProfile = "api/users/edit";
 
   static const limitPage = 10;
 }

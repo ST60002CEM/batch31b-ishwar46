@@ -18,4 +18,9 @@ class ProfileRemoteRepostitory implements IProfileRepository {
   Future<Either<Failure, List<ProfileEntity>>> getProfile() {
     return remoteDataSource.getProfile();
   }
+
+  @override
+  Future<Either<Failure, ProfileEntity>> editProfile(ProfileEntity users) {
+    return remoteDataSource.editProfile(users);
+  }
 }
