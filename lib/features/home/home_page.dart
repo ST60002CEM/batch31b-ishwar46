@@ -42,11 +42,11 @@ class _HomePageNewState extends State<HomePageNew>
             context: context,
             builder: (context) => AlertDialog(
               title: Text(
-                "",
+                "Are you sure you want to exit?",
                 style: const TextStyle(fontFamily: 'productSans', fontSize: 16),
               ),
               content: Text(
-                "",
+                "We hate to see you leave...",
                 style: const TextStyle(fontFamily: 'productSans'),
               ),
               actions: [
@@ -54,7 +54,7 @@ class _HomePageNewState extends State<HomePageNew>
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },
-                  child: Text("",
+                  child: Text("No",
                       style: const TextStyle(fontFamily: 'productSans')),
                 ),
                 TextButton(

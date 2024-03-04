@@ -70,7 +70,7 @@ dependencies:
   flutter_native_splash: ^2.3.8
   http: ^1.1.2
   logger: ^2.0.2+1
-  url_launcher: ^6.2.2
+  url_launcher: ^6.2.5
   smooth_page_indicator: ^1.1.0
   path_provider: ^2.1.1
   multi_select_flutter: ^4.1.3

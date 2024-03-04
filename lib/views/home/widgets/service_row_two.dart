@@ -31,9 +31,9 @@ class ServiceRowTwo extends StatelessWidget {
           height: 140,
           padding: const EdgeInsets.all(10),
           child: CardWidget(
-            title: "Hospital",
-            routeName: "",
-            imagePath: "assets/img/hospital.png",
+            title: "Notes",
+            routeName: "/notesRoute",
+            imagePath: "assets/img/notes.png",
             isDarkMode: isDarkMode,
           ),
         ),

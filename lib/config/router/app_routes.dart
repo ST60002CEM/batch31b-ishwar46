@@ -2,10 +2,12 @@ import '../../features/appointment/presentation/view/book_appointment/appointmen
 import '../../features/appointment/presentation/view/view_appointment/view_appointment.dart';
 import '../../features/auth/presentation/view/login/login_view.dart';
 import '../../features/auth/presentation/view/signup/register_view.dart';
+import '../../features/clients/clients_view.dart';
 import '../../features/events/presentation/view/events.dart';
 import '../../features/forgot_password/presentation/view/send_otp_page.dart';
 import '../../features/forgot_password/presentation/view/verify_otp_page.dart';
 import '../../features/home/home_page.dart';
+import '../../features/notes/notes_view.dart';
 import '../../features/notifications/presentation/view/notification_page.dart';
 import '../../features/onboarding/presentation/views/onboarding_screens.dart';
 import '../../features/payment/presentation/view/payment_view.dart';
@@ -44,6 +46,8 @@ class MyRoutes {
   static String dahboardRoute = "/dashboardRoute";
   static String qrCodeRoute = "/qrCodeRoute";
   static String paymentRoute = "/paymentRoute";
+  static String clientRoute = "/clientRoute";
+  static String notesRoute = "/notesRoute";
 
   static getApplicationRoute() {
     return {
@@ -67,6 +71,8 @@ class MyRoutes {
       dahboardRoute: (context) => HomePageNew(),
       qrCodeRoute: (context) => QRCodeView(),
       paymentRoute: (context) => Payment(),
+      clientRoute: (context) => StaffViewNew(),
+      notesRoute: (context) => NotesPage(),
     };
   }
 }

@@ -51,5 +51,8 @@ class ApiEndpoints {
   static const String profile = "api/users/profile";
   static const String editProfile = "api/users/edit";
 
+  //Client Routes
+  static const String allclients = "api/clients/get_clients";
+
   static const limitPage = 10;
 }
