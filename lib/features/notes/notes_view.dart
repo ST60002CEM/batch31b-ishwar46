@@ -1,6 +1,7 @@
 import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/constants/app_colors.dart';
@@ -148,7 +149,7 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     final isDarkMode = HelperFunctions.isDarkMode(context);
     return Scaffold(
-      backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
+      backgroundColor: isDarkMode ? AppColors.dark : AppColors.whiteText,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
@@ -213,13 +214,13 @@ class _NotesPageState extends State<NotesPage> {
                     Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.edit),
+                          icon: const Icon(Iconsax.edit, color: Colors.white),
                           onPressed: () {
                             editNote(index);
                           },
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete),
+                          icon: const Icon(Icons.delete, color: Colors.white),
                           onPressed: () {
                             deleteNote(index);
                           },
