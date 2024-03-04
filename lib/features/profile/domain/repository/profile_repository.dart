@@ -10,4 +10,5 @@ final profileRepositoryProvider = Provider<IProfileRepository>(
 
 abstract class IProfileRepository {
   Future<Either<Failure, List<ProfileEntity>>> getProfile();
+  Future<Either<Failure, ProfileEntity>> editProfile(ProfileEntity users);
 }

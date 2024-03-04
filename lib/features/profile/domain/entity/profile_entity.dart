@@ -21,6 +21,20 @@ class ProfileEntity {
     this.image,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'userId': userId,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'username': username,
+      'address': address,
+      'phone': phone,
+      'isAdmin': isAdmin,
+      'image': image,
+    };
+  }
+
   @override
   List<Object?> get props => [
         userId,
