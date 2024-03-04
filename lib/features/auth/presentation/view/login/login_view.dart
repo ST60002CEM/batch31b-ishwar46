@@ -5,6 +5,7 @@ import 'package:age_care/features/auth/presentation/auth_viewmodel/auth_viewmode
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:light/light.dart';
@@ -259,6 +260,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
+                              key: ValueKey('loginbutton'),
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: dark
                                       ? AppColors.darkModeOnPrimary
@@ -278,6 +280,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             ),
                           ),
                         ),
+                        //For testing Only
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+                        //   },
+                        //   child: Text('Logging In'),
+                        // ),
                         SizedBox(
                           height: AppSizes.spaceBtwSections,
                         ),
