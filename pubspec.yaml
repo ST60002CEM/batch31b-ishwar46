@@ -104,6 +104,7 @@ dependencies:
       ref: "4be9de9ffed5398fd7d5f44bbb07dcd3d3f1711b"
       path: packages/pdfx
   mockito: ^5.4.4
+  mocktail: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -126,6 +127,7 @@ flutter_icons:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
