@@ -5,7 +5,7 @@ class ApiEndpoints {
   static const Duration receiveTimeout = Duration(seconds: 5);
 
   // For Android Emulator Device
-  //static const String baseUrl = "http://10.0.2.2:5000/";
+  static const String baseUrl = "http://10.0.2.2:5000/";
 
   // For IOS Emulator Device
   // static const String baseUrl = "http://localhost:5000/";
@@ -16,7 +16,10 @@ class ApiEndpoints {
   //static const String baseUrl = "http://172.25.10.25:5000/";
 
   //Home 192.168.10.70
-  static const String baseUrl = "http://192.168.10.70:5000/";
+  //static const String baseUrl = "http://192.168.10.70:5000/";
+
+  //Home 192.168.10.70
+  //static const String baseUrl = "http://192.168.1.65:5000/";
   //My Phone IP
   //static const String baseUrl = "http://172.20.10.2:5000/";
 
@@ -53,6 +56,10 @@ class ApiEndpoints {
 
   //Client Routes
   static const String allclients = "api/clients/get_clients";
+
+  //Notes Routes
+  static const String saveNotes = "api/clients/savenotes";
+  static const String getNotes = "api/clients/getnotes";
 
   static const limitPage = 10;
 }
