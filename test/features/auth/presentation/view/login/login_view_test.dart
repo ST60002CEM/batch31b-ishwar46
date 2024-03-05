@@ -104,4 +104,46 @@ void main() {
       expect(result, Left(mockErrorModel));
     });
   });
+
+  //Register unit testing
+  group('test register', () {
+    setUpAll(() async {
+      //Mocking the AuthEntity
+      mockAuthEntity = AuthEntity(
+        staffId: '1234',
+        firstName: 'ishu',
+        lastName: 'test',
+        email: 'ishutest@mail.com',
+        password: 'password',
+        phone: '1234567890',
+        username: 'ishutest',
+        address: 'test address',
+      );
+
+      // Mocking the login use case
+      when(
+        mockLoginUseCase.loginStaff(
+          'ishutest',
+          'password',
+        ),
+      ).thenAnswer(
+        (_) async => Future.value(
+          Right(true),
+        ),
+      );
+    });
+    setUpAll(() async {
+      //Mocking the AuthEntity
+      mockAuthEntity = AuthEntity(
+        staffId: '1234',
+        firstName: 'ishu',
+        lastName: 'test',
+        email: 'ishu',
+        password: 'password',
+        phone: '1234567890',
+        username: 'ishutest',
+        address: 'test address',
+      );
+    });
+  });
 }
