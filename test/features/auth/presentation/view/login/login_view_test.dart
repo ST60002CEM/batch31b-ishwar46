@@ -1,97 +1,107 @@
-import 'package:age_care/features/auth/presentation/view/login/login_view.dart';
-import 'package:flutter/material.dart';
+import 'package:age_care/core/failure/disable_account.dart';
+import 'package:age_care/core/failure/failure.dart';
+import 'package:age_care/core/failure/server_errro.dart';
+import 'package:age_care/features/auth/domain/entity/auth_entity.dart';
+import 'package:age_care/features/auth/domain/use_case/login_usecase.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
+import 'login_view_test.mocks.dart';
+
+//============LOGIN UNIT TESTING================
+
+@GenerateNiceMocks([
+  MockSpec<LoginUseCase>(),
+  MockSpec<BuildContext>(),
+])
 void main() {
-  testWidgets('check for text LOGIN the page', (tester) async {
-    //Step 1 : Material widget lai launch gareko
-    await tester.pumpWidget(
-      MaterialApp(
-        home: LoginView(),
-      ),
-    );
+  late MockLoginUseCase mockLoginUseCase;
+  late AuthEntity mockAuthEntity;
 
-    await tester.pumpAndSettle(); // wait for the widget to render
-
-    //Step 2 : Verify the text
-    expect(find.text('Login'), findsOneWidget);
+  setUpAll(() async {
+    mockLoginUseCase = MockLoginUseCase();
   });
 
-  testWidgets(
-      'enter username and password, press Login button, and verify login action',
-      (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: LoginView(),
-    ));
-    await tester.pumpAndSettle();
+  group('test login', () {
+    setUpAll(() async {
+      //Mocking the AuthEntity
+      mockAuthEntity = AuthEntity(
+        staffId: '1234',
+        firstName: 'ishu',
+        lastName: 'test',
+        email: 'ishutest@mail.com',
+        password: 'password',
+        phone: '1234567890',
+        username: 'ishutest',
+        address: 'test address',
+      );
 
-    // Step 1: Enter username and password
-    await tester.enterText(find.byKey(ValueKey('username')), 'testuser');
-    await tester.enterText(find.byKey(ValueKey('password')), 'testpassword');
+      // Mocking the login use case
+      when(
+        mockLoginUseCase.loginStaff(
+          'ishutest',
+          'password',
+        ),
+      ).thenAnswer(
+        (_) async => Future.value(
+          Right(true),
+        ),
+      );
+    });
 
-    // Step 2: Tap the login button
-    await tester.tap(find.byKey(ValueKey('loginbutton')));
-    await tester.pump();
+    test('login correct user and pass', () async {
+      // login with proper credential
+      final result = await mockLoginUseCase.loginStaff(
+        'ishutest',
+        'password',
+      );
+      expect(result, Right(true));
+    });
 
-    // Step 3: After tapping the login button, Find the "Logging In" text
-    expect(find.byWidgetPredicate((widget) {
-      if (widget is ElevatedButton) {
-        final buttonText = widget.child as Text;
-        return buttonText.data == 'Logging I';
-      }
-      return false;
-    }), findsOneWidget);
+    //Login with server error
+    test('login with server error', () async {
+      final serverError = ServerError();
+      when(mockLoginUseCase.loginStaff('ishutest', 'password'))
+          .thenAnswer((_) async => Left(serverError));
 
-    // Step 4: Wait for the widget to render
-    await tester.pumpAndSettle();
+      final result = await mockLoginUseCase.loginStaff('ishutest', 'password');
+      expect(result, Left(serverError));
+    });
+
+    //Login with disabled account
+    test('login with disabled account', () async {
+      final disableAccount = AccountDisabledFailure();
+      when(mockLoginUseCase.loginStaff('ishutest', 'password'))
+          .thenAnswer((_) async => Left(disableAccount));
+
+      final result = await mockLoginUseCase.loginStaff('ishutest', 'password');
+      expect(result, Left(disableAccount));
+    });
+
+    //Login with invalid username
+    test('test login with invalid username', () async {
+      final mockErrorModel = Failure(
+        error: 'user not found',
+      );
+
+      when(
+        mockLoginUseCase.loginStaff(
+          'ishu',
+          'password',
+        ),
+      ).thenAnswer(
+        (_) async => Left(mockErrorModel),
+      );
+
+      final result = await mockLoginUseCase.loginStaff(
+        'ishu',
+        'password',
+      );
+
+      expect(result, Left(mockErrorModel));
+    });
   });
-
-//Find the Logo on the login page
-  testWidgets(
-    'find logo on login page',
-    (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: LoginView(),
-      ));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(Image), findsOneWidget);
-    },
-  );
-
-  //Find the Remember Me checkbox on the login page
-  testWidgets(
-    'find remember me checkbox on login page',
-    (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: LoginView(),
-      ));
-      await tester.pumpAndSettle();
-
-      // Find the Remember Me checkbox
-      expect(find.byType(Checkbox), findsOneWidget);
-    },
-  );
 }
-
-// testWidgets(
-  //     'navigate to registration page when tapping "Don\'t have an account" text',
-  //     (tester) async {
-  //   await tester.pumpWidget(MaterialApp(
-  //     home: LoginView(),
-  //   ));
-  //   await tester.pumpAndSettle();
-
-  //   // Print the widget tree
-  //   debugDumpApp();
-
-  //   // Step 1: Tap the "Don't have an account" text
-  //   await tester.tap(find.byKey(const ValueKey('registerButton')));
-  //   await tester.pumpAndSettle();
-
-  //   // Print the widget tree again after the tap
-  //   debugDumpApp();
-
-  //   // Step 2: Verify navigation to registration page
-  //   expect(find.text('RegisterGarrarahaiiii'), 'RegisterGarrarahaiiii');
-  // });
