@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:age_care/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+
+import '../../config/constants/app_colors.dart';
 
 class GyroscopeScreen extends StatefulWidget {
   const GyroscopeScreen({Key? key}) : super(key: key);
@@ -25,7 +28,7 @@ class _GyroscopeScreenState extends State<GyroscopeScreen> {
   void initState() {
     super.initState();
     _lastUpdate = DateTime.now();
-    _circleColor = Colors.blue; // Initial color
+    _circleColor = Colors.blue;
 
     _colorChangeTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       _changeCircleColor();
@@ -72,9 +75,26 @@ class _GyroscopeScreenState extends State<GyroscopeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // bool isDarkMode =
+    //     MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final isDarkMode = HelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gyroscope'),
+        centerTitle: true,
+        backgroundColor: isDarkMode ? AppColors.dark : AppColors.primaryColor,
+        title: Text(
+          'Notes'.toUpperCase(),
+          style: TextStyle(
+            color: AppColors.white,
+          ),
+        ),
+        leading: IconButton(
+          color: AppColors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
       ),
       body: Center(
         child: Column(
