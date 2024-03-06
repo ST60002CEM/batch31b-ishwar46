@@ -1,6 +1,6 @@
 class AppImages {
   //App Logos
-  static const String darkAppLogo = 'assets/img/logo.png,';
+  static const String darkAppLogo = 'assets/img/logo.png';
   static const String lightAppLogo = 'assets/img/logo.png';
 
   //OnBoarding Images

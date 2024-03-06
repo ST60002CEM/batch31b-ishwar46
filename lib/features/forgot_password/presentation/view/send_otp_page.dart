@@ -32,7 +32,7 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.cancel),
+            icon: const Icon(Icons.cancel_outlined),
           )
         ],
       ),
@@ -121,12 +121,9 @@ class _SendOTPViewState extends ConsumerState<SendOTPView> {
                         cursorColor: isDark
                             ? AppColors.whiteText
                             : AppColors.primaryColor,
-                        showCursor: false,
+                        showCursor: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green),
-                          ),
                           labelText: 'Email Address',
                           labelStyle: TextStyle(
                             fontSize: 12,
